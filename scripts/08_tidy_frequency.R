@@ -4,11 +4,10 @@ library(wordcloud)
 library(RColorBrewer)
 library(here)
 
-exists("stop_words_custom_extended")
-
 # Configuration
 INPUT_DIR_FILTERED <- here("data", "processed", "filtered")
 OUTPUT_DIR_PLOTS <- here("plots", "frequency")
+CHAR_NAMES_FILE <- here("all_chars_df.csv")  # Your character names file
 
 # Create output directories
 dir.create(OUTPUT_DIR_PLOTS, recursive = TRUE, showWarnings = FALSE)
@@ -23,63 +22,151 @@ message("Input: ", INPUT_DIR_FILTERED)
 message("Output: ", OUTPUT_DIR_PLOTS)
 message(strrep("=", 70), "\n")
 
-# Step 1: Individual play analysis (Hamlet example)
-message("STEP 1: Individual Play Analysis (Hamlet)")
+# Load character names to exclude (optional)
+message("Loading character names list...")
+if (file.exists(CHAR_NAMES_FILE)) {
+  all_chars_df <- read_csv(CHAR_NAMES_FILE, show_col_types = FALSE)
+  
+  # Create character names lookup (lowercase for matching)
+  char_names <- all_chars_df %>%
+    mutate(word = str_to_lower(character)) %>%
+    distinct(word) %>%
+    pull(word)
+  
+  message("✓ Loaded ", length(char_names), " character names to exclude")
+  exclude_chars <- TRUE
+} else {
+  message("! Character names file not found: ", CHAR_NAMES_FILE)
+  message("  Proceeding without character name exclusion")
+  exclude_chars <- FALSE
+  char_names <- c()
+}
+message("")
+
+# Optional: Load character exclusion list
+# Uncomment and specify path to use character filtering
+# all_chars_df <- read_csv("path/to/all_chars_df.csv", show_col_types = FALSE)
+# characters_to_exclude <- c("HAMLET", "OPHELIA")  # Specify which characters to exclude
+
+# Helper function to filter out excluded characters
+apply_character_filter <- function(data, exclude_chars = NULL) {
+  if (!is.null(exclude_chars) && length(exclude_chars) > 0) {
+    message("Excluding characters: ", paste(exclude_chars, collapse = ", "))
+    data <- data %>%
+      filter(!character %in% exclude_chars)
+  }
+  return(data)
+}
+
+# Step 1: Individual play analysis (All plays)
+message("STEP 1: Individual Play Analysis (All Plays)")
 message(strrep("-", 70))
 
-hamlet_filtered <- read_csv(
-  file.path(INPUT_DIR_FILTERED, "by_play", "hamlet_filtered.csv"),
-  show_col_types = FALSE
-)
+# Load list of all plays from cleaned data
+all_play_titles <- all_plays %>%
+  distinct(short_title) %>%
+  pull(short_title) %>%
+  sort()
 
-message("Loaded Hamlet: ", format(nrow(hamlet_filtered), big.mark = ","), " tokens")
+message("Found ", length(all_play_titles), " plays to analyze\n")
 
-# Optional: Remove character names from word counts
-# Uncomment the lines below to exclude character names
+play_analysis_count <- 0
 
-# Get list of all character names
-#character_names <- hamlet_filtered %>%
-#filter(!is.na(character)) %>%
-#pull(character) %>%
-#unique() %>%
-#str_to_lower()
+for (play_title in all_play_titles) {
+  # Generate filename
+  filename <- play_title %>%
+    str_to_lower() %>%
+    str_replace_all("[^a-z0-9]+", "_") %>%
+    str_remove("^_|_$")
+  
+  play_file <- file.path(INPUT_DIR_FILTERED, "by_play", paste0(filename, "_filtered.csv"))
+  
+  if (!file.exists(play_file)) {
+    message("  Skipping ", play_title, " (file not found)")
+    next
+  }
+  
+  # Load play data
+  play_filtered <- read_csv(play_file, show_col_types = FALSE)
+  
+  # Count words
+  play_counts <- play_filtered %>%
+    count(word, sort = TRUE)
+  
+  # Determine threshold (adaptive based on play length)
+  max_count <- max(play_counts$n)
+  threshold <- max(20, max_count * 0.05)  # At least 50, or 2% of max
+  
+  # Plot top words
+  if (max_count >= threshold) {
+    p_play <- play_counts %>%
+      filter(n > threshold) %>%
+      head(20) %>%  # Top 20 words max
+      mutate(word = reorder(word, n)) %>%
+      ggplot(aes(n, word)) +
+      geom_col(fill = "steelblue") +
+      labs(
+        x = "Frequency",
+        y = NULL,
+        title = paste("Most Frequent Words in", play_title),
+        subtitle = paste("Top words (threshold >", round(threshold), "occurrences)")
+      ) +
+      theme_minimal()
+    
+    ggsave(
+      filename = paste0(filename, "_top_words.png"),
+      plot = p_play,
+      path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
+      width = 8,
+      height = 6,
+      dpi = 600
+    )
+    
+    # Optionally create version excluding character names
+    if (exclude_chars) {
+      play_counts_no_chars <- play_filtered %>%
+        filter(!word %in% char_names) %>%
+        count(word, sort = TRUE)
+      
+      threshold_no_chars <- max(30, max(play_counts_no_chars$n) * 0.02)
+      
+      p_play_no_chars <- play_counts_no_chars %>%
+        filter(n > threshold_no_chars) %>%
+        head(20) %>%
+        mutate(word = reorder(word, n)) %>%
+        ggplot(aes(n, word)) +
+        geom_col(fill = "darkorange") +
+        labs(
+          x = "Frequency",
+          y = NULL,
+          title = paste("Most Frequent Words in", play_title, "(Excluding Character Names)"),
+          subtitle = paste("Top words (threshold >", round(threshold_no_chars), "occurrences)")
+        ) +
+        theme_minimal()
+      
+      ggsave(
+        filename = paste0(filename, "_top_words_no_chars.png"),
+        plot = p_play_no_chars,
+        path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
+        width = 8,
+        height = 6,
+        dpi = 600
+      )
+    }
+    
+    play_analysis_count <- play_analysis_count + 1
+    
+    if (play_analysis_count %% 10 == 0) {
+      message("  Created ", play_analysis_count, "/", length(all_play_titles), " play analyses...")
+    }
+  }
+}
 
-# Filter out character names from tokens
-#hamlet_filtered <- hamlet_filtered %>%
-#filter(!str_to_lower(word) %in% character_names)
-
-# Count words in Hamlet
-hamlet_counts <- hamlet_filtered %>%
-  count(word, sort = TRUE)
-
-message("Unique words in Hamlet: ", format(nrow(hamlet_counts), big.mark = ","))
-
-# Plot most frequent words in Hamlet (threshold: >20)
-message("Creating bar plot for Hamlet (words > 20 occurrences)...")
-
-p1 <- hamlet_counts %>%
-  filter(n > 20) %>%
-  mutate(word = reorder(word, n)) %>%
-  ggplot(aes(n, word)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    x = "Frequency",
-    y = NULL,
-    title = "Most Frequent Words in Hamlet",
-    subtitle = "Words appearing more than 20 times"
-  ) +
-  theme_minimal()
-
-ggsave(
-  filename = "hamlet_top_words.png",
-  plot = p1,
-  path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
-  width = 8,
-  height = 6,
-  dpi = 600
-)
-
-message("✓ Saved: hamlet_top_words.png\n")
+message("✓ Created ", play_analysis_count, " individual play bar charts")
+if (exclude_chars) {
+  message("  (with and without character names)")
+}
+message("")
 
 # Step 2: Word clouds
 message("STEP 2: Word Cloud Analysis")
@@ -110,7 +197,7 @@ message("✓ Saved: hamlet_wordcloud.png")
 message("Creating word cloud for all HSC plays...")
 
 hsc_filtered <- read_csv(
-  file.path(INPUT_DIR_FILTERED, "by_subset", "hsc_contents_filtered.csv"),
+  file.path(INPUT_DIR_FILTERED, "by_subset", "hsc_dialogue_filtered.csv"),
   show_col_types = FALSE
 )
 
@@ -146,22 +233,21 @@ tragedies <- read_csv(
   file.path(INPUT_DIR_FILTERED, "by_stopwords", "tragedies_no_stopwords.csv"),
   show_col_types = FALSE
 ) %>%
-  filter(class == "dialogue") %>%
-  anti_join(stop_words_custom_extended, by = "word")
+  filter(class == "dialogue")
 
 comedies <- read_csv(
-  file.path(INPUT_DIR_FILTERED, "by_stopwords", "comedies_no_stopwords.csv"),
-  show_col_types = FALSE
-  )%>%
-  filter(class == "dialogue") %>%
-  anti_join(stop_words_custom_extended, by = "word")
-
-histories <- read_csv(
-  file.path(INPUT_DIR_FILTERED, "by_stopwords", "histories_no_stopwords.csv"),
+  file.path(INPUT_DIR_FILTERED, "by_genre", "comedies.csv"),
   show_col_types = FALSE
 ) %>%
-  filter(class == "dialogue")%>%
-  anti_join(stop_words_custom_extended, by = "word")
+  filter(class == "dialogue") %>%
+  anti_join(tidytext::stop_words, by = "word")
+
+histories <- read_csv(
+  file.path(INPUT_DIR_FILTERED, "by_genre", "histories.csv"),
+  show_col_types = FALSE
+) %>%
+  filter(class == "dialogue") %>%
+  anti_join(tidytext::stop_words, by = "word")
 
 message("✓ Loaded tragedies: ", format(nrow(tragedies), big.mark = ","), " tokens")
 message("✓ Loaded comedies:  ", format(nrow(comedies), big.mark = ","), " tokens")
@@ -172,7 +258,7 @@ tragedy_counts <- tragedies %>% count(word, sort = TRUE)
 comedy_counts <- comedies %>% count(word, sort = TRUE)
 history_counts <- histories %>% count(word, sort = TRUE)
 
-# Plot most frequent words by genre
+# Plot top words by genre
 message("\nCreating genre comparison plots...")
 
 # Tragedies
@@ -185,7 +271,7 @@ p_tragedy <- tragedy_counts %>%
     x = "Frequency",
     y = NULL,
     title = "Most Frequent Words in Tragedies",
-    subtitle = "Most Frequent 20 words"
+    subtitle = "Top 20 words"
   ) +
   theme_minimal()
 
@@ -208,7 +294,7 @@ p_comedy <- comedy_counts %>%
     x = "Frequency",
     y = NULL,
     title = "Most Frequent Words in Comedies",
-    subtitle = "Most Frequent 20 words"
+    subtitle = "Top 20 words"
   ) +
   theme_minimal()
 
@@ -231,7 +317,7 @@ p_history <- history_counts %>%
     x = "Frequency",
     y = NULL,
     title = "Most Frequent Words in Histories",
-    subtitle = "Most Frequent 20 words"
+    subtitle = "Top 20 words"
   ) +
   theme_minimal()
 
@@ -268,7 +354,7 @@ p_genre_compare <- genre_combined %>%
   labs(
     x = "Frequency",
     y = NULL,
-    title = "Most Frequent 15 Words by Genre",
+    title = "Top 15 Words by Genre",
     subtitle = "Comparing vocabulary across Shakespeare's genres"
   ) +
   theme_minimal() +

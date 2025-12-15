@@ -11,9 +11,8 @@ INPUT_DIR_METADATA <- here("data", "metadata")
 OUTPUT_DIR_PLOTS <- here("plots", "relationships")
 
 # Filter settings - Customize these to analyze different subsets
-FILTER_BY <- "gutenberg_id"  # Options: "gutenberg_id", "genre", "short_title", "period", "romance", "problem_play", "roman", "all"
-FILTER_VALUES <- c("1516", "1519", "1522", "1524", 
-                   "1523", "1503", "1540", "1531", "1515")  # HSC plays
+# FILTER_BY <- "gutenberg_id"  # Options: "gutenberg_id", "genre", "short_title", "period", "romance", "problem_play", "roman", "all"
+# FILTER_VALUES <- c("1516", "1519", "1522", "1524","1523", "1503", "1540", "1531", "1515")  # HSC plays
 # Examples:
 # FILTER_BY <- "genre"
 # FILTER_VALUES <- c("Tragedy")
@@ -36,8 +35,8 @@ FILTER_VALUES <- c("1516", "1519", "1522", "1524",
 # FILTER_BY <- "roman"
 # FILTER_VALUES <- TRUE  # Roman plays only
 #
-# FILTER_BY <- "all"
-# FILTER_VALUES <- NULL
+FILTER_BY <- "all"
+FILTER_VALUES <- NULL
 
 # Create output directories
 dir.create(OUTPUT_DIR_PLOTS, recursive = TRUE, showWarnings = FALSE)
@@ -264,7 +263,7 @@ message(strrep("-", 70))
 # Prepare section-based data
 message("Creating section-based word data...")
 
-hsc_section_words <- selected_plays %>%
+section_words <- selected_plays %>%
   arrange(short_title, line_number) %>%
   group_by(short_title) %>%
   mutate(
@@ -281,7 +280,7 @@ message("✓ Created section-based word data")
 message("  Total words: ", format(nrow(hsc_section_words), big.mark = ","))
 
 # Count words by section
-section_word_counts <- hsc_section_words %>%
+section_word_counts <- section_words %>%
   count(short_title, section, word, sort = TRUE)
 
 message("✓ Counted words by section\n")

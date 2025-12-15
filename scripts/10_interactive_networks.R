@@ -7,7 +7,7 @@ library(here)
 # Configuration
 INPUT_DIR_CLEANED <- here("data", "cleaned")
 INPUT_DIR_METADATA <- here("data", "metadata")
-OUTPUT_DIR_NETWORKS <- here("interactive_networks")
+OUTPUT_DIR_NETWORKS <- here("interactive_networks", "correlations")
 
 # Filter settings - Customize these to analyze different subsets
 FILTER_BY <- "gutenberg_id"  # Options: "gutenberg_id", "genre", "short_title", "period", "romance", "problem_play", "roman", "all"

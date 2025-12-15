@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shakespeare Character Networks</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 1200px; margin: 50px auto; padding: 20px; }
+    h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+    .play-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .play-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px; background: #f9f9f9; }
+    .play-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .play-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+    .play-meta { font-size: 14px; color: #7f8c8d; margin-bottom: 10px; }
+    .play-link { display: inline-block; padding: 8px 16px; background: #3498db; color: white; 
+                 text-decoration: none; border-radius: 4px; margin-top: 10px; }
+    .play-link:hover { background: #2980b9; }
+  </style>
+</head>
+<body>
+  <h1>Shakespeare Character Co-occurrence Networks</h1>
+  <p>Interactive network visualizations showing character relationships in Shakespeare's plays.</p>
+  <p>Network edges represent scene co-occurrences between characters. Node size indicates degree centrality.</p>
+  <div class='play-grid'>
+    <div class='play-card'>
+      <div class='play-title'>A Midsummer Night's Dream</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1595</div>
+      <a class='play-link' href='a_midsummer_night_s_dream.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>All's Well That Ends Well</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1603</div>
+      <a class='play-link' href='all_s_well_that_ends_well.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Antony and Cleopatra</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1607</div>
+      <a class='play-link' href='antony_and_cleopatra.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>As You Like It</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1599</div>
+      <a class='play-link' href='as_you_like_it.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Comedy of Errors</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1594</div>
+      <a class='play-link' href='comedy_of_errors.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Coriolanus</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1608</div>
+      <a class='play-link' href='coriolanus.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Cymbeline</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1610</div>
+      <a class='play-link' href='cymbeline.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Hamlet</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1600</div>
+      <a class='play-link' href='hamlet.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry IV, Part 1</div>
+      <div class='play-meta'>Genre: History | Year: 1597</div>
+      <a class='play-link' href='henry_iv_part_1.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry IV, Part 2</div>
+      <div class='play-meta'>Genre: History | Year: 1598</div>
+      <a class='play-link' href='henry_iv_part_2.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry V</div>
+      <div class='play-meta'>Genre: History | Year: 1599</div>
+      <a class='play-link' href='henry_v.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry VI, Part 1</div>
+      <div class='play-meta'>Genre: History | Year: 1592</div>
+      <a class='play-link' href='henry_vi_part_1.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry VI, Part 2</div>
+      <div class='play-meta'>Genre: History | Year: 1591</div>
+      <a class='play-link' href='henry_vi_part_2.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry VI, Part 3</div>
+      <div class='play-meta'>Genre: History | Year: 1595</div>
+      <a class='play-link' href='henry_vi_part_3.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Henry VIII</div>
+      <div class='play-meta'>Genre: History | Year: 1613</div>
+      <a class='play-link' href='henry_viii.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Julius Caesar</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1599</div>
+      <a class='play-link' href='julius_caesar.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>King John</div>
+      <div class='play-meta'>Genre: History | Year: 1597</div>
+      <a class='play-link' href='king_john.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>King Lear</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1606</div>
+      <a class='play-link' href='king_lear.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Love's Labour's Lost</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1595</div>
+      <a class='play-link' href='love_s_labour_s_lost.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Macbeth</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1606</div>
+      <a class='play-link' href='macbeth.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Measure for Measure</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1604</div>
+      <a class='play-link' href='measure_for_measure.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Merchant of Venice</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1597</div>
+      <a class='play-link' href='merchant_of_venice.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Merry Wives of Windsor</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1601</div>
+      <a class='play-link' href='merry_wives_of_windsor.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Much Ado about Nothing</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1598</div>
+      <a class='play-link' href='much_ado_about_nothing.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Othello</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1604</div>
+      <a class='play-link' href='othello.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Pericles</div>
+      <div class='play-meta'>Genre: History | Year: 1608</div>
+      <a class='play-link' href='pericles.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Richard II</div>
+      <div class='play-meta'>Genre: History | Year: 1595</div>
+      <a class='play-link' href='richard_ii.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Richard III</div>
+      <div class='play-meta'>Genre: History | Year: 1592</div>
+      <a class='play-link' href='richard_iii.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Romeo and Juliet</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1595</div>
+      <a class='play-link' href='romeo_and_juliet.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Taming of the Shrew</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1592</div>
+      <a class='play-link' href='taming_of_the_shrew.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Tempest</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1611</div>
+      <a class='play-link' href='tempest.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Timon of Athens</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1604</div>
+      <a class='play-link' href='timon_of_athens.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Titus Andronicus</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1591</div>
+      <a class='play-link' href='titus_andronicus.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Troilus and Cressida</div>
+      <div class='play-meta'>Genre: Tragedy | Year: 1602</div>
+      <a class='play-link' href='troilus_and_cressida.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Twelfth Night</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1601</div>
+      <a class='play-link' href='twelfth_night.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Two Gentlemen of Verona</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1598</div>
+      <a class='play-link' href='two_gentlemen_of_verona.html'>View Network →</a>
+    </div>
+    <div class='play-card'>
+      <div class='play-title'>Winter's Tale</div>
+      <div class='play-meta'>Genre: Comedy | Year: 1611</div>
+      <a class='play-link' href='winter_s_tale.html'>View Network →</a>
+    </div>
+  </div>
+</body>
+</html>

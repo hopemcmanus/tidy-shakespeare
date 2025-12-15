@@ -1,0 +1,184 @@
+character,n_plays,plays
+MESSENGER,25,"Henry VI, Part 1; Henry VI, Part 2; Henry VI, Part 3; Richard III; Comedy of Errors; Titus Andronicus; King John; Merchant of Venice; Henry IV, Part 1; Henry IV, Part 2; Much Ado about Nothing; Henry V; Julius Caesar; Hamlet; All's Well That Ends Well; Measure for Measure; Othello; King Lear; Macbeth; Antony and Cleopatra; Coriolanus; Timon of Athens; Pericles; Cymbeline; Henry VIII"
+SERVANT,19,"Henry VI, Part 1; Taming of the Shrew; Two Gentlemen of Verona; Richard II; Romeo and Juliet; Merchant of Venice; Henry IV, Part 1; Henry IV, Part 2; Julius Caesar; Hamlet; Twelfth Night; Troilus and Cressida; Measure for Measure; Macbeth; Antony and Cleopatra; Timon of Athens; Pericles; Winter's Tale; Henry VIII"
+CAPTAIN,8,"Henry VI, Part 1; Titus Andronicus; Richard II; Hamlet; Twelfth Night; King Lear; Antony and Cleopatra; Cymbeline"
+PAGE,8,"Richard III; Taming of the Shrew; Romeo and Juliet; Merry Wives of Windsor; Henry IV, Part 2; All's Well That Ends Well; Timon of Athens; Henry VIII"
+DUKE,7,Comedy of Errors; Two Gentlemen of Verona; Merchant of Venice; Twelfth Night; All's Well That Ends Well; Measure for Measure; Othello
+FIRST GENTLEMAN,7,All's Well That Ends Well; Measure for Measure; Othello; Pericles; Cymbeline; Winter's Tale; Henry VIII
+FIRST LORD,7,As You Like It; All's Well That Ends Well; Coriolanus; Timon of Athens; Pericles; Cymbeline; Winter's Tale
+KING,7,"Love's Labour's Lost; Henry IV, Part 1; Henry IV, Part 2; Henry V; Hamlet; All's Well That Ends Well; Henry VIII"
+OFFICER,7,"Henry VI, Part 1; Comedy of Errors; Othello; King Lear; Antony and Cleopatra; Coriolanus; Winter's Tale"
+SECOND GENTLEMAN,7,All's Well That Ends Well; Measure for Measure; Othello; Pericles; Cymbeline; Winter's Tale; Henry VIII
+CLOWN,6,Titus Andronicus; Twelfth Night; All's Well That Ends Well; Othello; Antony and Cleopatra; Winter's Tale
+FIRST SERVANT,6,Taming of the Shrew; Romeo and Juliet; King Lear; Antony and Cleopatra; Timon of Athens; Pericles
+LORD,6,Love's Labour's Lost; Hamlet; Macbeth; Pericles; Cymbeline; Winter's Tale
+LORDS,6,Richard III; Henry V; Hamlet; Macbeth; Coriolanus; Winter's Tale
+SECOND LORD,6,As You Like It; All's Well That Ends Well; Coriolanus; Timon of Athens; Pericles; Cymbeline
+SOLDIER,6,"Henry VI, Part 1; Henry VI, Part 3; Macbeth; Antony and Cleopatra; Coriolanus; Timon of Athens"
+YORK,6,"Henry VI, Part 1; Henry VI, Part 2; Henry VI, Part 3; Richard III; Richard II; Henry V"
+ANTONIO,5,Two Gentlemen of Verona; Merchant of Venice; Much Ado about Nothing; Twelfth Night; Tempest
+BOY,5,"Henry VI, Part 1; Richard III; Much Ado about Nothing; Henry V; Troilus and Cressida"
+FIRST CITIZEN,5,Richard III; King John; Romeo and Juliet; Julius Caesar; Coriolanus
+FIRST SOLDIER,5,"Henry VI, Part 1; Julius Caesar; All's Well That Ends Well; Antony and Cleopatra; Coriolanus"
+GENTLEMAN,5,Richard III; Hamlet; All's Well That Ends Well; King Lear; Henry VIII
+GLOUCESTER,5,"Henry VI, Part 1; Henry VI, Part 2; Henry IV, Part 2; Henry V; King Lear"
+HERALD,5,"Henry VI, Part 2; Henry V; Othello; King Lear; Coriolanus"
+KING HENRY,5,"Henry VI, Part 1; Henry VI, Part 2; Henry VI, Part 3; Richard II; Henry V"
+SALISBURY,5,"Henry VI, Part 1; Henry VI, Part 2; King John; Richard II; Henry V"
+SONG,5,Merry Wives of Windsor; As You Like It; Measure for Measure; Cymbeline; Winter's Tale
+WARWICK,5,"Henry VI, Part 1; Henry VI, Part 2; Henry VI, Part 3; Henry IV, Part 2; Henry V"
+BARDOLPH,4,"Henry IV, Part 1; Merry Wives of Windsor; Henry IV, Part 2; Henry V"
+FIRST SENATOR,4,Othello; Coriolanus; Timon of Athens; Cymbeline
+FIRST WATCH,4,Romeo and Juliet; Much Ado about Nothing; Antony and Cleopatra; Coriolanus
+LUCIUS,4,Titus Andronicus; Julius Caesar; Timon of Athens; Cymbeline
+MAYOR,4,"Henry VI, Part 1; Henry VI, Part 2; Henry VI, Part 3; Richard III"
+NORTHUMBERLAND,4,"Henry VI, Part 3; Richard II; Henry IV, Part 1; Henry IV, Part 2"
+PORTER,4,"Henry VI, Part 1; Henry IV, Part 2; Macbeth; Henry VIII"
+PRINCE,4,"Richard III; Romeo and Juliet; Henry IV, Part 1; Henry IV, Part 2"
+SECOND SENATOR,4,Othello; Coriolanus; Timon of Athens; Cymbeline
+SECOND SERVANT,4,Romeo and Juliet; King Lear; Antony and Cleopatra; Timon of Athens
+SECOND SOLDIER,4,Julius Caesar; All's Well That Ends Well; Antony and Cleopatra; Coriolanus
+SECOND WATCH,4,Romeo and Juliet; Much Ado about Nothing; Antony and Cleopatra; Coriolanus
+ANNE,3,Richard III; Merry Wives of Windsor; Henry VIII
+ARCHBISHOP,3,"Richard III; Henry IV, Part 1; Henry IV, Part 2"
+BALTHASAR,3,Comedy of Errors; Romeo and Juliet; Much Ado about Nothing
+BUCKINGHAM,3,"Henry VI, Part 2; Richard III; Henry VIII"
+BURGUNDY,3,"Henry VI, Part 1; Henry V; King Lear"
+CHORUS,3,Romeo and Juliet; A Midsummer Night's Dream; Henry V
+DEMETRIUS,3,Titus Andronicus; A Midsummer Night's Dream; Antony and Cleopatra
+EXETER,3,"Henry VI, Part 1; Henry VI, Part 3; Henry V"
+FALSTAFF,3,"Henry IV, Part 1; Merry Wives of Windsor; Henry IV, Part 2"
+GOWER,3,"Henry IV, Part 2; Henry V; Pericles"
+HASTINGS,3,"Henry VI, Part 3; Richard III; Henry IV, Part 2"
+HOSTESS,3,"Henry IV, Part 1; Henry IV, Part 2; Henry V"
+KEEPER,3,Richard III; Richard II; Henry VIII
+LIEUTENANT,3,"Henry VI, Part 2; Henry VI, Part 3; Coriolanus"
+NORFOLK,3,"Henry VI, Part 3; Richard III; Henry VIII"
+PETER,3,"Henry VI, Part 2; Taming of the Shrew; Romeo and Juliet"
+PISTOL,3,"Merry Wives of Windsor; Henry IV, Part 2; Henry V"
+PRIEST,3,Richard III; Hamlet; Twelfth Night
+QUEEN,3,Richard II; Hamlet; Cymbeline
+QUEEN MARGARET,3,"Henry VI, Part 2; Henry VI, Part 3; Richard III"
+RICHARD,3,"Henry VI, Part 3; Richard III; Richard II"
+SECOND CITIZEN,3,Richard III; Julius Caesar; Coriolanus
+SECOND MESSENGER,3,Richard III; Antony and Cleopatra; Coriolanus
+SHERIFF,3,"Henry VI, Part 2; Richard III; Henry IV, Part 1"
+SOMERSET,3,"Henry VI, Part 1; Henry VI, Part 2; Henry VI, Part 3"
+SOOTHSAYER,3,Julius Caesar; Antony and Cleopatra; Cymbeline
+SUFFOLK,3,"Henry VI, Part 1; Henry VI, Part 2; Henry VIII"
+SURREY,3,Richard III; Richard II; Henry VIII
+THIRD CITIZEN,3,Richard III; Julius Caesar; Coriolanus
+THIRD GENTLEMAN,3,Othello; Winter's Tale; Henry VIII
+THIRD LORD,3,Coriolanus; Timon of Athens; Pericles
+WESTMORELAND,3,"Henry VI, Part 3; Henry IV, Part 1; Henry IV, Part 2"
+AMBASSADOR,2,Henry V; Antony and Cleopatra
+ANGELO,2,Comedy of Errors; Measure for Measure
+ANTONY,2,Julius Caesar; Antony and Cleopatra
+BASTARD,2,"Henry VI, Part 1; King John"
+BAWD,2,Measure for Measure; Pericles
+BEDFORD,2,"Henry VI, Part 1; Henry V"
+BIANCA,2,Taming of the Shrew; Othello
+BLUNT,2,"Richard III; Henry IV, Part 1"
+BOLINGBROKE,2,"Henry VI, Part 2; Richard II"
+BRUTUS,2,Julius Caesar; Coriolanus
+CAESAR,2,Julius Caesar; Antony and Cleopatra
+CARDINAL,2,"Henry VI, Part 2; Richard III"
+CHAMBERLAIN,2,"Henry IV, Part 1; Henry VIII"
+CHARLES,2,"Henry VI, Part 1; As You Like It"
+CITIZEN,2,King John; Coriolanus
+CITIZENS,2,Julius Caesar; Coriolanus
+CLARENCE,2,"Richard III; Henry IV, Part 2"
+CLAUDIO,2,Much Ado about Nothing; Measure for Measure
+CORNELIUS,2,Hamlet; Cymbeline
+COUNTESS,2,"Henry VI, Part 1; All's Well That Ends Well"
+DIANA,2,All's Well That Ends Well; Pericles
+DIOMEDES,2,Troilus and Cressida; Antony and Cleopatra
+DUCHESS,2,Richard III; Richard II
+ELY,2,Richard III; Henry V
+EMILIA,2,Othello; Winter's Tale
+EPILOGUE,2,"Henry IV, Part 2; Henry VIII"
+FIRST,2,Coriolanus; Timon of Athens
+FIRST AMBASSADOR,2,Henry V; Hamlet
+FIRST LADY,2,Timon of Athens; Winter's Tale
+FIRST MURDERER,2,Richard III; Macbeth
+FIRST MUSICIAN,2,Romeo and Juliet; Othello
+FIRST OFFICER,2,Twelfth Night; Coriolanus
+FIRST SAILOR,2,Hamlet; Pericles
+FIRST SERVINGMAN,2,"Henry VI, Part 1; Coriolanus"
+FLAVIUS,2,Julius Caesar; Timon of Athens
+FOOL,2,King Lear; Timon of Athens
+FOURTH CITIZEN,2,Julius Caesar; Coriolanus
+FRANCISCO,2,Hamlet; Tempest
+GAOLER,2,Cymbeline; Winter's Tale
+GENTLEWOMAN,2,Macbeth; Coriolanus
+GHOST,2,Julius Caesar; Hamlet
+GRATIANO,2,Merchant of Venice; Othello
+GREY,2,Richard III; Henry V
+HELENA,2,A Midsummer Night's Dream; All's Well That Ends Well
+HOST,2,Two Gentlemen of Verona; Merry Wives of Windsor
+JULIET,2,Romeo and Juliet; Measure for Measure
+KATHARINE,2,Love's Labour's Lost; Henry V
+KING EDWARD,2,"Henry VI, Part 3; Richard III"
+KING RICHARD,2,Richard III; Richard II
+LADY,2,Richard II; Cymbeline
+LADY PERCY,2,"Henry IV, Part 1; Henry IV, Part 2"
+LANCASTER,2,"Henry IV, Part 1; Henry IV, Part 2"
+LEPIDUS,2,Julius Caesar; Antony and Cleopatra
+LOVELL,2,Richard III; Henry VIII
+LUCILIUS,2,Julius Caesar; Timon of Athens
+MARGARET,2,"Henry VI, Part 1; Much Ado about Nothing"
+MARIA,2,Love's Labour's Lost; Twelfth Night
+MARIANA,2,All's Well That Ends Well; Measure for Measure
+MARTIUS,2,Titus Andronicus; Coriolanus
+MASTER,2,"Henry VI, Part 2; Tempest"
+MERCHANT,2,Comedy of Errors; Timon of Athens
+MONTAGUE,2,"Henry VI, Part 3; Romeo and Juliet"
+MORTIMER,2,"Henry VI, Part 1; Henry IV, Part 1"
+MOTH,2,Love's Labour's Lost; A Midsummer Night's Dream
+MOWBRAY,2,"Richard II; Henry IV, Part 2"
+NATHANIEL,2,Taming of the Shrew; Love's Labour's Lost
+NURSE,2,Titus Andronicus; Romeo and Juliet
+NYM,2,Merry Wives of Windsor; Henry V
+OLD MAN,2,King Lear; Macbeth
+OXFORD,2,"Henry VI, Part 3; Richard III"
+PARIS,2,Romeo and Juliet; Troilus and Cressida
+PETO,2,"Henry IV, Part 1; Henry IV, Part 2"
+POET,2,Julius Caesar; Timon of Athens
+POINS,2,"Henry IV, Part 1; Henry IV, Part 2"
+POMPEY,2,Measure for Measure; Antony and Cleopatra
+PORTIA,2,Merchant of Venice; Julius Caesar
+POST,2,"Henry VI, Part 2; Henry VI, Part 3"
+PUBLIUS,2,Titus Andronicus; Julius Caesar
+QUEEN ELIZABETH,2,"Henry VI, Part 3; Richard III"
+RIVERS,2,"Henry VI, Part 3; Richard III"
+ROBERT,2,King John; Merry Wives of Windsor
+ROSS,2,Richard II; Macbeth
+SCROOP,2,Richard II; Henry V
+SEBASTIAN,2,Twelfth Night; Tempest
+SECOND MURDERER,2,Richard III; Macbeth
+SECOND OFFICER,2,Twelfth Night; Coriolanus
+SECOND SERVINGMAN,2,"Henry VI, Part 1; Coriolanus"
+SENATOR,2,Coriolanus; Timon of Athens
+SENATORS,2,Othello; Coriolanus
+SERGEANT,2,"Henry VI, Part 1; Henry VIII"
+SERVINGMAN,2,Richard II; Merchant of Venice
+SERVINGMEN,2,"Henry VI, Part 1; Henry VI, Part 2"
+SHALLOW,2,"Merry Wives of Windsor; Henry IV, Part 2"
+SHEPHERD,2,"Henry VI, Part 1; Winter's Tale"
+SOLDIERS,2,Troilus and Cressida; Macbeth
+SON,2,"Henry VI, Part 3; Macbeth"
+STANLEY,2,"Henry VI, Part 2; Richard III"
+STEPHANO,2,Merchant of Venice; Tempest
+THIRD MESSENGER,2,Richard III; Antony and Cleopatra
+THIRD SERVANT,2,King Lear; Timon of Athens
+THIRD SERVINGMAN,2,"Henry VI, Part 1; Coriolanus"
+THIRD SOLDIER,2,Julius Caesar; Antony and Cleopatra
+TITUS,2,Titus Andronicus; Timon of Athens
+TRIBUNES,2,Titus Andronicus; Coriolanus
+VALENTINE,2,Two Gentlemen of Verona; Twelfth Night
+VAUX,2,"Henry VI, Part 2; Henry VIII"
+VENTIDIUS,2,Antony and Cleopatra; Timon of Athens
+VERNON,2,"Henry VI, Part 1; Henry IV, Part 1"
+WATCH,2,"Henry VI, Part 1; Much Ado about Nothing"
+WIDOW,2,Taming of the Shrew; All's Well That Ends Well
+WILLIAM,2,Merry Wives of Windsor; As You Like It

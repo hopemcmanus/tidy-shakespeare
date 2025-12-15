@@ -1,0 +1,1279 @@
+gutenberg_id,short_title,character,n_tokens,n_scenes,n_acts,genre,year
+1500,"Henry VI, Part 1",BASSET,191,2,2,History,1592
+1500,"Henry VI, Part 1",BASTARD,263,4,4,History,1592
+1500,"Henry VI, Part 1",BEDFORD,605,2,3,History,1592
+1500,"Henry VI, Part 1",BOY,36,1,1,History,1592
+1500,"Henry VI, Part 1",BURGUNDY,339,4,4,History,1592
+1500,"Henry VI, Part 1",CAPTAIN,54,2,3,History,1592
+1500,"Henry VI, Part 1",CHARLES,1134,6,5,History,1592
+1500,"Henry VI, Part 1",COUNTESS,352,1,1,History,1592
+1500,"Henry VI, Part 1",EXETER,437,2,4,History,1592
+1500,"Henry VI, Part 1",FASTOLF,55,2,2,History,1592
+1500,"Henry VI, Part 1",FIRST JAILER,30,1,1,History,1592
+1500,"Henry VI, Part 1",FIRST SENTINEL,22,1,1,History,1592
+1500,"Henry VI, Part 1",FIRST SERVINGMAN,48,2,2,History,1592
+1500,"Henry VI, Part 1",FIRST SOLDIER,18,1,1,History,1592
+1500,"Henry VI, Part 1",FIRST WARDER,24,1,1,History,1592
+1500,"Henry VI, Part 1",GARGRAVE,18,1,1,History,1592
+1500,"Henry VI, Part 1",GENERAL,203,1,1,History,1592
+1500,"Henry VI, Part 1",GLANSDALE,9,1,1,History,1592
+1500,"Henry VI, Part 1",GLOUCESTER,1420,4,4,History,1592
+1500,"Henry VI, Part 1",JOHN TALBOT,401,2,1,History,1592
+1500,"Henry VI, Part 1",KING HENRY,1329,3,3,History,1592
+1500,"Henry VI, Part 1",LAWYER,29,1,1,History,1592
+1500,"Henry VI, Part 1",LEGATE,7,1,1,History,1592
+1500,"Henry VI, Part 1",LUCY,591,3,1,History,1592
+1500,"Henry VI, Part 1",MARGARET,254,1,1,History,1592
+1500,"Henry VI, Part 1",MASTER GUNNER,139,1,1,History,1592
+1500,"Henry VI, Part 1",MAYOR,151,2,2,History,1592
+1500,"Henry VI, Part 1",MESSENGER,705,4,3,History,1592
+1500,"Henry VI, Part 1",MORTIMER,656,1,1,History,1592
+1500,"Henry VI, Part 1",OFFICER,49,1,1,History,1592
+1500,"Henry VI, Part 1",PLANTAGENET,690,3,2,History,1592
+1500,"Henry VI, Part 1",PORTER,3,1,1,History,1592
+1500,"Henry VI, Part 1",PUCELLE,1994,7,5,History,1592
+1500,"Henry VI, Part 1",REIGNIER,638,5,4,History,1592
+1500,"Henry VI, Part 1",SALISBURY,113,1,1,History,1592
+1500,"Henry VI, Part 1",SCOUT,31,1,1,History,1592
+1500,"Henry VI, Part 1",SECOND SERVINGMAN,12,1,1,History,1592
+1500,"Henry VI, Part 1",SECOND WARDER,10,1,1,History,1592
+1500,"Henry VI, Part 1",SENTINEL,40,1,1,History,1592
+1500,"Henry VI, Part 1",SERGEANT,31,1,1,History,1592
+1500,"Henry VI, Part 1",SERVANT,10,1,1,History,1592
+1500,"Henry VI, Part 1",SERVINGMEN,20,1,1,History,1592
+1500,"Henry VI, Part 1",SHEPHERD,202,1,1,History,1592
+1500,"Henry VI, Part 1",SOLDIER,34,1,1,History,1592
+1500,"Henry VI, Part 1",SOMERSET,515,2,3,History,1592
+1500,"Henry VI, Part 1",SUFFOLK,1308,3,2,History,1592
+1500,"Henry VI, Part 1",TALBOT,3195,7,4,History,1592
+1500,"Henry VI, Part 1",THIRD SERVINGMAN,74,1,1,History,1592
+1500,"Henry VI, Part 1",VERNON,237,2,3,History,1592
+1500,"Henry VI, Part 1",WARWICK,534,2,4,History,1592
+1500,"Henry VI, Part 1",WATCH,4,1,1,History,1592
+1500,"Henry VI, Part 1",WINCHESTER,759,3,4,History,1592
+1500,"Henry VI, Part 1",WOODVILLE,38,1,1,History,1592
+1500,"Henry VI, Part 1",YORK,708,3,2,History,1592
+1501,"Henry VI, Part 2",BEADLE,12,1,1,History,1591
+1501,"Henry VI, Part 2",BEVIS,110,1,1,History,1591
+1501,"Henry VI, Part 2",BOLINGBROKE,191,1,1,History,1591
+1501,"Henry VI, Part 2",BROTHER,46,1,1,History,1591
+1501,"Henry VI, Part 2",BUCKINGHAM,281,3,3,History,1591
+1501,"Henry VI, Part 2",CADE,686,1,1,History,1591
+1501,"Henry VI, Part 2",CARDINAL,823,3,3,History,1591
+1501,"Henry VI, Part 2",CLERK,18,1,1,History,1591
+1501,"Henry VI, Part 2",COMMONS,22,1,1,History,1591
+1501,"Henry VI, Part 2",DICK,167,1,1,History,1591
+1501,"Henry VI, Part 2",ELEANOR,964,3,2,History,1591
+1501,"Henry VI, Part 2",GLOUCESTER,2367,4,3,History,1591
+1501,"Henry VI, Part 2",HERALD,17,1,1,History,1591
+1501,"Henry VI, Part 2",HOLLAND,114,1,1,History,1591
+1501,"Henry VI, Part 2",HORNER,199,1,2,History,1591
+1501,"Henry VI, Part 2",HUME,245,2,1,History,1591
+1501,"Henry VI, Part 2",KING HENRY,1826,3,3,History,1591
+1501,"Henry VI, Part 2",LIEUTENANT,515,1,1,History,1591
+1501,"Henry VI, Part 2",MASTER,9,1,1,History,1591
+1501,"Henry VI, Part 2",MATE,10,1,1,History,1591
+1501,"Henry VI, Part 2",MAYOR,15,1,1,History,1591
+1501,"Henry VI, Part 2",MESSENGER,24,1,1,History,1591
+1501,"Henry VI, Part 2",MICHAEL,20,1,1,History,1591
+1501,"Henry VI, Part 2",PETER,200,1,2,History,1591
+1501,"Henry VI, Part 2",POST,45,1,1,History,1591
+1501,"Henry VI, Part 2",QUEEN MARGARET,2272,3,3,History,1591
+1501,"Henry VI, Part 2",SALISBURY,545,3,3,History,1591
+1501,"Henry VI, Part 2",SERVINGMEN,13,1,1,History,1591
+1501,"Henry VI, Part 2",SHERIFF,34,1,1,History,1591
+1501,"Henry VI, Part 2",SIMPCOX,168,1,1,History,1591
+1501,"Henry VI, Part 2",SMITH,94,1,1,History,1591
+1501,"Henry VI, Part 2",SOMERSET,140,3,2,History,1591
+1501,"Henry VI, Part 2",SPIRIT,90,1,1,History,1591
+1501,"Henry VI, Part 2",STAFFORD,112,1,1,History,1591
+1501,"Henry VI, Part 2",STANLEY,61,1,1,History,1591
+1501,"Henry VI, Part 2",SUFFOLK,2382,3,4,History,1591
+1501,"Henry VI, Part 2",TOWNSMAN,29,1,1,History,1591
+1501,"Henry VI, Part 2",VAUX,84,1,1,History,1591
+1501,"Henry VI, Part 2",WARWICK,844,3,3,History,1591
+1501,"Henry VI, Part 2",WHITMORE,199,1,1,History,1591
+1501,"Henry VI, Part 2",WIFE,56,1,1,History,1591
+1501,"Henry VI, Part 2",YORK,2174,4,3,History,1591
+1502,"Henry VI, Part 3",BONA,73,1,1,History,1595
+1502,"Henry VI, Part 3",CLIFFORD,1118,5,2,History,1595
+1502,"Henry VI, Part 3",EDWARD,1053,4,2,History,1595
+1502,"Henry VI, Part 3",EXETER,141,3,3,History,1595
+1502,"Henry VI, Part 3",FATHER,219,1,1,History,1595
+1502,"Henry VI, Part 3",GEORGE,855,7,4,History,1595
+1502,"Henry VI, Part 3",HASTINGS,153,3,1,History,1595
+1502,"Henry VI, Part 3",HUNTSMAN,18,1,1,History,1595
+1502,"Henry VI, Part 3",KING EDWARD,2444,7,3,History,1595
+1502,"Henry VI, Part 3",KING HENRY,3130,5,5,History,1595
+1502,"Henry VI, Part 3",KING LEWIS,516,1,1,History,1595
+1502,"Henry VI, Part 3",LADY GREY,301,1,1,History,1595
+1502,"Henry VI, Part 3",LIEUTENANT,21,1,1,History,1595
+1502,"Henry VI, Part 3",MAYOR,43,1,1,History,1595
+1502,"Henry VI, Part 3",MESSENGER,281,3,3,History,1595
+1502,"Henry VI, Part 3",MONTAGUE,119,3,3,History,1595
+1502,"Henry VI, Part 3",MONTGOMERY,114,1,1,History,1595
+1502,"Henry VI, Part 3",NOBLEMAN,16,1,1,History,1595
+1502,"Henry VI, Part 3",NORFOLK,26,1,1,History,1595
+1502,"Henry VI, Part 3",NORTHUMBERLAND,245,3,2,History,1595
+1502,"Henry VI, Part 3",OXFORD,290,7,3,History,1595
+1502,"Henry VI, Part 3",POST,224,3,2,History,1595
+1502,"Henry VI, Part 3",PRINCE EDWARD,371,5,4,History,1595
+1502,"Henry VI, Part 3",QUEEN ELIZABETH,300,3,2,History,1595
+1502,"Henry VI, Part 3",QUEEN MARGARET,2271,5,4,History,1595
+1502,"Henry VI, Part 3",RICHARD,3228,8,5,History,1595
+1502,"Henry VI, Part 3",RIVERS,54,1,1,History,1595
+1502,"Henry VI, Part 3",RUTLAND,197,1,1,History,1595
+1502,"Henry VI, Part 3",SIR JOHN,10,1,1,History,1595
+1502,"Henry VI, Part 3",SOLDIER,19,1,1,History,1595
+1502,"Henry VI, Part 3",SOMERSET,287,6,2,History,1595
+1502,"Henry VI, Part 3",SOMERVILLE,55,1,1,History,1595
+1502,"Henry VI, Part 3",SON,190,1,1,History,1595
+1502,"Henry VI, Part 3",TUTOR,24,1,1,History,1595
+1502,"Henry VI, Part 3",WARWICK,3510,5,5,History,1595
+1502,"Henry VI, Part 3",WESTMORELAND,86,1,1,History,1595
+1502,"Henry VI, Part 3",YORK,1367,3,1,History,1595
+1503,Richard III,ANNE,1186,2,2,History,1592
+1503,Richard III,ARCHBISHOP,90,1,1,History,1592
+1503,Richard III,BLUNT,67,2,1,History,1592
+1503,Richard III,BOY,157,1,1,History,1592
+1503,Richard III,BRAKENBURY,229,2,2,History,1592
+1503,Richard III,BUCKINGHAM,2847,6,5,History,1592
+1503,Richard III,CARDINAL,74,1,1,History,1592
+1503,Richard III,CATESBY,441,5,4,History,1592
+1503,Richard III,CHILDREN,26,1,1,History,1592
+1503,Richard III,CHRISTOPHER,58,1,1,History,1592
+1503,Richard III,CLARENCE,1289,2,1,History,1592
+1503,Richard III,DORSET,122,3,3,History,1592
+1503,Richard III,DUCHESS,1108,3,2,History,1592
+1503,Richard III,ELY,47,1,1,History,1592
+1503,Richard III,FIRST CITIZEN,65,1,1,History,1592
+1503,Richard III,FIRST MURDERER,428,2,1,History,1592
+1503,Richard III,FOURTH MESSENGER,78,1,1,History,1592
+1503,Richard III,GENTLEMAN,13,1,1,History,1592
+1503,Richard III,GHOST OF ANNE,63,1,1,History,1592
+1503,Richard III,GHOST OF BUCKINGHAM,88,1,1,History,1592
+1503,Richard III,GHOST OF CLARENCE,69,1,1,History,1592
+1503,Richard III,GHOST OF EDWARD,49,1,1,History,1592
+1503,Richard III,GHOST OF GREY,11,1,1,History,1592
+1503,Richard III,GHOST OF HASTINGS,38,1,1,History,1592
+1503,Richard III,GHOST OF HENRY,59,1,1,History,1592
+1503,Richard III,GHOST OF RIVERS,19,1,1,History,1592
+1503,Richard III,GHOST OF VAUGHAN,17,1,1,History,1592
+1503,Richard III,GHOSTS OF PRINCES,70,1,1,History,1592
+1503,Richard III,GIRL,33,1,1,History,1592
+1503,Richard III,GREY,110,1,2,History,1592
+1503,Richard III,HASTINGS,1121,4,3,History,1592
+1503,Richard III,HERBERT,10,1,1,History,1592
+1503,Richard III,KEEPER,68,1,1,History,1592
+1503,Richard III,KING EDWARD,526,1,1,History,1592
+1503,Richard III,KING RICHARD,3540,3,2,History,1592
+1503,Richard III,LORDS,14,1,1,History,1592
+1503,Richard III,LOVELL,20,2,1,History,1592
+1503,Richard III,MAYOR,114,3,1,History,1592
+1503,Richard III,MESSENGER,219,3,4,History,1592
+1503,Richard III,NORFOLK,68,1,1,History,1592
+1503,Richard III,OXFORD,13,1,1,History,1592
+1503,Richard III,PAGE,36,1,1,History,1592
+1503,Richard III,PRIEST,16,1,1,History,1592
+1503,Richard III,PRINCE,347,1,1,History,1592
+1503,Richard III,PURSUIVANT,20,1,1,History,1592
+1503,Richard III,QUEEN ELIZABETH,2147,4,3,History,1592
+1503,Richard III,QUEEN MARGARET,1770,2,2,History,1592
+1503,Richard III,RATCLIFFE,220,2,3,History,1592
+1503,Richard III,RICHARD,5345,6,3,History,1592
+1503,Richard III,RICHMOND,1078,3,1,History,1592
+1503,Richard III,RIVERS,373,3,3,History,1592
+1503,Richard III,SCRIVENER,117,1,1,History,1592
+1503,Richard III,SECOND CITIZEN,103,1,1,History,1592
+1503,Richard III,SECOND MESSENGER,23,1,1,History,1592
+1503,Richard III,SECOND MURDERER,459,2,1,History,1592
+1503,Richard III,SHERIFF,9,1,1,History,1592
+1503,Richard III,STANLEY,840,5,5,History,1592
+1503,Richard III,SURREY,9,1,1,History,1592
+1503,Richard III,THIRD CITIZEN,230,1,1,History,1592
+1503,Richard III,THIRD MESSENGER,47,1,1,History,1592
+1503,Richard III,TYRREL,268,2,1,History,1592
+1503,Richard III,VAUGHAN,9,1,1,History,1592
+1503,Richard III,YORK,330,2,2,History,1592
+1504,Comedy of Errors,ABBESS,554,1,1,Comedy,1594
+1504,Comedy of Errors,ADRIANA,2100,3,4,Comedy,1594
+1504,Comedy of Errors,ANGELO,637,2,3,Comedy,1594
+1504,Comedy of Errors,ANTIPHOLUS OF EPHESUS,1751,2,3,Comedy,1594
+1504,Comedy of Errors,ANTIPHOLUS OF SYRACUSE,2090,4,5,Comedy,1594
+1504,Comedy of Errors,BALTHASAR,203,1,1,Comedy,1594
+1504,Comedy of Errors,COURTESAN,294,3,2,Comedy,1594
+1504,Comedy of Errors,DROMIO OF EPHESUS,1359,3,5,Comedy,1594
+1504,Comedy of Errors,DROMIO OF SYRACUSE,2081,4,5,Comedy,1594
+1504,Comedy of Errors,DUKE,694,1,2,Comedy,1594
+1504,Comedy of Errors,EGEON,1105,1,2,Comedy,1594
+1504,Comedy of Errors,JAILER,4,1,1,Comedy,1594
+1504,Comedy of Errors,LUCE,64,1,1,Comedy,1594
+1504,Comedy of Errors,LUCIANA,766,3,4,Comedy,1594
+1504,Comedy of Errors,MERCHANT,382,2,3,Comedy,1594
+1504,Comedy of Errors,MESSENGER,132,1,1,Comedy,1594
+1504,Comedy of Errors,OFFICER,95,2,1,Comedy,1594
+1504,Comedy of Errors,PINCH,103,1,1,Comedy,1594
+1507,Titus Andronicus,AARON,2822,3,4,Tragedy,1591
+1507,Titus Andronicus,AEMILIUS,154,3,2,Tragedy,1591
+1507,Titus Andronicus,BASSIANUS,463,3,2,Tragedy,1591
+1507,Titus Andronicus,CAPTAIN,102,1,1,Tragedy,1591
+1507,Titus Andronicus,CHIRON,405,4,4,Tragedy,1591
+1507,Titus Andronicus,CLOWN,173,2,1,Tragedy,1591
+1507,Titus Andronicus,DEMETRIUS,723,4,4,Tragedy,1591
+1507,Titus Andronicus,FIRST GOTH,70,2,1,Tragedy,1591
+1507,Titus Andronicus,GOTH,24,1,1,Tragedy,1591
+1507,Titus Andronicus,GOTHS,10,1,1,Tragedy,1591
+1507,Titus Andronicus,LAVINIA,462,3,2,Tragedy,1591
+1507,Titus Andronicus,LUCIUS,1406,2,3,Tragedy,1591
+1507,Titus Andronicus,MARCUS,2438,4,5,Tragedy,1591
+1507,Titus Andronicus,MARTIUS,242,2,2,Tragedy,1591
+1507,Titus Andronicus,MESSENGER,56,1,1,Tragedy,1591
+1507,Titus Andronicus,MUTIUS,25,1,1,Tragedy,1591
+1507,Titus Andronicus,NURSE,137,1,1,Tragedy,1591
+1507,Titus Andronicus,PUBLIUS,112,2,2,Tragedy,1591
+1507,Titus Andronicus,QUINTUS,232,2,2,Tragedy,1591
+1507,Titus Andronicus,ROMANS,12,1,1,Tragedy,1591
+1507,Titus Andronicus,SATURNINUS,1624,4,4,Tragedy,1591
+1507,Titus Andronicus,SECOND GOTH,161,1,1,Tragedy,1591
+1507,Titus Andronicus,TAMORA,2006,4,4,Tragedy,1591
+1507,Titus Andronicus,TITUS,5789,3,5,Tragedy,1591
+1507,Titus Andronicus,TRIBUNES,19,1,1,Tragedy,1591
+1507,Titus Andronicus,YOUNG LUCIUS,354,3,3,Tragedy,1591
+1508,Taming of the Shrew,BAPTISTA,1262,3,5,Comedy,1592
+1508,Taming of the Shrew,BIANCA,546,2,5,Comedy,1592
+1508,Taming of the Shrew,BIONDELLO,802,3,4,Comedy,1592
+1508,Taming of the Shrew,CURTIS,172,1,1,Comedy,1592
+1508,Taming of the Shrew,FIRST SERVANT,11,1,2,Comedy,1592
+1508,Taming of the Shrew,GREMIO,1339,2,4,Comedy,1592
+1508,Taming of the Shrew,GRUMIO,1466,3,3,Comedy,1592
+1508,Taming of the Shrew,HABERDASHER,8,1,1,Comedy,1592
+1508,Taming of the Shrew,HORTENSIO,1580,4,5,Comedy,1592
+1508,Taming of the Shrew,JOSEPH,2,1,1,Comedy,1592
+1508,Taming of the Shrew,KATHERINA,1770,4,5,Comedy,1592
+1508,Taming of the Shrew,LUCENTIO,1394,3,4,Comedy,1592
+1508,Taming of the Shrew,NATHANIEL,22,1,1,Comedy,1592
+1508,Taming of the Shrew,NICHOLAS,2,1,1,Comedy,1592
+1508,Taming of the Shrew,PAGE,5,1,1,Comedy,1592
+1508,Taming of the Shrew,PEDANT,377,3,2,Comedy,1592
+1508,Taming of the Shrew,PETER,8,1,1,Comedy,1592
+1508,Taming of the Shrew,PETRUCHIO,4641,4,5,Comedy,1592
+1508,Taming of the Shrew,PHILIP,3,1,1,Comedy,1592
+1508,Taming of the Shrew,SERVANT,23,1,1,Comedy,1592
+1508,Taming of the Shrew,SLY,28,1,1,Comedy,1592
+1508,Taming of the Shrew,TAILOR,113,1,1,Comedy,1592
+1508,Taming of the Shrew,TRANIO,2268,3,5,Comedy,1592
+1508,Taming of the Shrew,VINCENTIO,348,3,2,Comedy,1592
+1508,Taming of the Shrew,WIDOW,76,1,1,Comedy,1592
+1509,Two Gentlemen of Verona,ANTONIO,262,1,1,Comedy,1598
+1509,Two Gentlemen of Verona,DUKE,1534,3,3,Comedy,1598
+1509,Two Gentlemen of Verona,EGLAMOUR,192,2,2,Comedy,1598
+1509,Two Gentlemen of Verona,FIRST OUTLAW,152,2,2,Comedy,1598
+1509,Two Gentlemen of Verona,HOST,158,1,1,Comedy,1598
+1509,Two Gentlemen of Verona,JULIA,2435,3,4,Comedy,1598
+1509,Two Gentlemen of Verona,LANCE,1853,4,3,Comedy,1598
+1509,Two Gentlemen of Verona,LUCETTA,560,2,2,Comedy,1598
+1509,Two Gentlemen of Verona,OUTLAWS,6,1,1,Comedy,1598
+1509,Two Gentlemen of Verona,PANTINO,310,2,2,Comedy,1598
+1509,Two Gentlemen of Verona,PROTEUS,3365,5,5,Comedy,1598
+1509,Two Gentlemen of Verona,SECOND OUTLAW,139,2,2,Comedy,1598
+1509,Two Gentlemen of Verona,SERVANT,9,1,1,Comedy,1598
+1509,Two Gentlemen of Verona,SILVIA,1140,4,3,Comedy,1598
+1509,Two Gentlemen of Verona,SPEED,1467,3,4,Comedy,1598
+1509,Two Gentlemen of Verona,THIRD OUTLAW,165,1,1,Comedy,1598
+1509,Two Gentlemen of Verona,THURIO,374,2,4,Comedy,1598
+1509,Two Gentlemen of Verona,VALENTINE,2832,2,5,Comedy,1598
+1510,Love's Labour's Lost,ARMADO,1038,2,2,Comedy,1595
+1510,Love's Labour's Lost,BEROWNE,1702,2,4,Comedy,1595
+1510,Love's Labour's Lost,BOYET,1035,1,2,Comedy,1595
+1510,Love's Labour's Lost,COSTARD,950,2,3,Comedy,1595
+1510,Love's Labour's Lost,DULL,210,2,2,Comedy,1595
+1510,Love's Labour's Lost,DUMAINE,68,1,2,Comedy,1595
+1510,Love's Labour's Lost,FORESTER,35,1,1,Comedy,1595
+1510,Love's Labour's Lost,HOLOFERNES,823,1,1,Comedy,1595
+1510,Love's Labour's Lost,JAQUENETTA,77,1,2,Comedy,1595
+1510,Love's Labour's Lost,KATHARINE,100,1,1,Comedy,1595
+1510,Love's Labour's Lost,KING,1185,2,3,Comedy,1595
+1510,Love's Labour's Lost,LONGAVILLE,166,1,2,Comedy,1595
+1510,Love's Labour's Lost,LORD,7,1,1,Comedy,1595
+1510,Love's Labour's Lost,MARIA,171,1,2,Comedy,1595
+1510,Love's Labour's Lost,MOTH,883,2,2,Comedy,1595
+1510,Love's Labour's Lost,NATHANIEL,404,1,1,Comedy,1595
+1510,Love's Labour's Lost,PRINCESS,885,1,2,Comedy,1595
+1510,Love's Labour's Lost,ROSALINE,289,1,2,Comedy,1595
+1511,King John,ARTHUR,982,2,3,History,1597
+1511,King John,AUSTRIA,242,1,2,History,1597
+1511,King John,BASTARD,4111,5,5,History,1597
+1511,King John,BIGOT,60,1,1,History,1597
+1511,King John,BLANCHE,332,1,2,History,1597
+1511,King John,CHATILLION,296,1,2,History,1597
+1511,King John,CITIZEN,38,1,1,History,1597
+1511,King John,CONSTANCE,2122,2,2,History,1597
+1511,King John,ENGLISH HERALD,101,1,1,History,1597
+1511,King John,ESSEX,25,1,1,History,1597
+1511,King John,FIRST CITIZEN,491,1,1,History,1597
+1511,King John,FIRST EXECUTIONER,19,1,1,History,1597
+1511,King John,FRENCH HERALD,87,1,1,History,1597
+1511,King John,GURNEY,4,1,1,History,1597
+1511,King John,HUBERT,1027,4,3,History,1597
+1511,King John,KING JOHN,3318,4,5,History,1597
+1511,King John,KING PHILIP,1539,2,2,History,1597
+1511,King John,LADY FAULCONBRIDGE,122,1,1,History,1597
+1511,King John,LOUIS,1164,4,3,History,1597
+1511,King John,MELUN,310,1,1,History,1597
+1511,King John,MESSENGER,210,3,2,History,1597
+1511,King John,PANDULPH,1266,3,2,History,1597
+1511,King John,PEMBROKE,611,4,2,History,1597
+1511,King John,PETER OF POMFRET,8,1,1,History,1597
+1511,King John,PRINCE HENRY,223,1,1,History,1597
+1511,King John,QUEEN ELEANOR,424,2,3,History,1597
+1511,King John,ROBERT,180,1,1,History,1597
+1511,King John,SALISBURY,1223,5,3,History,1597
+1512,Richard II,ABBOT,72,1,1,History,1595
+1512,Richard II,ANOTHER LORD,43,1,1,History,1595
+1512,Richard II,AUMERLE,706,4,4,History,1595
+1512,Richard II,BAGOT,170,2,2,History,1595
+1512,Richard II,BERKELEY,70,1,1,History,1595
+1512,Richard II,BOLINGBROKE,2558,2,4,History,1595
+1512,Richard II,BUSHY,273,3,3,History,1595
+1512,Richard II,CAPTAIN,123,1,1,History,1595
+1512,Richard II,CARLISLE,486,2,2,History,1595
+1512,Richard II,DUCHESS,1199,2,2,History,1595
+1512,Richard II,EXTON,178,3,1,History,1595
+1512,Richard II,FIRST HERALD,48,1,1,History,1595
+1512,Richard II,FITZWATER,218,2,2,History,1595
+1512,Richard II,GARDENER,413,1,1,History,1595
+1512,Richard II,GAUNT,1524,3,2,History,1595
+1512,Richard II,GREEN,242,3,3,History,1595
+1512,Richard II,GROOM,90,1,1,History,1595
+1512,Richard II,HARRY PERCY,43,1,1,History,1595
+1512,Richard II,KEEPER,29,1,1,History,1595
+1512,Richard II,KING HENRY,665,2,1,History,1595
+1512,Richard II,KING RICHARD,5187,4,5,History,1595
+1512,Richard II,LADY,27,1,1,History,1595
+1512,Richard II,MARSHAL,256,1,1,History,1595
+1512,Richard II,MOWBRAY,985,2,1,History,1595
+1512,Richard II,NORTHUMBERLAND,1107,3,4,History,1595
+1512,Richard II,PERCY,309,2,3,History,1595
+1512,Richard II,QUEEN,916,3,3,History,1595
+1512,Richard II,RICHARD,800,1,1,History,1595
+1512,Richard II,ROSS,177,2,1,History,1595
+1512,Richard II,SALISBURY,156,2,2,History,1595
+1512,Richard II,SCROOP,287,1,1,History,1595
+1512,Richard II,SECOND HERALD,48,1,1,History,1595
+1512,Richard II,SERVANT,78,1,2,History,1595
+1512,Richard II,SERVINGMAN,43,1,1,History,1595
+1512,Richard II,SURREY,76,1,1,History,1595
+1512,Richard II,WILLOUGHBY,102,2,1,History,1595
+1512,Richard II,YORK,2245,3,4,History,1595
+1513,Romeo and Juliet,ABRAM,24,1,1,Tragedy,1595
+1513,Romeo and Juliet,APOTHECARY,53,1,1,Tragedy,1595
+1513,Romeo and Juliet,BALTHASAR,233,2,1,Tragedy,1595
+1513,Romeo and Juliet,BENVOLIO,1161,4,3,Tragedy,1595
+1513,Romeo and Juliet,CAPULET,2147,5,4,Tragedy,1595
+1513,Romeo and Juliet,CAPULET'S COUSIN,17,1,1,Tragedy,1595
+1513,Romeo and Juliet,CHORUS,113,1,1,Tragedy,1595
+1513,Romeo and Juliet,FIRST CITIZEN,43,1,2,Tragedy,1595
+1513,Romeo and Juliet,FIRST MUSICIAN,71,1,1,Tragedy,1595
+1513,Romeo and Juliet,FIRST SERVANT,81,2,2,Tragedy,1595
+1513,Romeo and Juliet,FIRST WATCH,162,1,1,Tragedy,1595
+1513,Romeo and Juliet,FRIAR JOHN,97,1,1,Tragedy,1595
+1513,Romeo and Juliet,FRIAR LAWRENCE,2738,5,4,Tragedy,1595
+1513,Romeo and Juliet,GREGORY,147,1,1,Tragedy,1595
+1513,Romeo and Juliet,JULIET,4291,5,5,Tragedy,1595
+1513,Romeo and Juliet,LADY CAPULET,874,5,4,Tragedy,1595
+1513,Romeo and Juliet,LADY MONTAGUE,28,1,1,Tragedy,1595
+1513,Romeo and Juliet,MERCUTIO,2112,2,3,Tragedy,1595
+1513,Romeo and Juliet,MONTAGUE,318,2,3,Tragedy,1595
+1513,Romeo and Juliet,NURSE,2232,4,4,Tragedy,1595
+1513,Romeo and Juliet,PAGE,81,1,1,Tragedy,1595
+1513,Romeo and Juliet,PARIS,541,5,4,Tragedy,1595
+1513,Romeo and Juliet,PETER,246,2,2,Tragedy,1595
+1513,Romeo and Juliet,PRINCE,590,2,3,Tragedy,1595
+1513,Romeo and Juliet,ROMEO,4702,6,4,Tragedy,1595
+1513,Romeo and Juliet,SAMPSON,257,1,1,Tragedy,1595
+1513,Romeo and Juliet,SECOND MUSICIAN,34,1,1,Tragedy,1595
+1513,Romeo and Juliet,SECOND SERVANT,96,3,2,Tragedy,1595
+1513,Romeo and Juliet,SECOND WATCH,9,1,1,Tragedy,1595
+1513,Romeo and Juliet,SERVANT,181,3,1,Tragedy,1595
+1513,Romeo and Juliet,THIRD MUSICIAN,7,1,1,Tragedy,1595
+1513,Romeo and Juliet,TYBALT,264,2,2,Tragedy,1595
+1514,A Midsummer Night's Dream,BOTTOM,1636,3,4,Comedy,1595
+1514,A Midsummer Night's Dream,CHORUS,34,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,COBWEB,5,1,2,Comedy,1595
+1514,A Midsummer Night's Dream,DEMETRIUS,1070,3,5,Comedy,1595
+1514,A Midsummer Night's Dream,EGEUS,296,1,2,Comedy,1595
+1514,A Midsummer Night's Dream,FAIRY,189,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,FIRST FAIRY,46,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,FLUTE,114,1,2,Comedy,1595
+1514,A Midsummer Night's Dream,HELENA,1817,2,4,Comedy,1595
+1514,A Midsummer Night's Dream,HERMIA,1284,2,4,Comedy,1595
+1514,A Midsummer Night's Dream,HIPPOLYTA,251,2,3,Comedy,1595
+1514,A Midsummer Night's Dream,LION,67,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,LYSANDER,1410,3,5,Comedy,1595
+1514,A Midsummer Night's Dream,MOON,33,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,MOONSHINE,24,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,MOTH,3,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,MUSTARDSEED,8,1,2,Comedy,1595
+1514,A Midsummer Night's Dream,OBERON,1625,3,4,Comedy,1595
+1514,A Midsummer Night's Dream,PEASEBLOSSOM,5,1,2,Comedy,1595
+1514,A Midsummer Night's Dream,PHILOSTRATE,184,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,PUCK,1381,3,4,Comedy,1595
+1514,A Midsummer Night's Dream,PYRAMUS,420,2,2,Comedy,1595
+1514,A Midsummer Night's Dream,QUINCE,678,2,3,Comedy,1595
+1514,A Midsummer Night's Dream,SECOND FAIRY,10,1,1,Comedy,1595
+1514,A Midsummer Night's Dream,SNOUT,59,2,2,Comedy,1595
+1514,A Midsummer Night's Dream,SNUG,51,1,2,Comedy,1595
+1514,A Midsummer Night's Dream,STARVELING,32,2,3,Comedy,1595
+1514,A Midsummer Night's Dream,THESEUS,2039,2,3,Comedy,1595
+1514,A Midsummer Night's Dream,THISBE,236,2,2,Comedy,1595
+1514,A Midsummer Night's Dream,TITANIA,1098,3,4,Comedy,1595
+1514,A Midsummer Night's Dream,WALL,99,1,1,Comedy,1595
+1515,Merchant of Venice,ANTONIO,1437,3,5,Comedy,1597
+1515,Merchant of Venice,ARRAGON,498,1,1,Comedy,1597
+1515,Merchant of Venice,BALTHAZAR,7,1,1,Comedy,1597
+1515,Merchant of Venice,BASSANIO,2588,3,5,Comedy,1597
+1515,Merchant of Venice,DUKE,367,1,1,Comedy,1597
+1515,Merchant of Venice,DUKE OF VENICE,190,1,1,Comedy,1597
+1515,Merchant of Venice,GOBBO,293,1,1,Comedy,1597
+1515,Merchant of Venice,GRATIANO,1377,4,5,Comedy,1597
+1515,Merchant of Venice,JESSICA,662,6,3,Comedy,1597
+1515,Merchant of Venice,LAUNCELET,1456,5,3,Comedy,1597
+1515,Merchant of Venice,LEONARDO,11,1,1,Comedy,1597
+1515,Merchant of Venice,LORENZO,1346,5,4,Comedy,1597
+1515,Merchant of Venice,MESSENGER,77,1,1,Comedy,1597
+1515,Merchant of Venice,NERISSA,707,4,5,Comedy,1597
+1515,Merchant of Venice,PORTIA,4672,5,5,Comedy,1597
+1515,Merchant of Venice,PRINCE OF MOROCCO,800,2,1,Comedy,1597
+1515,Merchant of Venice,SALARINO,846,5,4,Comedy,1597
+1515,Merchant of Venice,SALERIO,148,1,1,Comedy,1597
+1515,Merchant of Venice,SERVANT,15,1,1,Comedy,1597
+1515,Merchant of Venice,SERVINGMAN,35,1,1,Comedy,1597
+1515,Merchant of Venice,SHYLOCK,2892,3,4,Comedy,1597
+1515,Merchant of Venice,SOLANIO,429,3,3,Comedy,1597
+1515,Merchant of Venice,STEPHANO,54,1,1,Comedy,1597
+1515,Merchant of Venice,TUBAL,96,1,1,Comedy,1597
+1516,"Henry IV, Part 1",ARCHBISHOP,260,1,1,History,1597
+1516,"Henry IV, Part 1",BARDOLPH,179,3,3,History,1597
+1516,"Henry IV, Part 1",BLUNT,298,2,4,History,1597
+1516,"Henry IV, Part 1",CARRIER,4,1,1,History,1597
+1516,"Henry IV, Part 1",CHAMBERLAIN,150,1,1,History,1597
+1516,"Henry IV, Part 1",DOUGLAS,350,4,2,History,1597
+1516,"Henry IV, Part 1",FALSTAFF,5554,4,5,History,1597
+1516,"Henry IV, Part 1",FIRST CARRIER,175,1,1,History,1597
+1516,"Henry IV, Part 1",FIRST TRAVELLER,29,1,1,History,1597
+1516,"Henry IV, Part 1",FRANCIS,83,1,1,History,1597
+1516,"Henry IV, Part 1",GADSHILL,370,3,1,History,1597
+1516,"Henry IV, Part 1",GLENDOWER,610,1,1,History,1597
+1516,"Henry IV, Part 1",HOSTESS,415,2,2,History,1597
+1516,"Henry IV, Part 1",HOTSPUR,4354,4,5,History,1597
+1516,"Henry IV, Part 1",KING,2571,5,3,History,1597
+1516,"Henry IV, Part 1",LADY PERCY,420,2,2,History,1597
+1516,"Henry IV, Part 1",LANCASTER,64,2,1,History,1597
+1516,"Henry IV, Part 1",MESSENGER,64,2,2,History,1597
+1516,"Henry IV, Part 1",MORTIMER,446,1,1,History,1597
+1516,"Henry IV, Part 1",NORTHUMBERLAND,171,1,1,History,1597
+1516,"Henry IV, Part 1",OSTLER,3,1,1,History,1597
+1516,"Henry IV, Part 1",PETO,92,2,1,History,1597
+1516,"Henry IV, Part 1",POINS,566,2,2,History,1597
+1516,"Henry IV, Part 1",PRINCE,4414,5,5,History,1597
+1516,"Henry IV, Part 1",SECOND CARRIER,141,1,1,History,1597
+1516,"Henry IV, Part 1",SECOND TRAVELLER,3,1,1,History,1597
+1516,"Henry IV, Part 1",SERVANT,19,1,1,History,1597
+1516,"Henry IV, Part 1",SHERIFF,59,1,1,History,1597
+1516,"Henry IV, Part 1",SIR MICHAEL,53,1,1,History,1597
+1516,"Henry IV, Part 1",THIEVES,1,1,1,History,1597
+1516,"Henry IV, Part 1",VERNON,460,3,2,History,1597
+1516,"Henry IV, Part 1",VINTNER,33,1,1,History,1597
+1516,"Henry IV, Part 1",WESTMORELAND,298,3,3,History,1597
+1516,"Henry IV, Part 1",WORCESTER,1432,4,4,History,1597
+1517,Merry Wives of Windsor,ANNE,186,3,3,Comedy,1601
+1517,Merry Wives of Windsor,BARDOLPH,168,4,4,Comedy,1601
+1517,Merry Wives of Windsor,CAIUS,835,5,5,Comedy,1601
+1517,Merry Wives of Windsor,EVANS,1799,5,4,Comedy,1601
+1517,Merry Wives of Windsor,FALSTAFF,3705,4,5,Comedy,1601
+1517,Merry Wives of Windsor,FENTON,752,3,4,Comedy,1601
+1517,Merry Wives of Windsor,FORD,2539,5,4,Comedy,1601
+1517,Merry Wives of Windsor,HOST,868,5,4,Comedy,1601
+1517,Merry Wives of Windsor,JOHN,20,2,2,Comedy,1601
+1517,Merry Wives of Windsor,MISTRESS FORD,1335,5,4,Comedy,1601
+1517,Merry Wives of Windsor,MISTRESS PAGE,2558,5,4,Comedy,1601
+1517,Merry Wives of Windsor,MISTRESS QUICKLY,2161,4,5,Comedy,1601
+1517,Merry Wives of Windsor,NYM,245,2,2,Comedy,1601
+1517,Merry Wives of Windsor,PAGE,1093,5,5,Comedy,1601
+1517,Merry Wives of Windsor,PISTOL,405,4,3,Comedy,1601
+1517,Merry Wives of Windsor,ROBERT,13,2,2,Comedy,1601
+1517,Merry Wives of Windsor,ROBIN,101,2,2,Comedy,1601
+1517,Merry Wives of Windsor,RUGBY,52,2,2,Comedy,1601
+1517,Merry Wives of Windsor,SHALLOW,939,4,5,Comedy,1601
+1517,Merry Wives of Windsor,SIMPLE,338,4,3,Comedy,1601
+1517,Merry Wives of Windsor,SLENDER,1184,5,4,Comedy,1601
+1517,Merry Wives of Windsor,SONG,59,1,1,Comedy,1601
+1517,Merry Wives of Windsor,WILLIAM,37,1,1,Comedy,1601
+1518,"Henry IV, Part 2",ARCHBISHOP,1099,3,2,History,1598
+1518,"Henry IV, Part 2",BARDOLPH,313,4,4,History,1598
+1518,"Henry IV, Part 2",BULLCALF,110,1,1,History,1598
+1518,"Henry IV, Part 2",CHIEF JUSTICE,1140,3,3,History,1598
+1518,"Henry IV, Part 2",CLARENCE,161,3,2,History,1598
+1518,"Henry IV, Part 2",COLEVILE,64,1,1,History,1598
+1518,"Henry IV, Part 2",DAVY,282,2,1,History,1598
+1518,"Henry IV, Part 2",DOLL,651,1,2,History,1598
+1518,"Henry IV, Part 2",EPILOGUE,317,1,1,History,1598
+1518,"Henry IV, Part 2",FALSTAFF,5532,5,5,History,1598
+1518,"Henry IV, Part 2",FANG,53,1,1,History,1598
+1518,"Henry IV, Part 2",FEEBLE,94,1,1,History,1598
+1518,"Henry IV, Part 2",FIRST BEADLE,74,1,1,History,1598
+1518,"Henry IV, Part 2",FIRST DRAWER,75,1,1,History,1598
+1518,"Henry IV, Part 2",FIRST GROOM,35,1,1,History,1598
+1518,"Henry IV, Part 2",GLOUCESTER,112,3,2,History,1598
+1518,"Henry IV, Part 2",GOWER,56,1,1,History,1598
+1518,"Henry IV, Part 2",HARCOURT,64,1,1,History,1598
+1518,"Henry IV, Part 2",HASTINGS,419,3,2,History,1598
+1518,"Henry IV, Part 2",HOSTESS,1434,2,2,History,1598
+1518,"Henry IV, Part 2",KING,3076,4,3,History,1598
+1518,"Henry IV, Part 2",LADY NORTHUMBERLAND,38,1,1,History,1598
+1518,"Henry IV, Part 2",LADY PERCY,372,1,1,History,1598
+1518,"Henry IV, Part 2",LANCASTER,812,3,2,History,1598
+1518,"Henry IV, Part 2",LORD BARDOLPH,654,2,1,History,1598
+1518,"Henry IV, Part 2",MESSENGER,33,1,1,History,1598
+1518,"Henry IV, Part 2",MORTON,638,1,1,History,1598
+1518,"Henry IV, Part 2",MOULDY,94,1,1,History,1598
+1518,"Henry IV, Part 2",MOWBRAY,435,3,2,History,1598
+1518,"Henry IV, Part 2",NORTHUMBERLAND,823,2,2,History,1598
+1518,"Henry IV, Part 2",PAGE,215,3,2,History,1598
+1518,"Henry IV, Part 2",PETO,44,1,1,History,1598
+1518,"Henry IV, Part 2",PISTOL,555,3,2,History,1598
+1518,"Henry IV, Part 2",POINS,476,2,1,History,1598
+1518,"Henry IV, Part 2",PORTER,28,1,1,History,1598
+1518,"Henry IV, Part 2",PRINCE,1666,3,2,History,1598
+1518,"Henry IV, Part 2",PRINCES,7,1,1,History,1598
+1518,"Henry IV, Part 2",SECOND DRAWER,95,1,1,History,1598
+1518,"Henry IV, Part 2",SECOND GROOM,5,1,1,History,1598
+1518,"Henry IV, Part 2",SERVANT,85,1,1,History,1598
+1518,"Henry IV, Part 2",SHADOW,6,1,1,History,1598
+1518,"Henry IV, Part 2",SHALLOW,1572,4,2,History,1598
+1518,"Henry IV, Part 2",SILENCE,251,2,2,History,1598
+1518,"Henry IV, Part 2",SNARE,14,1,1,History,1598
+1518,"Henry IV, Part 2",TRAVERS,114,1,1,History,1598
+1518,"Henry IV, Part 2",WART,4,1,1,History,1598
+1518,"Henry IV, Part 2",WARWICK,573,4,3,History,1598
+1518,"Henry IV, Part 2",WESTMORELAND,851,4,1,History,1598
+1519,Much Ado about Nothing,A LORD,4,1,1,Comedy,1598
+1519,Much Ado about Nothing,ANTONIO,429,3,3,Comedy,1598
+1519,Much Ado about Nothing,BALTHASAR,103,2,1,Comedy,1598
+1519,Much Ado about Nothing,BEATRICE,2376,5,5,Comedy,1598
+1519,Much Ado about Nothing,BENEDICK,3883,4,5,Comedy,1598
+1519,Much Ado about Nothing,BORACHIO,997,5,5,Comedy,1598
+1519,Much Ado about Nothing,BOY,6,1,1,Comedy,1598
+1519,Much Ado about Nothing,CLAUDIO,2076,4,5,Comedy,1598
+1519,Much Ado about Nothing,CONRADE,248,3,3,Comedy,1598
+1519,Much Ado about Nothing,DOGBERRY,1528,4,3,Comedy,1598
+1519,Much Ado about Nothing,DON JOHN,905,3,4,Comedy,1598
+1519,Much Ado about Nothing,DON PEDRO,2441,4,5,Comedy,1598
+1519,Much Ado about Nothing,FIRST WATCH,80,2,2,Comedy,1598
+1519,Much Ado about Nothing,FRIAR,594,2,2,Comedy,1598
+1519,Much Ado about Nothing,HERO,986,3,5,Comedy,1598
+1519,Much Ado about Nothing,LEONATO,2639,5,5,Comedy,1598
+1519,Much Ado about Nothing,MARGARET,545,3,3,Comedy,1598
+1519,Much Ado about Nothing,MESSENGER,231,3,3,Comedy,1598
+1519,Much Ado about Nothing,SECOND WATCH,130,2,2,Comedy,1598
+1519,Much Ado about Nothing,SEXTON,105,1,1,Comedy,1598
+1519,Much Ado about Nothing,URSULA,363,3,3,Comedy,1598
+1519,Much Ado about Nothing,VERGES,184,4,3,Comedy,1598
+1519,Much Ado about Nothing,WATCH,37,1,1,Comedy,1598
+1521,Henry V,ALICE,163,2,2,History,1599
+1521,Henry V,AMBASSADOR,101,1,1,History,1599
+1521,Henry V,BARDOLPH,225,3,2,History,1599
+1521,Henry V,BATES,167,1,1,History,1599
+1521,Henry V,BEDFORD,56,2,2,History,1599
+1521,Henry V,BOURBON,141,1,2,History,1599
+1521,Henry V,BOY,634,4,3,History,1599
+1521,Henry V,BURGUNDY,513,1,1,History,1599
+1521,Henry V,CAMBRIDGE,108,1,1,History,1599
+1521,Henry V,CANTERBURY,1661,2,1,History,1599
+1521,Henry V,CHORUS,1440,4,4,History,1599
+1521,Henry V,CONSTABLE,1063,4,3,History,1599
+1521,Henry V,COURT,11,1,1,History,1599
+1521,Henry V,DAUPHIN,908,4,3,History,1599
+1521,Henry V,ELY,183,2,1,History,1599
+1521,Henry V,ERPINGHAM,52,1,1,History,1599
+1521,Henry V,EXETER,1001,6,4,History,1599
+1521,Henry V,FIRST AMBASSADOR,30,1,1,History,1599
+1521,Henry V,FLUELLEN,2520,5,3,History,1599
+1521,Henry V,FRENCH KING,703,3,3,History,1599
+1521,Henry V,FRENCH SOLDIER,103,1,1,History,1599
+1521,Henry V,GLOUCESTER,28,4,2,History,1599
+1521,Henry V,GOVERNOR,48,1,1,History,1599
+1521,Henry V,GOWER,523,5,3,History,1599
+1521,Henry V,GREY,86,1,1,History,1599
+1521,Henry V,HERALD,8,1,1,History,1599
+1521,Henry V,HOSTESS,354,2,1,History,1599
+1521,Henry V,JAMY,98,1,1,History,1599
+1521,Henry V,KATHARINE,441,2,2,History,1599
+1521,Henry V,KING,409,1,1,History,1599
+1521,Henry V,KING HENRY,7974,6,5,History,1599
+1521,Henry V,LORDS,1,1,1,History,1599
+1521,Henry V,MACMORRIS,205,1,1,History,1599
+1521,Henry V,MESSENGER,36,3,3,History,1599
+1521,Henry V,MONTJOY,401,3,2,History,1599
+1521,Henry V,NYM,398,3,2,History,1599
+1521,Henry V,ORLEANS,314,3,2,History,1599
+1521,Henry V,PISTOL,1124,5,4,History,1599
+1521,Henry V,QUEEN ISABEL,188,1,1,History,1599
+1521,Henry V,RAMBURES,66,2,2,History,1599
+1521,Henry V,SALISBURY,75,1,1,History,1599
+1521,Henry V,SCROOP,93,1,1,History,1599
+1521,Henry V,WARWICK,7,1,1,History,1599
+1521,Henry V,WESTMORLAND,204,2,4,History,1599
+1521,Henry V,WILLIAMS,620,3,1,History,1599
+1521,Henry V,YORK,14,1,1,History,1599
+1522,Julius Caesar,ANTONY,2543,4,5,Tragedy,1599
+1522,Julius Caesar,ARTEMIDORUS,145,2,2,Tragedy,1599
+1522,Julius Caesar,BRUTUS,5424,5,5,Tragedy,1599
+1522,Julius Caesar,CAESAR,1131,2,3,Tragedy,1599
+1522,Julius Caesar,CALPHURNIA,203,1,2,Tragedy,1599
+1522,Julius Caesar,CARPENTER,4,1,1,Tragedy,1599
+1522,Julius Caesar,CASCA,1078,3,3,Tragedy,1599
+1522,Julius Caesar,CASSIUS,3730,3,5,Tragedy,1599
+1522,Julius Caesar,CATO,54,2,1,Tragedy,1599
+1522,Julius Caesar,CICERO,62,1,1,Tragedy,1599
+1522,Julius Caesar,CINNA,233,2,3,Tragedy,1599
+1522,Julius Caesar,CITIZENS,74,1,1,Tragedy,1599
+1522,Julius Caesar,CLAUDIUS,6,1,1,Tragedy,1599
+1522,Julius Caesar,CLITUS,71,1,1,Tragedy,1599
+1522,Julius Caesar,COBBLER,145,1,1,Tragedy,1599
+1522,Julius Caesar,DARDANIUS,15,1,1,Tragedy,1599
+1522,Julius Caesar,DECIUS,324,2,2,Tragedy,1599
+1522,Julius Caesar,FIRST CITIZEN,128,2,1,Tragedy,1599
+1522,Julius Caesar,FIRST SOLDIER,27,2,2,Tragedy,1599
+1522,Julius Caesar,FLAVIUS,199,1,1,Tragedy,1599
+1522,Julius Caesar,FOURTH CITIZEN,134,2,1,Tragedy,1599
+1522,Julius Caesar,GHOST,16,1,1,Tragedy,1599
+1522,Julius Caesar,LEPIDUS,22,1,1,Tragedy,1599
+1522,Julius Caesar,LIGARIUS,112,1,1,Tragedy,1599
+1522,Julius Caesar,LUCILIUS,198,5,2,Tragedy,1599
+1522,Julius Caesar,LUCIUS,205,3,2,Tragedy,1599
+1522,Julius Caesar,MARULLUS,240,1,1,Tragedy,1599
+1522,Julius Caesar,MESSALA,254,3,2,Tragedy,1599
+1522,Julius Caesar,MESSENGER,24,1,1,Tragedy,1599
+1522,Julius Caesar,METELLUS,121,1,2,Tragedy,1599
+1522,Julius Caesar,OCTAVIUS,340,2,2,Tragedy,1599
+1522,Julius Caesar,PINDARUS,122,2,2,Tragedy,1599
+1522,Julius Caesar,POET,56,1,1,Tragedy,1599
+1522,Julius Caesar,POPILIUS,10,1,1,Tragedy,1599
+1522,Julius Caesar,PORTIA,727,2,1,Tragedy,1599
+1522,Julius Caesar,PUBLIUS,6,2,2,Tragedy,1599
+1522,Julius Caesar,SECOND CITIZEN,133,2,1,Tragedy,1599
+1522,Julius Caesar,SECOND SOLDIER,8,2,2,Tragedy,1599
+1522,Julius Caesar,SERVANT,215,2,2,Tragedy,1599
+1522,Julius Caesar,SOOTHSAYER,131,3,3,Tragedy,1599
+1522,Julius Caesar,STRATO,59,1,1,Tragedy,1599
+1522,Julius Caesar,THIRD CITIZEN,131,2,1,Tragedy,1599
+1522,Julius Caesar,THIRD SOLDIER,1,1,1,Tragedy,1599
+1522,Julius Caesar,TITINIUS,248,1,2,Tragedy,1599
+1522,Julius Caesar,TREBONIUS,61,2,2,Tragedy,1599
+1522,Julius Caesar,VARRO,21,1,1,Tragedy,1599
+1522,Julius Caesar,VOLUMNIUS,17,1,1,Tragedy,1599
+1523,As You Like It,ADAM,515,4,2,Comedy,1599
+1523,As You Like It,AMIENS,172,2,1,Comedy,1599
+1523,As You Like It,AUDREY,149,2,2,Comedy,1599
+1523,As You Like It,CELIA,2117,4,4,Comedy,1599
+1523,As You Like It,CHARLES,375,2,1,Comedy,1599
+1523,As You Like It,CORIN,549,3,3,Comedy,1599
+1523,As You Like It,DENNIS,17,1,1,Comedy,1599
+1523,As You Like It,DUKE FREDERICK,529,3,3,Comedy,1599
+1523,As You Like It,DUKE SENIOR,814,3,2,Comedy,1599
+1523,As You Like It,FIRST LORD,353,3,2,Comedy,1599
+1523,As You Like It,FIRST PAGE,39,1,1,Comedy,1599
+1523,As You Like It,HYMEN,148,1,1,Comedy,1599
+1523,As You Like It,JAQUES,1754,6,4,Comedy,1599
+1523,As You Like It,JAQUES DE BOYS,128,1,1,Comedy,1599
+1523,As You Like It,LE BEAU,371,1,1,Comedy,1599
+1523,As You Like It,MARTEXT,36,1,1,Comedy,1599
+1523,As You Like It,OLIVER,1162,3,4,Comedy,1599
+1523,As You Like It,ORLANDO,2375,6,5,Comedy,1599
+1523,As You Like It,PAGES,185,1,1,Comedy,1599
+1523,As You Like It,PHOEBE,699,3,2,Comedy,1599
+1523,As You Like It,ROSALIND,5749,6,5,Comedy,1599
+1523,As You Like It,SECOND LORD,136,2,2,Comedy,1599
+1523,As You Like It,SECOND PAGE,21,1,1,Comedy,1599
+1523,As You Like It,SILVIUS,542,4,4,Comedy,1599
+1523,As You Like It,SONG,147,2,2,Comedy,1599
+1523,As You Like It,TOUCHSTONE,2384,4,4,Comedy,1599
+1523,As You Like It,WILLIAM,44,1,1,Comedy,1599
+1524,Hamlet,BARNARDO,210,2,1,Tragedy,1600
+1524,Hamlet,CAPTAIN,84,1,1,Tragedy,1600
+1524,Hamlet,CORNELIUS,10,1,1,Tragedy,1600
+1524,Hamlet,DANES,9,1,1,Tragedy,1600
+1524,Hamlet,FIRST AMBASSADOR,40,1,1,Tragedy,1600
+1524,Hamlet,FIRST CLOWN,735,1,1,Tragedy,1600
+1524,Hamlet,FIRST PLAYER,363,1,2,Tragedy,1600
+1524,Hamlet,FIRST SAILOR,38,1,1,Tragedy,1600
+1524,Hamlet,FORTINBRAS,187,2,2,Tragedy,1600
+1524,Hamlet,FRANCISCO,55,1,1,Tragedy,1600
+1524,Hamlet,GENTLEMAN,192,1,1,Tragedy,1600
+1524,Hamlet,GHOST,687,2,2,Tragedy,1600
+1524,Hamlet,GUILDENSTERN,339,3,3,Tragedy,1600
+1524,Hamlet,HAMLET,11782,5,5,Tragedy,1600
+1524,Hamlet,HORATIO,2032,5,4,Tragedy,1600
+1524,Hamlet,KING,4087,5,5,Tragedy,1600
+1524,Hamlet,LAERTES,1449,5,3,Tragedy,1600
+1524,Hamlet,LORD,67,1,1,Tragedy,1600
+1524,Hamlet,LORDS,2,1,1,Tragedy,1600
+1524,Hamlet,LUCIANUS,40,1,1,Tragedy,1600
+1524,Hamlet,MARCELLUS,437,4,1,Tragedy,1600
+1524,Hamlet,MESSENGER,36,1,1,Tragedy,1600
+1524,Hamlet,OPHELIA,1179,4,4,Tragedy,1600
+1524,Hamlet,OSRIC,360,1,1,Tragedy,1600
+1524,Hamlet,PLAYER KING,337,1,1,Tragedy,1600
+1524,Hamlet,PLAYER QUEEN,238,1,1,Tragedy,1600
+1524,Hamlet,POLONIUS,2647,4,3,Tragedy,1600
+1524,Hamlet,PRIEST,91,1,1,Tragedy,1600
+1524,Hamlet,PROLOGUE,16,1,1,Tragedy,1600
+1524,Hamlet,QUEEN,1059,5,5,Tragedy,1600
+1524,Hamlet,REYNALDO,65,1,1,Tragedy,1600
+1524,Hamlet,ROSENCRANTZ,712,4,3,Tragedy,1600
+1524,Hamlet,SECOND CLOWN,98,1,1,Tragedy,1600
+1524,Hamlet,SERVANT,9,1,1,Tragedy,1600
+1524,Hamlet,VOLTEMAND,158,1,2,Tragedy,1600
+1526,Twelfth Night,AGUECHEEK,8,1,1,Comedy,1601
+1526,Twelfth Night,ANTONIO,802,3,3,Comedy,1601
+1526,Twelfth Night,CAPTAIN,239,1,1,Comedy,1601
+1526,Twelfth Night,CLOWN,2141,5,5,Comedy,1601
+1526,Twelfth Night,CURIO,41,2,2,Comedy,1601
+1526,Twelfth Night,DUKE,1878,2,3,Comedy,1601
+1526,Twelfth Night,FABIAN,863,4,3,Comedy,1601
+1526,Twelfth Night,FIRST OFFICER,101,2,2,Comedy,1601
+1526,Twelfth Night,MALVOLIO,2227,5,5,Comedy,1601
+1526,Twelfth Night,MARIA,1214,4,4,Comedy,1601
+1526,Twelfth Night,OLIVIA,2301,4,4,Comedy,1601
+1526,Twelfth Night,PRIEST,57,1,1,Comedy,1601
+1526,Twelfth Night,SEBASTIAN,1005,2,4,Comedy,1601
+1526,Twelfth Night,SECOND OFFICER,19,1,1,Comedy,1601
+1526,Twelfth Night,SERVANT,21,1,1,Comedy,1601
+1526,Twelfth Night,SIR ANDREW,1194,5,5,Comedy,1601
+1526,Twelfth Night,SIR TOBY,2715,5,5,Comedy,1601
+1526,Twelfth Night,VALENTINE,103,2,1,Comedy,1601
+1526,Twelfth Night,VIOLA,2576,4,4,Comedy,1601
+1528,Troilus and Cressida,ACHILLES,1307,6,4,Tragedy,1602
+1528,Troilus and Cressida,AENEAS,1052,6,3,Tragedy,1602
+1528,Troilus and Cressida,AGAMEMNON,1418,4,5,Tragedy,1602
+1528,Troilus and Cressida,AJAX,539,5,4,Tragedy,1602
+1528,Troilus and Cressida,ALEXANDER,259,1,1,Tragedy,1602
+1528,Troilus and Cressida,ANDARUS,3,1,1,Tragedy,1602
+1528,Troilus and Cressida,ANDROMACHE,113,1,1,Tragedy,1602
+1528,Troilus and Cressida,BOY,26,1,2,Tragedy,1602
+1528,Troilus and Cressida,CALCHAS,229,2,2,Tragedy,1602
+1528,Troilus and Cressida,CASSANDRA,262,2,2,Tragedy,1602
+1528,Troilus and Cressida,CRESSIDA,2125,3,4,Tragedy,1602
+1528,Troilus and Cressida,DEIPHOBUS,10,2,1,Tragedy,1602
+1528,Troilus and Cressida,DIOMEDES,697,7,4,Tragedy,1602
+1528,Troilus and Cressida,HECTOR,1539,7,3,Tragedy,1602
+1528,Troilus and Cressida,HELEN,188,1,1,Tragedy,1602
+1528,Troilus and Cressida,HELENUS,37,1,1,Tragedy,1602
+1528,Troilus and Cressida,MARGARELON,14,1,1,Tragedy,1602
+1528,Troilus and Cressida,MENELAUS,78,3,4,Tragedy,1602
+1528,Troilus and Cressida,MYRMIDON,8,1,1,Tragedy,1602
+1528,Troilus and Cressida,NESTOR,1141,3,5,Tragedy,1602
+1528,Troilus and Cressida,PANDARUS,3152,5,4,Tragedy,1602
+1528,Troilus and Cressida,PARIS,719,4,3,Tragedy,1602
+1528,Troilus and Cressida,PATROCLUS,409,3,4,Tragedy,1602
+1528,Troilus and Cressida,PRIAM,138,2,2,Tragedy,1602
+1528,Troilus and Cressida,SERVANT,120,2,2,Tragedy,1602
+1528,Troilus and Cressida,SOLDIERS,6,1,1,Tragedy,1602
+1528,Troilus and Cressida,THERSITES,2261,5,3,Tragedy,1602
+1528,Troilus and Cressida,TROILUS,4030,7,5,Tragedy,1602
+1528,Troilus and Cressida,ULYSSES,3536,4,5,Tragedy,1602
+1529,All's Well That Ends Well,BERTRAM,2078,5,5,Comedy,1603
+1529,All's Well That Ends Well,CLOWN,1671,4,5,Comedy,1603
+1529,All's Well That Ends Well,COUNTESS,2137,5,5,Comedy,1603
+1529,All's Well That Ends Well,DIANA,1016,4,3,Comedy,1603
+1529,All's Well That Ends Well,DUKE,124,2,1,Comedy,1603
+1529,All's Well That Ends Well,FIRST GENTLEMAN,73,1,1,Comedy,1603
+1529,All's Well That Ends Well,FIRST LORD,1213,4,4,Comedy,1603
+1529,All's Well That Ends Well,FIRST SOLDIER,612,2,1,Comedy,1603
+1529,All's Well That Ends Well,FOURTH LORD,6,1,1,Comedy,1603
+1529,All's Well That Ends Well,GENTLEMAN,129,2,1,Comedy,1603
+1529,All's Well That Ends Well,HELENA,3602,6,5,Comedy,1603
+1529,All's Well That Ends Well,KING,2889,3,3,Comedy,1603
+1529,All's Well That Ends Well,LAFEW,2233,4,4,Comedy,1603
+1529,All's Well That Ends Well,MARIANA,173,1,1,Comedy,1603
+1529,All's Well That Ends Well,MESSENGER,34,1,1,Comedy,1603
+1529,All's Well That Ends Well,PAGE,7,1,1,Comedy,1603
+1529,All's Well That Ends Well,PAROLLES,3001,6,5,Comedy,1603
+1529,All's Well That Ends Well,SECOND GENTLEMAN,66,1,1,Comedy,1603
+1529,All's Well That Ends Well,SECOND LORD,782,4,4,Comedy,1603
+1529,All's Well That Ends Well,SECOND SOLDIER,7,1,1,Comedy,1603
+1529,All's Well That Ends Well,STEWARD,347,2,2,Comedy,1603
+1529,All's Well That Ends Well,WIDOW,432,5,3,Comedy,1603
+1530,Measure for Measure,ABHORSON,141,2,1,Comedy,1604
+1530,Measure for Measure,ANGELO,2378,3,4,Comedy,1604
+1530,Measure for Measure,BARNARDINE,113,1,1,Comedy,1604
+1530,Measure for Measure,BAWD,227,1,2,Comedy,1604
+1530,Measure for Measure,CLAUDIO,799,2,3,Comedy,1604
+1530,Measure for Measure,DUKE,6565,4,5,Comedy,1604
+1530,Measure for Measure,ELBOW,600,2,2,Comedy,1604
+1530,Measure for Measure,ESCALUS,1422,3,5,Comedy,1604
+1530,Measure for Measure,FIRST GENTLEMAN,175,1,1,Comedy,1604
+1530,Measure for Measure,FRANCISCA,76,1,1,Comedy,1604
+1530,Measure for Measure,FRIAR PETER,273,3,2,Comedy,1604
+1530,Measure for Measure,FRIAR THOMAS,36,1,1,Comedy,1604
+1530,Measure for Measure,FROTH,58,1,1,Comedy,1604
+1530,Measure for Measure,ISABELLA,3020,5,5,Comedy,1604
+1530,Measure for Measure,JULIET,63,1,1,Comedy,1604
+1530,Measure for Measure,JUSTICE,10,1,1,Comedy,1604
+1530,Measure for Measure,LUCIO,2329,4,5,Comedy,1604
+1530,Measure for Measure,MARIANA,476,2,2,Comedy,1604
+1530,Measure for Measure,MESSENGER,41,1,1,Comedy,1604
+1530,Measure for Measure,POMPEY,1302,3,4,Comedy,1604
+1530,Measure for Measure,PROVOST,1136,3,5,Comedy,1604
+1530,Measure for Measure,SECOND GENTLEMAN,54,1,1,Comedy,1604
+1530,Measure for Measure,SERVANT,34,2,1,Comedy,1604
+1530,Measure for Measure,SONG,41,1,1,Comedy,1604
+1531,Othello,BIANCA,267,2,3,Tragedy,1604
+1531,Othello,BRABANTIO,1044,3,1,Tragedy,1604
+1531,Othello,CASSIO,1965,4,5,Tragedy,1604
+1531,Othello,CLOWN,226,2,1,Tragedy,1604
+1531,Othello,DESDEMONA,2757,4,5,Tragedy,1604
+1531,Othello,DUKE,486,1,1,Tragedy,1604
+1531,Othello,EMILIA,1816,4,4,Tragedy,1604
+1531,Othello,FIRST GENTLEMAN,20,1,1,Tragedy,1604
+1531,Othello,FIRST MUSICIAN,23,1,1,Tragedy,1604
+1531,Othello,FIRST SENATOR,180,1,1,Tragedy,1604
+1531,Othello,GENTLEMEN,5,1,1,Tragedy,1604
+1531,Othello,GRATIANO,162,2,1,Tragedy,1604
+1531,Othello,HERALD,101,1,1,Tragedy,1604
+1531,Othello,IAGO,8459,4,5,Tragedy,1604
+1531,Othello,LODOVICO,530,3,2,Tragedy,1604
+1531,Othello,MESSENGER,82,2,2,Tragedy,1604
+1531,Othello,MONTANO,416,3,2,Tragedy,1604
+1531,Othello,OFFICER,28,2,1,Tragedy,1604
+1531,Othello,OTHELLO,6258,4,5,Tragedy,1604
+1531,Othello,RODERIGO,862,3,4,Tragedy,1604
+1531,Othello,SAILOR,25,1,1,Tragedy,1604
+1531,Othello,SECOND GENTLEMAN,90,1,1,Tragedy,1604
+1531,Othello,SECOND SENATOR,38,1,1,Tragedy,1604
+1531,Othello,SENATORS,1,1,1,Tragedy,1604
+1531,Othello,THIRD GENTLEMAN,113,1,1,Tragedy,1604
+1532,King Lear,ALBANY,1042,4,3,Tragedy,1606
+1532,King Lear,BURGUNDY,68,1,1,Tragedy,1606
+1532,King Lear,CAPTAIN,28,1,1,Tragedy,1606
+1532,King Lear,CORDELIA,841,4,3,Tragedy,1606
+1532,King Lear,CORNWALL,749,5,3,Tragedy,1606
+1532,King Lear,CURAN,79,1,1,Tragedy,1606
+1532,King Lear,EDGAR,2929,5,5,Tragedy,1606
+1532,King Lear,EDMUND,2371,4,5,Tragedy,1606
+1532,King Lear,FIRST SERVANT,76,1,1,Tragedy,1606
+1532,King Lear,FOOL,1731,4,3,Tragedy,1606
+1532,King Lear,FRANCE,241,1,1,Tragedy,1606
+1532,King Lear,GENTLEMAN,568,6,5,Tragedy,1606
+1532,King Lear,GLOUCESTER,2536,6,5,Tragedy,1606
+1532,King Lear,GONERIL,1483,5,5,Tragedy,1606
+1532,King Lear,HERALD,72,1,1,Tragedy,1606
+1532,King Lear,KENT,2632,7,5,Tragedy,1606
+1532,King Lear,KNIGHT,105,1,1,Tragedy,1606
+1532,King Lear,LEAR,5650,7,5,Tragedy,1606
+1532,King Lear,MESSENGER,125,2,1,Tragedy,1606
+1532,King Lear,OFFICER,13,1,1,Tragedy,1606
+1532,King Lear,OLD MAN,57,1,1,Tragedy,1606
+1532,King Lear,OSWALD,504,6,4,Tragedy,1606
+1532,King Lear,PHYSICIAN,137,2,1,Tragedy,1606
+1532,King Lear,REGAN,1369,6,5,Tragedy,1606
+1532,King Lear,SECOND SERVANT,35,1,1,Tragedy,1606
+1532,King Lear,THIRD SERVANT,39,1,1,Tragedy,1606
+1533,Macbeth,ANGUS,138,2,2,Tragedy,1606
+1533,Macbeth,APPARITION,69,1,1,Tragedy,1606
+1533,Macbeth,BANQUO,788,4,3,Tragedy,1606
+1533,Macbeth,CAITHNESS,73,1,1,Tragedy,1606
+1533,Macbeth,DOCTOR,326,2,2,Tragedy,1606
+1533,Macbeth,DONALBAIN,56,1,1,Tragedy,1606
+1533,Macbeth,DUNCAN,472,3,1,Tragedy,1606
+1533,Macbeth,FIRST MURDERER,123,3,2,Tragedy,1606
+1533,Macbeth,FIRST WITCH,354,3,3,Tragedy,1606
+1533,Macbeth,FLEANCE,15,1,1,Tragedy,1606
+1533,Macbeth,GENTLEWOMAN,180,1,1,Tragedy,1606
+1533,Macbeth,HECATE,263,2,2,Tragedy,1606
+1533,Macbeth,LADY MACBETH,1920,7,4,Tragedy,1606
+1533,Macbeth,LADY MACDUFF,292,1,1,Tragedy,1606
+1533,Macbeth,LENNOX,504,5,5,Tragedy,1606
+1533,Macbeth,LORD,158,1,1,Tragedy,1606
+1533,Macbeth,LORDS,13,1,1,Tragedy,1606
+1533,Macbeth,MACBETH,5345,7,5,Tragedy,1606
+1533,Macbeth,MACDUFF,1159,5,3,Tragedy,1606
+1533,Macbeth,MALCOLM,1511,6,4,Tragedy,1606
+1533,Macbeth,MENTEITH,71,2,1,Tragedy,1606
+1533,Macbeth,MESSENGER,175,2,3,Tragedy,1606
+1533,Macbeth,MURDERER,43,1,1,Tragedy,1606
+1533,Macbeth,OLD MAN,81,1,1,Tragedy,1606
+1533,Macbeth,PORTER,302,1,1,Tragedy,1606
+1533,Macbeth,ROSS,906,4,5,Tragedy,1606
+1533,Macbeth,SECOND MURDERER,86,2,1,Tragedy,1606
+1533,Macbeth,SECOND WITCH,128,2,2,Tragedy,1606
+1533,Macbeth,SERVANT,29,3,2,Tragedy,1606
+1533,Macbeth,SEYTON,31,2,1,Tragedy,1606
+1533,Macbeth,SIWARD,198,4,1,Tragedy,1606
+1533,Macbeth,SOLDIER,236,1,1,Tragedy,1606
+1533,Macbeth,SOLDIERS,4,1,1,Tragedy,1606
+1533,Macbeth,SON,144,1,1,Tragedy,1606
+1533,Macbeth,THIRD MURDERER,42,1,1,Tragedy,1606
+1533,Macbeth,THIRD WITCH,132,2,2,Tragedy,1606
+1533,Macbeth,YOUNG SIWARD,43,1,1,Tragedy,1606
+1534,Antony and Cleopatra,AGRIPPA,366,5,4,Tragedy,1607
+1534,Antony and Cleopatra,ALEXAS,204,3,2,Tragedy,1607
+1534,Antony and Cleopatra,AMBASSADOR,108,2,1,Tragedy,1607
+1534,Antony and Cleopatra,ANTONY,5971,15,4,Tragedy,1607
+1534,Antony and Cleopatra,CAESAR,2875,9,5,Tragedy,1607
+1534,Antony and Cleopatra,CANIDIUS,165,2,1,Tragedy,1607
+1534,Antony and Cleopatra,CAPTAIN,7,1,1,Tragedy,1607
+1534,Antony and Cleopatra,CHARMIAN,624,7,5,Tragedy,1607
+1534,Antony and Cleopatra,CLEOPATRA,4711,11,5,Tragedy,1607
+1534,Antony and Cleopatra,CLOWN,252,1,1,Tragedy,1607
+1534,Antony and Cleopatra,DEMETRIUS,35,1,1,Tragedy,1607
+1534,Antony and Cleopatra,DERCETUS,155,2,2,Tragedy,1607
+1534,Antony and Cleopatra,DIOMEDES,125,2,1,Tragedy,1607
+1534,Antony and Cleopatra,DOLABELLA,297,3,2,Tragedy,1607
+1534,Antony and Cleopatra,EGYPTIAN,37,1,1,Tragedy,1607
+1534,Antony and Cleopatra,ENOBARBUS,2457,7,4,Tragedy,1607
+1534,Antony and Cleopatra,EROS,280,5,2,Tragedy,1607
+1534,Antony and Cleopatra,FIRST GUARD,113,2,2,Tragedy,1607
+1534,Antony and Cleopatra,FIRST SERVANT,83,1,1,Tragedy,1607
+1534,Antony and Cleopatra,FIRST SOLDIER,66,1,1,Tragedy,1607
+1534,Antony and Cleopatra,FIRST WATCH,24,1,1,Tragedy,1607
+1534,Antony and Cleopatra,FOURTH SOLDIER,6,1,1,Tragedy,1607
+1534,Antony and Cleopatra,GUARDSMAN,21,1,1,Tragedy,1607
+1534,Antony and Cleopatra,IRAS,156,3,4,Tragedy,1607
+1534,Antony and Cleopatra,LEPIDUS,396,4,3,Tragedy,1607
+1534,Antony and Cleopatra,MAECENAS,221,4,4,Tragedy,1607
+1534,Antony and Cleopatra,MARDIAN,118,2,3,Tragedy,1607
+1534,Antony and Cleopatra,MENAS,421,3,1,Tragedy,1607
+1534,Antony and Cleopatra,MENECRATES,38,1,1,Tragedy,1607
+1534,Antony and Cleopatra,MESSENGER,384,7,4,Tragedy,1607
+1534,Antony and Cleopatra,OCTAVIA,237,4,2,Tragedy,1607
+1534,Antony and Cleopatra,OFFICER,17,1,1,Tragedy,1607
+1534,Antony and Cleopatra,PHILO,138,1,1,Tragedy,1607
+1534,Antony and Cleopatra,POMPEY,924,3,1,Tragedy,1607
+1534,Antony and Cleopatra,PROCULEIUS,216,2,1,Tragedy,1607
+1534,Antony and Cleopatra,SCARUS,272,3,2,Tragedy,1607
+1534,Antony and Cleopatra,SECOND GUARD,15,2,2,Tragedy,1607
+1534,Antony and Cleopatra,SECOND MESSENGER,75,2,1,Tragedy,1607
+1534,Antony and Cleopatra,SECOND SERVANT,59,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SECOND SOLDIER,64,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SECOND WATCH,26,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SELEUCUS,26,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SENTRY,91,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SERVANT,11,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SILIUS,67,1,1,Tragedy,1607
+1534,Antony and Cleopatra,SOLDIER,212,3,2,Tragedy,1607
+1534,Antony and Cleopatra,SOOTHSAYER,209,2,2,Tragedy,1607
+1534,Antony and Cleopatra,TAURUS,2,1,1,Tragedy,1607
+1534,Antony and Cleopatra,THE SONG,39,1,1,Tragedy,1607
+1534,Antony and Cleopatra,THIDIAS,182,2,1,Tragedy,1607
+1534,Antony and Cleopatra,THIRD GUARD,2,1,1,Tragedy,1607
+1534,Antony and Cleopatra,THIRD MESSENGER,22,1,1,Tragedy,1607
+1534,Antony and Cleopatra,THIRD SOLDIER,17,1,1,Tragedy,1607
+1534,Antony and Cleopatra,VARRIUS,27,1,1,Tragedy,1607
+1534,Antony and Cleopatra,VENTIDIUS,222,1,1,Tragedy,1607
+1535,Coriolanus,AEDILE,77,2,2,Tragedy,1608
+1535,Coriolanus,AEDILES,2,1,1,Tragedy,1608
+1535,Coriolanus,AUFIDIUS,2039,7,3,Tragedy,1608
+1535,Coriolanus,BRUTUS,1573,4,5,Tragedy,1608
+1535,Coriolanus,CITIZEN,20,1,1,Tragedy,1608
+1535,Coriolanus,CITIZENS,5,1,1,Tragedy,1608
+1535,Coriolanus,COMINIUS,1944,5,5,Tragedy,1608
+1535,Coriolanus,CORIOLANUS,4827,7,5,Tragedy,1608
+1535,Coriolanus,FIFTH CITIZEN,14,1,1,Tragedy,1608
+1535,Coriolanus,FIRST,7,1,1,Tragedy,1608
+1535,Coriolanus,FIRST CITIZEN,658,3,4,Tragedy,1608
+1535,Coriolanus,FIRST CONSPIRATOR,56,1,1,Tragedy,1608
+1535,Coriolanus,FIRST LORD,90,1,1,Tragedy,1608
+1535,Coriolanus,FIRST OFFICER,143,1,1,Tragedy,1608
+1535,Coriolanus,FIRST PATRICIAN,4,1,1,Tragedy,1608
+1535,Coriolanus,FIRST ROMAN,6,1,1,Tragedy,1608
+1535,Coriolanus,FIRST SENATOR,310,4,3,Tragedy,1608
+1535,Coriolanus,FIRST SERVINGMAN,236,1,1,Tragedy,1608
+1535,Coriolanus,FIRST SOLDIER,39,1,1,Tragedy,1608
+1535,Coriolanus,FIRST WATCH,246,1,1,Tragedy,1608
+1535,Coriolanus,FOURTH CITIZEN,45,1,1,Tragedy,1608
+1535,Coriolanus,GENTLEWOMAN,9,1,1,Tragedy,1608
+1535,Coriolanus,HERALD,38,1,1,Tragedy,1608
+1535,Coriolanus,LARTIUS,353,5,2,Tragedy,1608
+1535,Coriolanus,LIEUTENANT,86,1,2,Tragedy,1608
+1535,Coriolanus,LORDS,4,1,1,Tragedy,1608
+1535,Coriolanus,MARTIUS,1627,6,1,Tragedy,1608
+1535,Coriolanus,MENENIUS,4284,5,5,Tragedy,1608
+1535,Coriolanus,MESSENGER,274,3,4,Tragedy,1608
+1535,Coriolanus,OFFICER,3,1,1,Tragedy,1608
+1535,Coriolanus,PATRICIAN,11,1,1,Tragedy,1608
+1535,Coriolanus,ROMAN,235,1,1,Tragedy,1608
+1535,Coriolanus,SECOND CITIZEN,171,3,3,Tragedy,1608
+1535,Coriolanus,SECOND CONSPIRATOR,38,1,1,Tragedy,1608
+1535,Coriolanus,SECOND LORD,61,1,1,Tragedy,1608
+1535,Coriolanus,SECOND MESSENGER,132,2,2,Tragedy,1608
+1535,Coriolanus,SECOND OFFICER,185,1,1,Tragedy,1608
+1535,Coriolanus,SECOND ROMAN,3,1,1,Tragedy,1608
+1535,Coriolanus,SECOND SENATOR,54,2,2,Tragedy,1608
+1535,Coriolanus,SECOND SERVINGMAN,263,1,1,Tragedy,1608
+1535,Coriolanus,SECOND SOLDIER,2,1,1,Tragedy,1608
+1535,Coriolanus,SECOND WATCH,89,1,1,Tragedy,1608
+1535,Coriolanus,SENATOR,41,1,1,Tragedy,1608
+1535,Coriolanus,SENATORS,7,1,1,Tragedy,1608
+1535,Coriolanus,SEVENTH CITIZEN,18,1,1,Tragedy,1608
+1535,Coriolanus,SICINIUS,1873,5,5,Tragedy,1608
+1535,Coriolanus,SIXTH CITIZEN,12,1,1,Tragedy,1608
+1535,Coriolanus,SOLDIER,17,1,1,Tragedy,1608
+1535,Coriolanus,THIRD CITIZEN,481,2,2,Tragedy,1608
+1535,Coriolanus,THIRD CONSPIRATOR,80,1,1,Tragedy,1608
+1535,Coriolanus,THIRD LORD,12,1,1,Tragedy,1608
+1535,Coriolanus,THIRD ROMAN,8,1,1,Tragedy,1608
+1535,Coriolanus,THIRD SERVINGMAN,393,1,1,Tragedy,1608
+1535,Coriolanus,TITUS LARTIUS,31,1,1,Tragedy,1608
+1535,Coriolanus,TRIBUNES,5,1,1,Tragedy,1608
+1535,Coriolanus,VALERIA,350,2,2,Tragedy,1608
+1535,Coriolanus,VIRGILIA,235,3,4,Tragedy,1608
+1535,Coriolanus,VOLSCE,160,1,1,Tragedy,1608
+1535,Coriolanus,VOLUMNIA,2426,3,5,Tragedy,1608
+1535,Coriolanus,YOUNG MARTIUS,17,1,1,Tragedy,1608
+1536,Timon of Athens,ALCIBIADES,1183,4,4,Tragedy,1604
+1536,Timon of Athens,APEMANTUS,1768,3,3,Tragedy,1604
+1536,Timon of Athens,BANDITTI,17,1,1,Tragedy,1604
+1536,Timon of Athens,CAPHIS,126,2,1,Tragedy,1604
+1536,Timon of Athens,CUPID,47,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST,2,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST BANDIT,90,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST FRIEND,172,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST LADY,9,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST LORD,136,2,1,Tragedy,1604
+1536,Timon of Athens,FIRST SENATOR,604,3,2,Tragedy,1604
+1536,Timon of Athens,FIRST SERVANT,41,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST STRANGER,230,1,1,Tragedy,1604
+1536,Timon of Athens,FIRST VARRO'S SERVANT,44,1,1,Tragedy,1604
+1536,Timon of Athens,FLAMINIUS,215,3,2,Tragedy,1604
+1536,Timon of Athens,FLAVIUS,1528,3,5,Tragedy,1604
+1536,Timon of Athens,FOOL,180,1,1,Tragedy,1604
+1536,Timon of Athens,FOURTH FRIEND,18,1,1,Tragedy,1604
+1536,Timon of Athens,HORTENSIUS,70,1,1,Tragedy,1604
+1536,Timon of Athens,ISIDORE'S SERVANT,42,1,1,Tragedy,1604
+1536,Timon of Athens,JEWELLER,77,1,1,Tragedy,1604
+1536,Timon of Athens,LUCILIUS,35,1,1,Tragedy,1604
+1536,Timon of Athens,LUCIUS,535,2,1,Tragedy,1604
+1536,Timon of Athens,LUCULLUS,271,1,1,Tragedy,1604
+1536,Timon of Athens,MERCHANT,62,1,1,Tragedy,1604
+1536,Timon of Athens,MESSENGER,122,2,2,Tragedy,1604
+1536,Timon of Athens,OLD ATHENIAN,207,1,1,Tragedy,1604
+1536,Timon of Athens,PAGE,51,1,1,Tragedy,1604
+1536,Timon of Athens,PAINTER,466,1,2,Tragedy,1604
+1536,Timon of Athens,PHILOTUS,33,1,1,Tragedy,1604
+1536,Timon of Athens,PHRYNIA,32,1,1,Tragedy,1604
+1536,Timon of Athens,POET,720,1,2,Tragedy,1604
+1536,Timon of Athens,SECOND BANDIT,33,1,1,Tragedy,1604
+1536,Timon of Athens,SECOND FRIEND,165,1,1,Tragedy,1604
+1536,Timon of Athens,SECOND FRIENDS,2,1,1,Tragedy,1604
+1536,Timon of Athens,SECOND LORD,107,2,1,Tragedy,1604
+1536,Timon of Athens,SECOND SENATOR,425,3,2,Tragedy,1604
+1536,Timon of Athens,SECOND SERVANT,81,1,2,Tragedy,1604
+1536,Timon of Athens,SECOND STRANGER,47,1,1,Tragedy,1604
+1536,Timon of Athens,SECOND VARRO'S SERVANT,36,1,1,Tragedy,1604
+1536,Timon of Athens,SEMPRONIUS,209,1,1,Tragedy,1604
+1536,Timon of Athens,SENATOR,280,1,1,Tragedy,1604
+1536,Timon of Athens,SERVANT,219,3,2,Tragedy,1604
+1536,Timon of Athens,SERVANTS,4,1,1,Tragedy,1604
+1536,Timon of Athens,SERVILIUS,126,2,1,Tragedy,1604
+1536,Timon of Athens,SOLDIER,118,2,1,Tragedy,1604
+1536,Timon of Athens,SOME OTHER,3,1,1,Tragedy,1604
+1536,Timon of Athens,SOME SPEAK,5,1,1,Tragedy,1604
+1536,Timon of Athens,THIRD BANDIT,42,1,1,Tragedy,1604
+1536,Timon of Athens,THIRD FRIEND,57,1,1,Tragedy,1604
+1536,Timon of Athens,THIRD LORD,26,1,1,Tragedy,1604
+1536,Timon of Athens,THIRD SENATOR,5,2,2,Tragedy,1604
+1536,Timon of Athens,THIRD SERVANT,73,1,2,Tragedy,1604
+1536,Timon of Athens,THIRD STRANGER,4,1,1,Tragedy,1604
+1536,Timon of Athens,TIMANDRA,43,1,1,Tragedy,1604
+1536,Timon of Athens,TIMON,6377,5,5,Tragedy,1604
+1536,Timon of Athens,TITUS,89,1,1,Tragedy,1604
+1536,Timon of Athens,VARRO'S SERVANT,58,1,1,Tragedy,1604
+1536,Timon of Athens,VENTIDIUS,59,1,1,Tragedy,1604
+1537,Pericles,ANTIOCHUS,476,1,1,History,1608
+1537,Pericles,BAWD,750,2,1,History,1608
+1537,Pericles,BOULT,737,2,1,History,1608
+1537,Pericles,CERIMON,733,3,2,History,1608
+1537,Pericles,CLEON,830,2,3,History,1608
+1537,Pericles,DAUGHTER,16,1,1,History,1608
+1537,Pericles,DIANA,72,1,1,History,1608
+1537,Pericles,DIONYZA,667,3,3,History,1608
+1537,Pericles,ESCANES,6,1,1,History,1608
+1537,Pericles,FIRST FISHERMAN,318,1,1,History,1608
+1537,Pericles,FIRST GENTLEMAN,135,3,3,History,1608
+1537,Pericles,FIRST KNIGHT,29,2,1,History,1608
+1537,Pericles,FIRST LORD,197,3,3,History,1608
+1537,Pericles,FIRST PIRATE,8,2,1,History,1608
+1537,Pericles,FIRST SAILOR,71,1,1,History,1608
+1537,Pericles,FIRST SERVANT,32,1,1,History,1608
+1537,Pericles,GOWER,1953,5,4,History,1608
+1537,Pericles,HELCANUS,17,1,1,History,1608
+1537,Pericles,HELICANUS,849,4,3,History,1608
+1537,Pericles,KNIGHTS,19,1,1,History,1608
+1537,Pericles,LEONINE,142,1,1,History,1608
+1537,Pericles,LORD,48,1,1,History,1608
+1537,Pericles,LYCHORIDA,74,1,1,History,1608
+1537,Pericles,LYSIMACHUS,714,2,2,History,1608
+1537,Pericles,MARINA,1307,5,2,History,1608
+1537,Pericles,MARSHALL,5,1,1,History,1608
+1537,Pericles,MESSENGER,6,1,1,History,1608
+1537,Pericles,PANDAR,217,2,1,History,1608
+1537,Pericles,PERICLES,4600,5,4,History,1608
+1537,Pericles,PHILEMON,4,1,1,History,1608
+1537,Pericles,SECOND FISHERMAN,222,1,1,History,1608
+1537,Pericles,SECOND GENTLEMAN,113,2,2,History,1608
+1537,Pericles,SECOND KNIGHT,9,1,1,History,1608
+1537,Pericles,SECOND LORD,80,2,2,History,1608
+1537,Pericles,SECOND PIRATE,4,1,1,History,1608
+1537,Pericles,SECOND SAILOR,39,1,1,History,1608
+1537,Pericles,SERVANT,16,1,1,History,1608
+1537,Pericles,SIMONIDES,1170,3,1,History,1608
+1537,Pericles,THAISA,618,4,3,History,1608
+1537,Pericles,THALIARD,208,2,1,History,1608
+1537,Pericles,THIRD FISHERMAN,151,1,1,History,1608
+1537,Pericles,THIRD KNIGHT,8,1,1,History,1608
+1537,Pericles,THIRD LORD,26,2,1,History,1608
+1537,Pericles,THIRD PIRATE,11,1,1,History,1608
+1537,Pericles,TYRIAN SAILOR,54,1,1,History,1608
+1538,Cymbeline,ARVIRAGUS,944,5,3,Tragedy,1610
+1538,Cymbeline,ATTENDANT,23,1,1,Tragedy,1610
+1538,Cymbeline,BELARIUS,2516,5,3,Tragedy,1610
+1538,Cymbeline,BROTHERS,30,1,1,Tragedy,1610
+1538,Cymbeline,CAPTAIN,67,1,1,Tragedy,1610
+1538,Cymbeline,CLOTEN,2003,4,4,Tragedy,1610
+1538,Cymbeline,CORNELIUS,525,2,2,Tragedy,1610
+1538,Cymbeline,CYMBELINE,2000,4,5,Tragedy,1610
+1538,Cymbeline,FIRST BROTHER,61,1,1,Tragedy,1610
+1538,Cymbeline,FIRST CAPTAIN,30,1,1,Tragedy,1610
+1538,Cymbeline,FIRST GENTLEMAN,506,1,1,Tragedy,1610
+1538,Cymbeline,FIRST LORD,190,2,2,Tragedy,1610
+1538,Cymbeline,FIRST SENATOR,102,1,1,Tragedy,1610
+1538,Cymbeline,FRENCHMAN,180,1,1,Tragedy,1610
+1538,Cymbeline,GAOLER,394,1,1,Tragedy,1610
+1538,Cymbeline,GUIDERIUS,1092,5,3,Tragedy,1610
+1538,Cymbeline,IACHIMO,3208,4,3,Tragedy,1610
+1538,Cymbeline,IMOGEN,4190,6,5,Tragedy,1610
+1538,Cymbeline,JUPITER,157,1,1,Tragedy,1610
+1538,Cymbeline,LADIES,6,1,1,Tragedy,1610
+1538,Cymbeline,LADY,62,4,2,Tragedy,1610
+1538,Cymbeline,LEONATUS,46,1,1,Tragedy,1610
+1538,Cymbeline,LEONATUS POSTHUMUS,185,1,1,Tragedy,1610
+1538,Cymbeline,LORD,137,1,2,Tragedy,1610
+1538,Cymbeline,LUCIUS,719,3,3,Tragedy,1610
+1538,Cymbeline,MESSENGER,22,2,2,Tragedy,1610
+1538,Cymbeline,MOTHER,60,1,1,Tragedy,1610
+1538,Cymbeline,PHILARIO,291,2,2,Tragedy,1610
+1538,Cymbeline,PISANIO,1508,6,5,Tragedy,1610
+1538,Cymbeline,POSTHUMUS,3452,5,3,Tragedy,1610
+1538,Cymbeline,QUEEN,1212,5,3,Tragedy,1610
+1538,Cymbeline,SECOND BROTHER,32,1,1,Tragedy,1610
+1538,Cymbeline,SECOND CAPTAIN,65,1,1,Tragedy,1610
+1538,Cymbeline,SECOND GAOLER,4,1,1,Tragedy,1610
+1538,Cymbeline,SECOND GENTLEMAN,71,1,1,Tragedy,1610
+1538,Cymbeline,SECOND LORD,328,2,2,Tragedy,1610
+1538,Cymbeline,SECOND SENATOR,1,1,1,Tragedy,1610
+1538,Cymbeline,SICILIUS,230,1,1,Tragedy,1610
+1538,Cymbeline,SONG,45,1,1,Tragedy,1610
+1538,Cymbeline,SOOTHSAYER,316,2,2,Tragedy,1610
+1538,Cymbeline,TRIBUNE,15,1,1,Tragedy,1610
+1539,Winter's Tale,ANTIGONUS,789,2,2,Comedy,1611
+1539,Winter's Tale,ARCHIDAMUS,176,1,1,Comedy,1611
+1539,Winter's Tale,AUTOLYCUS,2388,3,2,Comedy,1611
+1539,Winter's Tale,CAMILLO,2088,4,3,Comedy,1611
+1539,Winter's Tale,CLEOMENES,143,2,2,Comedy,1611
+1539,Winter's Tale,CLOWN,1609,3,3,Comedy,1611
+1539,Winter's Tale,DION,189,2,2,Comedy,1611
+1539,Winter's Tale,DORCAS,67,1,1,Comedy,1611
+1539,Winter's Tale,EMILIA,143,1,1,Comedy,1611
+1539,Winter's Tale,FIRST ATTENDANT,13,1,1,Comedy,1611
+1539,Winter's Tale,FIRST GENTLEMAN,221,1,1,Comedy,1611
+1539,Winter's Tale,FIRST LADY,49,1,1,Comedy,1611
+1539,Winter's Tale,FIRST LORD,240,3,2,Comedy,1611
+1539,Winter's Tale,FLORIZEL,1400,2,2,Comedy,1611
+1539,Winter's Tale,GAOLER,72,1,1,Comedy,1611
+1539,Winter's Tale,HERMIONE,1582,3,4,Comedy,1611
+1539,Winter's Tale,LEONTES,4911,3,4,Comedy,1611
+1539,Winter's Tale,LORD,172,1,1,Comedy,1611
+1539,Winter's Tale,LORDS,19,2,2,Comedy,1611
+1539,Winter's Tale,MAMILLIUS,151,2,2,Comedy,1611
+1539,Winter's Tale,MARINER,80,1,1,Comedy,1611
+1539,Winter's Tale,MOPSA,141,1,1,Comedy,1611
+1539,Winter's Tale,OFFICER,204,1,1,Comedy,1611
+1539,Winter's Tale,PAULINA,2398,3,3,Comedy,1611
+1539,Winter's Tale,PERDITA,910,3,2,Comedy,1611
+1539,Winter's Tale,POLIXENES,1980,3,3,Comedy,1611
+1539,Winter's Tale,SECOND GENTLEMAN,126,1,1,Comedy,1611
+1539,Winter's Tale,SECOND LADY,21,1,1,Comedy,1611
+1539,Winter's Tale,SERVANT,514,4,4,Comedy,1611
+1539,Winter's Tale,SHEPHERD,1084,3,3,Comedy,1611
+1539,Winter's Tale,SONG,47,1,1,Comedy,1611
+1539,Winter's Tale,THIRD GENTLEMAN,597,1,1,Comedy,1611
+1539,Winter's Tale,TIME,267,1,1,Comedy,1611
+1540,Tempest,ADRIAN,64,2,2,Comedy,1611
+1540,Tempest,ALONSO,776,2,4,Comedy,1611
+1540,Tempest,ANTONIO,1001,2,4,Comedy,1611
+1540,Tempest,ARIEL,1244,3,5,Comedy,1611
+1540,Tempest,ARIEL'S SONG,59,1,1,Comedy,1611
+1540,Tempest,BOATSWAIN,354,1,2,Comedy,1611
+1540,Tempest,CALIBAN,1366,2,5,Comedy,1611
+1540,Tempest,CERES,157,1,1,Comedy,1611
+1540,Tempest,FERDINAND,985,2,4,Comedy,1611
+1540,Tempest,FRANCISCO,80,2,2,Comedy,1611
+1540,Tempest,GONZALO,1184,2,4,Comedy,1611
+1540,Tempest,IRIS,330,1,1,Comedy,1611
+1540,Tempest,JUNO,42,1,1,Comedy,1611
+1540,Tempest,MARINERS,8,1,1,Comedy,1611
+1540,Tempest,MASTER,17,1,1,Comedy,1611
+1540,Tempest,MIRANDA,918,2,4,Comedy,1611
+1540,Tempest,PROSPERO,4938,4,4,Comedy,1611
+1540,Tempest,SEBASTIAN,746,2,4,Comedy,1611
+1540,Tempest,STEPHANO,1348,2,4,Comedy,1611
+1540,Tempest,TRINCULO,825,2,4,Comedy,1611
+1541,Henry VIII,ABERGAVENNY,114,1,1,History,1613
+1541,Henry VIII,ANNE,375,2,2,History,1613
+1541,Henry VIII,BRANDON,85,1,1,History,1613
+1541,Henry VIII,BUCKINGHAM,1482,1,2,History,1613
+1541,Henry VIII,BUTTS,60,1,1,History,1613
+1541,Henry VIII,CAMPEIUS,378,3,2,History,1613
+1541,Henry VIII,CAPUTIUS,65,1,1,History,1613
+1541,Henry VIII,CHAMBERLAIN,1118,3,4,History,1613
+1541,Henry VIII,CHANCELLOR,210,1,1,History,1613
+1541,Henry VIII,CRANMER,1045,3,1,History,1613
+1541,Henry VIII,CRIER,24,1,1,History,1613
+1541,Henry VIII,CROMWELL,305,1,2,History,1613
+1541,Henry VIII,DENNY,21,1,1,History,1613
+1541,Henry VIII,EPILOGUE,123,1,1,History,1613
+1541,Henry VIII,FIRST GENTLEMAN,689,1,2,History,1613
+1541,Henry VIII,GARDINER,666,2,2,History,1613
+1541,Henry VIII,GARTER,26,1,1,History,1613
+1541,Henry VIII,GENTLEMAN,18,1,1,History,1613
+1541,Henry VIII,GENTLEMAN USHER,5,1,1,History,1613
+1541,Henry VIII,GRIFFITH,558,1,1,History,1613
+1541,Henry VIII,GUILDFORD,69,1,1,History,1613
+1541,Henry VIII,KEEPER,45,1,1,History,1613
+1541,Henry VIII,KING,3479,3,4,History,1613
+1541,Henry VIII,LINCOLN,51,1,1,History,1613
+1541,Henry VIII,LOVELL,477,3,3,History,1613
+1541,Henry VIII,MESSENGER,28,1,1,History,1613
+1541,Henry VIII,NORFOLK,1487,2,4,History,1613
+1541,Henry VIII,OLD LADY,493,2,2,History,1613
+1541,Henry VIII,ONE,15,1,1,History,1613
+1541,Henry VIII,PAGE,3,1,1,History,1613
+1541,Henry VIII,PATIENCE,35,1,1,History,1613
+1541,Henry VIII,PORTER,275,1,1,History,1613
+1541,Henry VIII,PORTER'S MAN,356,1,1,History,1613
+1541,Henry VIII,QUEEN KATHERINE,2889,3,4,History,1613
+1541,Henry VIII,SANDYS,346,2,1,History,1613
+1541,Henry VIII,SCRIBE,18,1,1,History,1613
+1541,Henry VIII,SECOND GENTLEMAN,793,1,2,History,1613
+1541,Henry VIII,SECRETARY,8,1,1,History,1613
+1541,Henry VIII,SERGEANT,28,1,1,History,1613
+1541,Henry VIII,SERVANT,24,1,1,History,1613
+1541,Henry VIII,SUFFOLK,628,2,3,History,1613
+1541,Henry VIII,SURREY,525,1,2,History,1613
+1541,Henry VIII,SURVEYOR,450,1,1,History,1613
+1541,Henry VIII,THIRD GENTLEMAN,439,1,1,History,1613
+1541,Henry VIII,VAUX,24,1,1,History,1613
+1541,Henry VIII,WOLSEY,3242,3,3,History,1613
+1541,Henry VIII,WOMAN,71,1,1,History,1613

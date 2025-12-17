@@ -184,8 +184,9 @@ shakespeare_analysis/
 │   │   └── filtered/          # Multiple filtered datasets
 │   ├── json/                   # JSON exports
 |   |   | full_text
+│   │   ├── all_shakespeare.json
 |   |   └── full_text/
-│   │   └── *.json
+│   │   |   └── *.json
 │   ├── metadata/               # Metadata and logs
 │   │   ├── meta_shakespeare.csv
 │   │   ├── meta_shakespeare.json

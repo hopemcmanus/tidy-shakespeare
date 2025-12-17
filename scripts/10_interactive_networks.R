@@ -10,8 +10,8 @@ INPUT_DIR_METADATA <- here("data", "metadata")
 OUTPUT_DIR_NETWORKS <- here("interactive_networks", "correlations")
 
 # Filter settings - Customize these to analyze different subsets
-FILTER_BY <- "gutenberg_id"  # Options: "gutenberg_id", "genre", "short_title", "period", "romance", "problem_play", "roman", "all"
-FILTER_VALUES <- c("1516", "1519", "1522", "1524", "1523", "1503", "1540", "1531", "1515")  # HSC plays
+# FILTER_BY <- "gutenberg_id"  # Options: "gutenberg_id", "genre", "short_title", "period", "romance", "problem_play", "roman", "all"
+# FILTER_VALUES <- c("1516", "1519", "1522", "1524", "1523", "1503", "1540", "1531", "1515")  # HSC plays
 # Examples:
 # FILTER_BY <- "genre"
 # FILTER_VALUES <- c("Tragedy")
@@ -34,8 +34,8 @@ FILTER_VALUES <- c("1516", "1519", "1522", "1524", "1523", "1503", "1540", "1531
 # FILTER_BY <- "roman"
 # FILTER_VALUES <- TRUE  # Roman plays only
 #
-# FILTER_BY <- "all"
-# FILTER_VALUES <- NULL
+FILTER_BY <- "all"
+FILTER_VALUES <- NULL
 
 # Create output directory
 dir.create(OUTPUT_DIR_NETWORKS, recursive = TRUE, showWarnings = FALSE)

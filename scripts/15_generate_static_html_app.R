@@ -5,38 +5,22 @@
 #              Shakespeare corpus with two-level sidebar navigation and minimal
 #              color scheme
 #
-# Author: Shakespeare Text Analysis Pipeline
-# Date: 2024
-#
-# Architecture:
-#   - Single index.html with embedded CSS and JavaScript
-#   - Two-level left sidebar:
-#       Level 1: Filters + Master play table
-#       Level 2: Play detail navigation (appears when play selected)
-#   - Right panel: Master table OR play content sections
-#   - Minimal color scheme (blacks, greys, whites)
-#   - Smooth scroll navigation within play content
-#
-# Outputs:
-#   - index.html (project root)
+# Updates:
+#   - Fixed token counts display
+#   - Fixed tags display (romance, roman, problem_play)
+#   - Reorganized sidebar (plays list above filters)
+#   - Removed token slider
+#   - Added attribution footer with links
+#   - Improved full text section (search, filters, removed gutenberg_title)
+#   - Correlations display vertically (interactive first)
+#   - Removed duplicate project resources from play pages
 #
 ################################################################################
 
-# Package Management -----------------------------------------------------------
-required_packages <- c(
-  "tidyverse",
-  "jsonlite",
-  "DBI",
-  "RSQLite"
-)
-
-for (pkg in required_packages) {
-  if (!require(pkg, character.only = TRUE, quietly = TRUE)) {
-    message(paste("Installing package:", pkg))
-    install.packages(pkg, dependencies = TRUE)
-    library(pkg, character.only = TRUE)
-  }
-}
+library(tidyverse)
+library(jsonlite)
+library(DBI)
+library(RSQLite)
 
 # Configuration ----------------------------------------------------------------
 METADATA_DIR <- "data/metadata"
@@ -45,6 +29,10 @@ CLEANED_DIR <- "data/cleaned"
 TOKENS_DIR <- "data/processed/tokens"
 PLOTS_DIR <- "plots"
 OUTPUT_FILE <- "index.html"
+
+# GitHub info for attribution
+GITHUB_REPO <- "https://github.com/hopemcmanus/tidy-shakespeare"
+PORTFOLIO_URL <- "https://hopemcmanus.github.io/portfolio/shakespeare/"
 
 # Helper Functions -------------------------------------------------------------
 
@@ -76,9 +64,12 @@ generate_html <- function(plays_json, token_json) {
             color: #ffffff;
             padding: 1.25rem 2rem;
             border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .header h1 {
+        .header-left h1 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
@@ -89,9 +80,29 @@ generate_html <- function(plays_json, token_json) {
             color: #d0d0d0;
         }
         
+        .header-right {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .header-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #555;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        
+        .header-link:hover {
+            background: #444;
+            border-color: #666;
+        }
+        
         .container {
             display: flex;
-            height: calc(100vh - 80px);
+            height: calc(100vh - 140px);
             overflow: hidden;
         }
         
@@ -116,9 +127,48 @@ generate_html <- function(plays_json, token_json) {
             display: none;
         }
         
+        .plays-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .plays-count {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            padding: 0 0.5rem;
+            font-weight: 600;
+        }
+        
+        .play-item {
+            padding: 0.6rem 0.75rem;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            border-radius: 3px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .play-item:hover {
+            background: #f0f0f0;
+            border-color: #e0e0e0;
+        }
+        
+        .play-item.selected {
+            background: #e8e8e8;
+            border-color: #ccc;
+        }
+        
+        .play-item-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #1a1a1a;
+        }
+        
         .filters {
             padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
             background: #f5f5f5;
         }
         
@@ -163,46 +213,6 @@ generate_html <- function(plays_json, token_json) {
             color: #333;
         }
         
-        .slider-container {
-            padding: 0.25rem 0;
-        }
-        
-        .slider-values {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 0.4rem;
-        }
-        
-        input[type="range"] {
-            width: 100%;
-            height: 4px;
-            border-radius: 2px;
-            background: #ddd;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #333;
-            cursor: pointer;
-        }
-        
-        input[type="range"]::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #333;
-            cursor: pointer;
-            border: none;
-        }
-        
         .clear-filters {
             background: #333;
             color: white;
@@ -218,54 +228,6 @@ generate_html <- function(plays_json, token_json) {
         
         .clear-filters:hover {
             background: #1a1a1a;
-        }
-        
-        .plays-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0.5rem;
-        }
-        
-        .plays-count {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-            padding: 0 0.5rem;
-        }
-        
-        .play-item {
-            padding: 0.75rem;
-            margin-bottom: 0.25rem;
-            cursor: pointer;
-            border-radius: 4px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-        
-        .play-item:hover {
-            background: #f0f0f0;
-            border-color: #e0e0e0;
-        }
-        
-        .play-item.selected {
-            background: #e8e8e8;
-            border-color: #ccc;
-        }
-        
-        .play-item-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
-        }
-        
-        .play-item-meta {
-            font-size: 0.75rem;
-            color: #666;
-        }
-        
-        .play-item-meta span {
-            margin-right: 0.75rem;
         }
         
         /* Level 2: Play navigation */
@@ -500,17 +462,12 @@ generate_html <- function(plays_json, token_json) {
             margin-right: 0.4rem;
         }
         
-        .plot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 1.5rem;
-        }
-        
         .plot-item {
             border: 1px solid #e0e0e0;
             border-radius: 4px;
             overflow: hidden;
             background: #fafafa;
+            margin-bottom: 1.5rem;
         }
         
         .plot-item h4 {
@@ -547,6 +504,31 @@ generate_html <- function(plays_json, token_json) {
             border: none;
         }
         
+        .fulltext-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+        
+        .filter-select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+        }
+        
         .no-data {
             padding: 2rem;
             text-align: center;
@@ -557,11 +539,30 @@ generate_html <- function(plays_json, token_json) {
             border-radius: 4px;
         }
         
-        .loading {
-            padding: 2rem;
-            text-align: center;
+        .footer {
+            background: #f5f5f5;
+            border-top: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
             color: #666;
-            font-style: italic;
+        }
+        
+        .footer a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-line {
+            margin-bottom: 0.5rem;
         }
         
         @media (max-width: 1024px) {
@@ -588,8 +589,14 @@ generate_html <- function(plays_json, token_json) {
 </head>
 <body>
     <div class="header">
-        <h1>Shakespeare Corpus Explorer</h1>
-        <div class="header-subtitle">37 plays from Project Gutenberg · Tidy text analysis pipeline</div>
+        <div class="header-left">
+            <h1>Shakespeare Corpus Explorer</h1>
+            <div class="header-subtitle">37 plays from Project Gutenberg · Tidy text analysis pipeline</div>
+        </div>
+        <div class="header-right">
+            <a href="', PORTFOLIO_URL, '" class="header-link" target="_blank">About</a>
+            <a href="', GITHUB_REPO, '" class="header-link" target="_blank">GitHub</a>
+        </div>
     </div>
     
     <div class="container">
@@ -597,6 +604,13 @@ generate_html <- function(plays_json, token_json) {
         <div class="sidebar">
             <!-- Level 1: Master Navigation -->
             <div class="master-nav" id="master-nav">
+                <div class="plays-list">
+                    <div class="plays-count" id="plays-count">Loading...</div>
+                    <div id="plays-list-items">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+                
                 <div class="filters">
                     <!-- Period Filter -->
                     <div class="filter-section">
@@ -651,26 +665,7 @@ generate_html <- function(plays_json, token_json) {
                         </div>
                     </div>
                     
-                    <!-- Token Count Slider -->
-                    <div class="filter-section">
-                        <span class="filter-label">Max Tokens</span>
-                        <div class="slider-container">
-                            <input type="range" id="token-slider" min="0" max="50000" value="50000" step="1000">
-                            <div class="slider-values">
-                                <span>0</span>
-                                <span id="token-max-value">50,000</span>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <button class="clear-filters" onclick="clearFilters()">Clear Filters</button>
-                </div>
-                
-                <div class="plays-list">
-                    <div class="plays-count" id="plays-count">Loading...</div>
-                    <div id="plays-list-items">
-                        <!-- Populated by JavaScript -->
-                    </div>
                 </div>
             </div>
             
@@ -683,8 +678,8 @@ generate_html <- function(plays_json, token_json) {
                 </div>
                 <div class="play-nav-links" id="play-nav-links">
                     <a href="#overview" class="nav-link" onclick="scrollToSection(event, \'overview\')">Overview</a>
-                    <a href="#character-network" class="nav-link" onclick="scrollToSection(event, \'character-network\')">Character Network</a>
                     <a href="#full-text" class="nav-link" onclick="scrollToSection(event, \'full-text\')">Full Text</a>
+                    <a href="#character-network" class="nav-link" onclick="scrollToSection(event, \'character-network\')">Character Network</a>
                     <a href="#frequency" class="nav-link" onclick="scrollToSection(event, \'frequency\')">Frequency Analysis</a>
                     <a href="#sentiment" class="nav-link" onclick="scrollToSection(event, \'sentiment\')">Sentiment Analysis</a>
                     <a href="#bigrams" class="nav-link" onclick="scrollToSection(event, \'bigrams\')">Bigram Networks</a>
@@ -728,25 +723,40 @@ generate_html <- function(plays_json, token_json) {
                     </div>
                 </section>
                 
-                <!-- Character Network Section -->
-                <section class="section" id="character-network">
-                    <h2 class="section-title">Character Network</h2>
-                    <div id="character-network-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </section>
-                
                 <!-- Full Text Section -->
                 <section class="section" id="full-text">
                     <h2 class="section-title">Full Text</h2>
                     <div class="info-grid" id="fulltext-stats">
                         <!-- Populated by JavaScript -->
                     </div>
-                    <h3 class="section-subtitle">Preview (First 50 rows)</h3>
+                    
+                    <h3 class="section-subtitle">Download Options</h3>
+                    <div class="download-buttons" id="download-fulltext">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    
+                    <h3 class="section-subtitle">Preview with Search & Filters</h3>
+                    <div class="fulltext-controls">
+                        <input type="text" id="fulltext-search" class="search-box" placeholder="Search text...">
+                        <select id="fulltext-class-filter" class="filter-select">
+                            <option value="all">All Classes</option>
+                            <option value="dialogue">Dialogue Only</option>
+                            <option value="directions">Stage Directions Only</option>
+                            <option value="references">References Only</option>
+                        </select>
+                    </div>
                     <div class="data-preview">
                         <table class="data-table" id="fulltext-table">
                             <!-- Populated by JavaScript -->
                         </table>
+                    </div>
+                </section>
+                
+                <!-- Character Network Section -->
+                <section class="section" id="character-network">
+                    <h2 class="section-title">Character Network</h2>
+                    <div id="character-network-content">
+                        <!-- Populated by JavaScript -->
                     </div>
                 </section>
                 
@@ -793,6 +803,23 @@ generate_html <- function(plays_json, token_json) {
         </div>
     </div>
     
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-line">
+                Derived from the <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a>. 
+                Enhancements documented in our <a href="', GITHUB_REPO, '" target="_blank">README at GitHub</a>.
+            </div>
+            <div class="footer-line">
+                Corpus licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a>
+            </div>
+            <div class="footer-line">
+                Download a comprehensive table with metadata on all plays in the corpus: 
+                <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | 
+                <a href="data/metadata/meta_shakespeare.csv" download>CSV</a>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Embedded data
         const EMBEDDED_PLAYS = ', plays_json, ';
@@ -802,6 +829,7 @@ generate_html <- function(plays_json, token_json) {
         let allPlays = [];
         let filteredPlays = [];
         let currentPlay = null;
+        let currentFullTextData = [];
         
         // Initialize
         document.addEventListener("DOMContentLoaded", function() {
@@ -852,11 +880,6 @@ generate_html <- function(plays_json, token_json) {
             document.getElementById("filter-roman").addEventListener("change", filterAndRenderPlays);
             document.getElementById("filter-problem").addEventListener("change", filterAndRenderPlays);
             
-            document.getElementById("token-slider").addEventListener("input", function(e) {
-                document.getElementById("token-max-value").textContent = parseInt(e.target.value).toLocaleString();
-                filterAndRenderPlays();
-            });
-            
             // Scroll spy for nav links
             document.getElementById("main-content").addEventListener("scroll", updateActiveNavLink);
         }
@@ -872,12 +895,9 @@ generate_html <- function(plays_json, token_json) {
             if (document.getElementById("filter-comedy").checked) genres.push("Comedy");
             if (document.getElementById("filter-history").checked) genres.push("History");
             
-            const maxTokens = parseInt(document.getElementById("token-slider").value);
-            
             filteredPlays = allPlays.filter(play => {
                 if (periods.length > 0 && !periods.includes(play.period)) return false;
                 if (genres.length > 0 && !genres.includes(play.genre)) return false;
-                if (play.tokens && play.tokens > maxTokens) return false;
                 
                 const romanceChecked = document.getElementById("filter-romance").checked;
                 const romanChecked = document.getElementById("filter-roman").checked;
@@ -913,11 +933,6 @@ generate_html <- function(plays_json, token_json) {
                 
                 div.innerHTML = `
                     <div class="play-item-title">${play.short_title}</div>
-                    <div class="play-item-meta">
-                        <span>${play.year || "—"}</span>
-                        <span>${play.genre}</span>
-                        <span>${(play.tokens || 0).toLocaleString()} tokens</span>
-                    </div>
                 `;
                 
                 container.appendChild(div);
@@ -956,8 +971,6 @@ generate_html <- function(plays_json, token_json) {
             document.getElementById("filter-romance").checked = true;
             document.getElementById("filter-roman").checked = true;
             document.getElementById("filter-problem").checked = true;
-            document.getElementById("token-slider").value = 50000;
-            document.getElementById("token-max-value").textContent = "50,000";
             filterAndRenderPlays();
         }
         
@@ -1047,11 +1060,11 @@ generate_html <- function(plays_json, token_json) {
             // Overview
             loadOverview(play);
             
-            // Character Network
-            await loadCharacterNetwork(shortTitle);
-            
             // Full Text
             await loadFullText(play, shortTitle);
+            
+            // Character Network
+            await loadCharacterNetwork(shortTitle);
             
             // Frequency Analysis
             await loadFrequencyAnalysis(shortTitle);
@@ -1104,51 +1117,13 @@ generate_html <- function(plays_json, token_json) {
             `;
         }
         
-        // Load character network
-        async function loadCharacterNetwork(shortTitle) {
-            const content = document.getElementById("character-network-content");
-            let html = "";
-            let found = false;
-            
-            const staticPlot = `plots/character_networks/${shortTitle}_character_network.png`;
-            console.log("Checking static plot:", staticPlot);
-            if (await fileExists(staticPlot)) {
-                console.log("✓ Static plot found");
-                html += `
-                    <div class="plot-item">
-                        <h4>Static Network</h4>
-                        <img src="${staticPlot}" alt="Character Network">
-                    </div>
-                `;
-                found = true;
-            } else {
-                console.log("✗ Static plot not found");
-            }
-            
-            const interactivePlot = `interactive_networks/characters/${shortTitle}.html`;
-            console.log("Checking interactive plot:", interactivePlot);
-            if (await fileExists(interactivePlot)) {
-                console.log("✓ Interactive plot found");
-                html += `
-                    <div class="plot-item">
-                        <h4>Interactive Network</h4>
-                        <iframe src="${interactivePlot}"></iframe>
-                    </div>
-                `;
-                found = true;
-            } else {
-                console.log("✗ Interactive plot not found");
-            }
-            
-            content.innerHTML = found ? `<div class="plot-grid">${html}</div>` : \'<div class="no-data">No character network visualizations available</div>\';
-        }
-        
         // Load full text
         async function loadFullText(play, shortTitle) {
             try {
                 const response = await fetch(`data/json/full_text/${shortTitle}.json`);
                 if (response.ok) {
                     const data = await response.json();
+                    currentFullTextData = data;
                     
                     const dialogueCount = data.filter(row => row.class === "dialogue").length;
                     const directionCount = data.filter(row => row.class === "directions").length;
@@ -1173,7 +1148,18 @@ generate_html <- function(plays_json, token_json) {
                         </div>
                     `;
                     
-                    renderDataTable(data.slice(0, 50), "fulltext-table");
+                    // Download buttons
+                    document.getElementById("download-fulltext").innerHTML = `
+                        <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Cleaned Text (CSV)</a>
+                        <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
+                    `;
+                    
+                    // Setup search and filter listeners
+                    document.getElementById("fulltext-search").addEventListener("input", filterFullText);
+                    document.getElementById("fulltext-class-filter").addEventListener("change", filterFullText);
+                    
+                    // Initial render
+                    filterFullText();
                 } else {
                     document.getElementById("fulltext-stats").innerHTML = \'<div class="no-data">Data not available</div>\';
                 }
@@ -1181,6 +1167,92 @@ generate_html <- function(plays_json, token_json) {
                 console.error("Error loading full text:", error);
                 document.getElementById("fulltext-stats").innerHTML = \'<div class="no-data">Error loading data</div>\';
             }
+        }
+        
+        // Filter full text based on search and class
+        function filterFullText() {
+            const searchTerm = document.getElementById("fulltext-search").value.toLowerCase();
+            const classFilter = document.getElementById("fulltext-class-filter").value;
+            
+            let filtered = currentFullTextData;
+            
+            // Apply class filter
+            if (classFilter !== "all") {
+                filtered = filtered.filter(row => row.class === classFilter);
+            }
+            
+            // Apply search filter
+            if (searchTerm) {
+                filtered = filtered.filter(row => 
+                    (row.text && row.text.toLowerCase().includes(searchTerm)) ||
+                    (row.character && row.character.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            // Limit to first 100 rows for performance
+            renderFullTextTable(filtered.slice(0, 100));
+        }
+        
+        // Render full text table (without gutenberg_title column)
+        function renderFullTextTable(data) {
+            const table = document.getElementById("fulltext-table");
+            
+            if (!data || data.length === 0) {
+                table.innerHTML = \'<tr><td colspan="10" class="no-data">No matching rows</td></tr>\';
+                return;
+            }
+            
+            // Define columns to display (exclude gutenberg_title)
+            const displayColumns = ["gutenberg_id", "short_title", "genre", "year", "author", "section", "class", "act", "scene", "character", "line_number", "text"];
+            
+            let html = "<thead><tr>";
+            displayColumns.forEach(col => {
+                html += `<th>${col.replace(/_/g, " ")}</th>`;
+            });
+            html += "</tr></thead><tbody>";
+            
+            data.forEach(row => {
+                html += "<tr>";
+                displayColumns.forEach(col => {
+                    const value = row[col] || "";
+                    html += `<td>${value}</td>`;
+                });
+                html += "</tr>";
+            });
+            
+            html += "</tbody>";
+            table.innerHTML = html;
+        }
+        
+        // Load character network
+        async function loadCharacterNetwork(shortTitle) {
+            const content = document.getElementById("character-network-content");
+            let html = "";
+            let found = false;
+            
+            const staticPlot = `plots/character_networks/${shortTitle}_character_network.png`;
+            if (await fileExists(staticPlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Static Network</h4>
+                        <img src="${staticPlot}" alt="Character Network">
+                    </div>
+                `;
+                found = true;
+            }
+            
+            const interactivePlot = `interactive_networks/characters/${shortTitle}.html`;
+            if (await fileExists(interactivePlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Interactive Network</h4>
+                        <iframe src="${interactivePlot}"></iframe>
+                    </div>
+                `;
+                found = true;
+            }
+            
+            content.innerHTML = found ? html : \'<div class="no-data">No character network visualizations available</div>\';
         }
         
         // Load frequency analysis
@@ -1203,12 +1275,12 @@ generate_html <- function(plays_json, token_json) {
         // Load sentiment analysis
         async function loadSentimentAnalysis(shortTitle) {
             const content = document.getElementById("sentiment-content");
-const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_all_lexicons.png`;
-
+            const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_all_lexicons.png`;
+            
             if (await fileExists(sentimentPlot)) {
                 content.innerHTML = `
                     <div class="plot-item">
-                        <h4>Sentiment by Act and Scene</h4>
+                        <h4>Sentiment by Act and Scene (All Lexicons)</h4>
                         <img src="${sentimentPlot}" alt="Sentiment Analysis">
                     </div>
                 `;
@@ -1234,31 +1306,15 @@ const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_
             }
         }
         
-        // Load word correlations
+        // Load word correlations (interactive first, then static)
         async function loadWordCorrelations(shortTitle) {
             const content = document.getElementById("correlations-content");
             let html = "";
             let found = false;
             
-            const corrPlot = `plots/relationships/correlations/section_correlations_${shortTitle}.png`;
-            console.log("Checking correlation plot:", corrPlot);
-            if (await fileExists(corrPlot)) {
-                console.log("✓ Correlation plot found");
-                html += `
-                    <div class="plot-item">
-                        <h4>Static Correlation Plot</h4>
-                        <img src="${corrPlot}" alt="Word Correlations">
-                    </div>
-                `;
-                found = true;
-            } else {
-                console.log("✗ Correlation plot not found");
-            }
-            
+            // Interactive first
             const corrNetwork = `interactive_networks/correlations/${shortTitle}.html`;
-            console.log("Checking correlation network:", corrNetwork);
             if (await fileExists(corrNetwork)) {
-                console.log("✓ Correlation network found");
                 html += `
                     <div class="plot-item">
                         <h4>Interactive Correlation Network</h4>
@@ -1266,11 +1322,21 @@ const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_
                     </div>
                 `;
                 found = true;
-            } else {
-                console.log("✗ Correlation network not found");
             }
             
-            content.innerHTML = found ? `<div class="plot-grid">${html}</div>` : \'<div class="no-data">No word correlation visualizations available</div>\';
+            // Static second
+            const corrPlot = `plots/relationships/correlations/section_correlations_${shortTitle}.png`;
+            if (await fileExists(corrPlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Static Correlation Plot</h4>
+                        <img src="${corrPlot}" alt="Word Correlations">
+                    </div>
+                `;
+                found = true;
+            }
+            
+            content.innerHTML = found ? html : \'<div class="no-data">No word correlation visualizations available</div>\';
         }
         
         // Load downloads
@@ -1278,49 +1344,9 @@ const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_
             document.getElementById("downloads-content").innerHTML = `
                 <h3 class="section-subtitle">Play Data Files</h3>
                 <div class="download-buttons">
-                    <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Cleaned Text (CSV)</a>
-                    <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
                     <a href="data/processed/tokens/${shortTitle}_tokens.csv" class="download-btn" download>Tokens (CSV)</a>
                 </div>
-                
-                <h3 class="section-subtitle">Project Resources</h3>
-                <div class="download-buttons">
-                    <a href="data/metadata/meta_shakespeare.csv" class="download-btn" download>All Plays Metadata (CSV)</a>
-                    <a href="data/metadata/meta_shakespeare.json" class="download-btn" download>All Plays Metadata (JSON)</a>
-                    <a href="data/metadata/unique_characters.csv" class="download-btn" download>Unique Characters</a>
-                    <a href="data/metadata/character_statistics.csv" class="download-btn" download>Character Statistics</a>
-                </div>
             `;
-        }
-        
-        // Helper: Render data table
-        function renderDataTable(data, tableId) {
-            const table = document.getElementById(tableId);
-            
-            if (!data || data.length === 0) {
-                table.innerHTML = \'<tr><td colspan="10" class="no-data">No data available</td></tr>\';
-                return;
-            }
-            
-            const columns = Object.keys(data[0]);
-            
-            let html = "<thead><tr>";
-            columns.forEach(col => {
-                html += `<th>${col}</th>`;
-            });
-            html += "</tr></thead><tbody>";
-            
-            data.forEach(row => {
-                html += "<tr>";
-                columns.forEach(col => {
-                    const value = row[col] || "";
-                    html += `<td>${value}</td>`;
-                });
-                html += "</tr>";
-            });
-            
-            html += "</tbody>";
-            table.innerHTML = html;
         }
         
         // Helper: Check if file exists
@@ -1389,7 +1415,7 @@ main <- function() {
     message("  ✓ Created meta_shakespeare.json")
   }
   
-  message(sprintf("  Found %d plays", length(plays_data)))
+  message(sprintf("  Found %d plays", nrow(plays_data)))
   
   # Check for tokenisation log
   token_log_csv <- file.path(METADATA_DIR, "tokenisation_log.csv")
@@ -1402,7 +1428,7 @@ main <- function() {
     message("  ✓ Loaded tokenisation_log.json")
   } else if (file.exists(token_log_csv)) {
     token_df <- read_csv(token_log_csv, show_col_types = FALSE)
-    token_data <- as.list(token_df)
+    token_data <- token_df
     write_json(token_df, token_log_json, pretty = TRUE)
     message("  ✓ Loaded tokenisation_log.csv and created JSON")
   } else {
@@ -1427,16 +1453,18 @@ main <- function() {
   message("\nOutput file: ", OUTPUT_FILE)
   message("\nFeatures:")
   message("  • Two-level sidebar navigation (master → play detail)")
-  message("  • Filters for period, genre, tags, and token count")
+  message("  • Plays list above filters in sidebar")
+  message("  • Filters for period, genre, and tags (no token slider)")
   message("  • Master table view of all plays")
   message("  • Individual play pages with scrollable sections")
-  message("  • Smooth-scroll navigation via sidebar jump links")
+  message("  • Full text with search and class filters")
+  message("  • Word correlations displayed vertically (interactive first)")
+  message("  • Attribution footer with GitHub and portfolio links")
   message("  • Minimal black/grey/white color scheme")
   message("  • Embedded JSON data (works without web server)")
   message("\nTo view the application:")
-  message("  1. Simply open index.html in a web browser")
-  message("  2. Or for live data loading, use a web server:")
-  message("     python -m http.server 8000")
+  message("  1. Run a local server: servr::httd() or python -m http.server 8000")
+  message("  2. Open http://localhost:8000 in your browser")
   message("\n================================================================================\n")
 }
 

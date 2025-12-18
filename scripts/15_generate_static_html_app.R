@@ -5,22 +5,10 @@
 #              Shakespeare corpus with two-level sidebar navigation and minimal
 #              color scheme
 #
-# Updates:
-#   - Fixed token counts display
-#   - Fixed tags display (romance, roman, problem_play)
-#   - Reorganized sidebar (plays list above filters)
-#   - Removed token slider
-#   - Added attribution footer with links
-#   - Improved full text section (search, filters, removed gutenberg_title)
-#   - Correlations display vertically (interactive first)
-#   - Removed duplicate project resources from play pages
-#
 ################################################################################
 
 library(tidyverse)
 library(jsonlite)
-library(DBI)
-library(RSQLite)
 
 # Configuration ----------------------------------------------------------------
 METADATA_DIR <- "data/metadata"
@@ -37,14 +25,14 @@ PORTFOLIO_URL <- "https://hopemcmanus.github.io/portfolio/shakespeare/"
 # Helper Functions -------------------------------------------------------------
 
 #' Generate HTML string with embedded JSON data
-generate_html <- function(plays_json, token_json) {
+generate_html <- function(plays_json) {
   
   html <- paste0('<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shakespeare Corpus Explorer</title>
+    <title>Tidy Shakespeare</title>
     <style>
         * {
             margin: 0;
@@ -102,12 +90,12 @@ generate_html <- function(plays_json, token_json) {
         
         .container {
             display: flex;
-            height: calc(100vh - 140px);
+            height: calc(100vh - 120px);
             overflow: hidden;
         }
         
         .sidebar {
-            width: 320px;
+            width: 280px;
             background: #fafafa;
             border-right: 1px solid #e0e0e0;
             display: flex;
@@ -115,7 +103,6 @@ generate_html <- function(plays_json, token_json) {
             overflow: hidden;
         }
         
-        /* Level 1: Master navigation */
         .master-nav {
             display: flex;
             flex-direction: column;
@@ -192,8 +179,8 @@ generate_html <- function(plays_json, token_json) {
         
         .checkbox-group {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            flex-direction: column;
+            gap: 0.4rem;
         }
         
         .checkbox-item {
@@ -202,7 +189,7 @@ generate_html <- function(plays_json, token_json) {
         }
         
         .checkbox-item input {
-            margin-right: 0.3rem;
+            margin-right: 0.5rem;
             cursor: pointer;
         }
         
@@ -230,7 +217,6 @@ generate_html <- function(plays_json, token_json) {
             background: #1a1a1a;
         }
         
-        /* Level 2: Play navigation */
         .play-nav {
             display: none;
             flex-direction: column;
@@ -316,7 +302,6 @@ generate_html <- function(plays_json, token_json) {
             background: #fff;
         }
         
-        /* Master table view */
         .master-table-view {
             padding: 2rem;
         }
@@ -357,6 +342,27 @@ generate_html <- function(plays_json, token_json) {
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: #666;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .data-table th:hover {
+            background: #eee;
+        }
+        
+        .data-table th.sortable::after {
+            content: " ↕";
+            opacity: 0.3;
+        }
+        
+        .data-table th.sort-asc::after {
+            content: " ↑";
+            opacity: 1;
+        }
+        
+        .data-table th.sort-desc::after {
+            content: " ↓";
+            opacity: 1;
         }
         
         .data-table td {
@@ -373,7 +379,6 @@ generate_html <- function(plays_json, token_json) {
             background: #fafafa;
         }
         
-        /* Play detail view */
         .play-detail-view {
             display: none;
             padding: 2rem;
@@ -542,8 +547,8 @@ generate_html <- function(plays_json, token_json) {
         .footer {
             background: #f5f5f5;
             border-top: 1px solid #e0e0e0;
-            padding: 1rem 2rem;
-            font-size: 0.85rem;
+            padding: 0.75rem 2rem;
+            font-size: 0.8rem;
             color: #666;
         }
         
@@ -559,15 +564,15 @@ generate_html <- function(plays_json, token_json) {
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .footer-line {
-            margin-bottom: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            align-items: center;
         }
         
         @media (max-width: 1024px) {
             .sidebar {
-                width: 280px;
+                width: 260px;
             }
         }
         
@@ -590,8 +595,8 @@ generate_html <- function(plays_json, token_json) {
 <body>
     <div class="header">
         <div class="header-left">
-            <h1>Shakespeare Corpus Explorer</h1>
-            <div class="header-subtitle">37 plays from Project Gutenberg · Tidy text analysis pipeline</div>
+            <h1>Tidy Shakespeare</h1>
+            <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
         </div>
         <div class="header-right">
             <a href="', PORTFOLIO_URL, '" class="header-link" target="_blank">About</a>
@@ -600,19 +605,14 @@ generate_html <- function(plays_json, token_json) {
     </div>
     
     <div class="container">
-        <!-- SIDEBAR -->
         <div class="sidebar">
-            <!-- Level 1: Master Navigation -->
             <div class="master-nav" id="master-nav">
                 <div class="plays-list">
                     <div class="plays-count" id="plays-count">Loading...</div>
-                    <div id="plays-list-items">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <div id="plays-list-items"></div>
                 </div>
                 
                 <div class="filters">
-                    <!-- Period Filter -->
                     <div class="filter-section">
                         <span class="filter-label">Period</span>
                         <div class="checkbox-group">
@@ -627,7 +627,6 @@ generate_html <- function(plays_json, token_json) {
                         </div>
                     </div>
                     
-                    <!-- Genre Filter -->
                     <div class="filter-section">
                         <span class="filter-label">Genre</span>
                         <div class="checkbox-group">
@@ -646,7 +645,6 @@ generate_html <- function(plays_json, token_json) {
                         </div>
                     </div>
                     
-                    <!-- Tags Filter -->
                     <div class="filter-section">
                         <span class="filter-label">Tags</span>
                         <div class="checkbox-group">
@@ -669,135 +667,89 @@ generate_html <- function(plays_json, token_json) {
                 </div>
             </div>
             
-            <!-- Level 2: Play Navigation -->
             <div class="play-nav" id="play-nav">
                 <div class="play-nav-header">
                     <button class="back-button" onclick="backToMasterView()">Back to All Plays</button>
                     <div class="play-nav-title" id="play-nav-title">Play Title</div>
-                    <div class="play-nav-meta" id="play-nav-meta">Year · Genre · Period</div>
+                    <div class="play-nav-meta" id="play-nav-meta">Author</div>
                 </div>
                 <div class="play-nav-links" id="play-nav-links">
-                    <a href="#overview" class="nav-link" onclick="scrollToSection(event, \'overview\')">Overview</a>
-                    <a href="#full-text" class="nav-link" onclick="scrollToSection(event, \'full-text\')">Full Text</a>
-                    <a href="#character-network" class="nav-link" onclick="scrollToSection(event, \'character-network\')">Character Network</a>
-                    <a href="#frequency" class="nav-link" onclick="scrollToSection(event, \'frequency\')">Frequency Analysis</a>
-                    <a href="#sentiment" class="nav-link" onclick="scrollToSection(event, \'sentiment\')">Sentiment Analysis</a>
-                    <a href="#bigrams" class="nav-link" onclick="scrollToSection(event, \'bigrams\')">Bigram Networks</a>
-                    <a href="#correlations" class="nav-link" onclick="scrollToSection(event, \'correlations\')">Word Correlations</a>
+                    <a href="#overview" class="nav-link" onclick="scrollToSection(event, \'overview\')">Information</a>
+                    <a href="#full-text" class="nav-link" onclick="scrollToSection(event, \'full-text\')">Text</a>
+                    <a href="#sentiment" class="nav-link" onclick="scrollToSection(event, \'sentiment\')">Sentiment</a>
+                    <a href="#bigrams" class="nav-link" onclick="scrollToSection(event, \'bigrams\')">Bigrams</a>
+                    <a href="#words" class="nav-link" onclick="scrollToSection(event, \'words\')">Words</a>
+                    <a href="#character-network" class="nav-link" onclick="scrollToSection(event, \'character-network\')">Characters</a>
                     <a href="#downloads" class="nav-link" onclick="scrollToSection(event, \'downloads\')">Downloads</a>
                 </div>
             </div>
         </div>
         
-        <!-- MAIN CONTENT -->
         <div class="main-content" id="main-content">
-            <!-- Master Table View -->
             <div class="master-table-view" id="master-table-view">
-                <h2>Shakespeare Plays</h2>
+                <h2>Corpus</h2>
                 <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Gutenberg ID</th>
-                                <th>Title</th>
-                                <th>Year</th>
-                                <th>Genre</th>
-                                <th>Period</th>
-                                <th>Tokens</th>
+                                <th class="sortable" data-column="short_title" onclick="sortTable(\'short_title\')">Title</th>
+                                <th class="sortable" data-column="year" onclick="sortTable(\'year\')">Year</th>
+                                <th class="sortable" data-column="period" onclick="sortTable(\'period\')">Period</th>
+                                <th class="sortable" data-column="genre" onclick="sortTable(\'genre\')">Genre</th>
+                                <th class="sortable" data-column="gutenberg_id" onclick="sortTable(\'gutenberg_id\')">Gutenberg ID</th>
                             </tr>
                         </thead>
-                        <tbody id="master-table-body">
-                            <!-- Populated by JavaScript -->
-                        </tbody>
+                        <tbody id="master-table-body"></tbody>
                     </table>
                 </div>
             </div>
             
-            <!-- Play Detail View -->
             <div class="play-detail-view" id="play-detail-view">
-                <!-- Overview Section -->
                 <section class="section" id="overview">
-                    <h2 class="section-title">Overview</h2>
-                    <div class="info-grid" id="overview-stats">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <h2 class="section-title">Information</h2>
+                    <div class="info-grid" id="overview-stats"></div>
                 </section>
                 
-                <!-- Full Text Section -->
                 <section class="section" id="full-text">
-                    <h2 class="section-title">Full Text</h2>
-                    <div class="info-grid" id="fulltext-stats">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    
-                    <h3 class="section-subtitle">Download Options</h3>
-                    <div class="download-buttons" id="download-fulltext">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    
-                    <h3 class="section-subtitle">Preview with Search & Filters</h3>
+                    <h2 class="section-title">Text</h2>
+                    <div class="info-grid" id="fulltext-stats"></div>
+                    <h3 class="section-subtitle">Preview</h3>
                     <div class="fulltext-controls">
                         <input type="text" id="fulltext-search" class="search-box" placeholder="Search text...">
                         <select id="fulltext-class-filter" class="filter-select">
-                            <option value="all">All Classes</option>
-                            <option value="dialogue">Dialogue Only</option>
-                            <option value="directions">Stage Directions Only</option>
-                            <option value="references">References Only</option>
+                            <option value="all">All Contents</option>
+                            <option value="dialogue">Dialogue</option>
+                            <option value="directions">Stage Directions</option>
                         </select>
                     </div>
                     <div class="data-preview">
-                        <table class="data-table" id="fulltext-table">
-                            <!-- Populated by JavaScript -->
-                        </table>
+                        <table class="data-table" id="fulltext-table"></table>
                     </div>
                 </section>
                 
-                <!-- Character Network Section -->
-                <section class="section" id="character-network">
-                    <h2 class="section-title">Character Network</h2>
-                    <div id="character-network-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </section>
-                
-                <!-- Frequency Analysis Section -->
-                <section class="section" id="frequency">
-                    <h2 class="section-title">Frequency Analysis</h2>
-                    <div id="frequency-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </section>
-                
-                <!-- Sentiment Analysis Section -->
                 <section class="section" id="sentiment">
-                    <h2 class="section-title">Sentiment Analysis</h2>
-                    <div id="sentiment-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <h2 class="section-title">Sentiment</h2>
+                    <div id="sentiment-content"></div>
                 </section>
                 
-                <!-- Bigram Networks Section -->
                 <section class="section" id="bigrams">
-                    <h2 class="section-title">Bigram Networks</h2>
-                    <div id="bigrams-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <h2 class="section-title">Bigrams</h2>
+                    <div id="bigrams-content"></div>
                 </section>
                 
-                <!-- Word Correlations Section -->
-                <section class="section" id="correlations">
-                    <h2 class="section-title">Word Correlations</h2>
-                    <div id="correlations-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                <section class="section" id="words">
+                    <h2 class="section-title">Words</h2>
+                    <div id="words-content"></div>
                 </section>
                 
-                <!-- Downloads Section -->
+                <section class="section" id="character-network">
+                    <h2 class="section-title">Characters</h2>
+                    <div id="character-network-content"></div>
+                </section>
+                
                 <section class="section" id="downloads">
                     <h2 class="section-title">Downloads</h2>
-                    <div id="downloads-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <div id="downloads-content"></div>
                 </section>
             </div>
         </div>
@@ -805,86 +757,68 @@ generate_html <- function(plays_json, token_json) {
     
     <div class="footer">
         <div class="footer-content">
-            <div class="footer-line">
-                Derived from the <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a>. 
-                Enhancements documented in our <a href="', GITHUB_REPO, '" target="_blank">README at GitHub</a>.
-            </div>
-            <div class="footer-line">
-                Corpus licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a>
-            </div>
-            <div class="footer-line">
-                Download a comprehensive table with metadata on all plays in the corpus: 
-                <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | 
-                <a href="data/metadata/meta_shakespeare.csv" download>CSV</a>
-            </div>
+            <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
+            <span>·</span>
+            <span>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+            <span>·</span>
+            <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
         </div>
     </div>
     
     <script>
-        // Embedded data
         const EMBEDDED_PLAYS = ', plays_json, ';
-        const EMBEDDED_TOKENS = ', token_json, ';
         
-        // Global state
         let allPlays = [];
         let filteredPlays = [];
         let currentPlay = null;
         let currentFullTextData = [];
+        let currentSortColumn = "short_title";
+        let currentSortOrder = "asc";
         
-        // Initialize
         document.addEventListener("DOMContentLoaded", function() {
-            console.log("Initializing Shakespeare Corpus Explorer...");
             loadMetadata();
             setupEventListeners();
             filterAndRenderPlays();
         });
         
-        // Load metadata from embedded data
         function loadMetadata() {
             try {
-                console.log("Loading embedded metadata...");
-                
                 if (!EMBEDDED_PLAYS || EMBEDDED_PLAYS.length === 0) {
                     throw new Error("No plays data embedded");
                 }
-                
                 allPlays = EMBEDDED_PLAYS;
-                
-                // Merge token counts
-                if (EMBEDDED_TOKENS && EMBEDDED_TOKENS.length > 0) {
-                    allPlays = allPlays.map(play => {
-                        const tokenInfo = EMBEDDED_TOKENS.find(t => t.gutenberg_id === play.gutenberg_id);
-                        return {
-                            ...play,
-                            tokens: tokenInfo ? tokenInfo.tokens : 0
-                        };
-                    });
-                }
-                
-                console.log(`Loaded ${allPlays.length} plays`);
-                
             } catch (error) {
                 console.error("Error loading metadata:", error);
                 document.getElementById("plays-count").textContent = "Error: " + error.message;
             }
         }
         
-        // Setup event listeners
         function setupEventListeners() {
-            document.getElementById("filter-elizabethan").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-jacobean").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-tragedy").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-comedy").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-history").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-romance").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-roman").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-problem").addEventListener("change", filterAndRenderPlays);
-            
-            // Scroll spy for nav links
+            ["filter-elizabethan", "filter-jacobean", "filter-tragedy", "filter-comedy", 
+             "filter-history", "filter-romance", "filter-roman", "filter-problem"].forEach(id => {
+                document.getElementById(id).addEventListener("change", filterAndRenderPlays);
+            });
             document.getElementById("main-content").addEventListener("scroll", updateActiveNavLink);
         }
         
-        // Filter and render plays
+        function sortTable(column) {
+            if (currentSortColumn === column) {
+                currentSortOrder = currentSortOrder === "asc" ? "desc" : "asc";
+            } else {
+                currentSortColumn = column;
+                currentSortOrder = "asc";
+            }
+            
+            document.querySelectorAll(".data-table th").forEach(th => {
+                th.classList.remove("sort-asc", "sort-desc");
+            });
+            
+            const th = document.querySelector(`[data-column="${column}"]`);
+            th.classList.add(currentSortOrder === "asc" ? "sort-asc" : "sort-desc");
+            
+            renderMasterTable();
+        }
+        
         function filterAndRenderPlays() {
             const periods = [];
             if (document.getElementById("filter-elizabethan").checked) periods.push("Elizabethan");
@@ -899,110 +833,98 @@ generate_html <- function(plays_json, token_json) {
                 if (periods.length > 0 && !periods.includes(play.period)) return false;
                 if (genres.length > 0 && !genres.includes(play.genre)) return false;
                 
-                const romanceChecked = document.getElementById("filter-romance").checked;
-                const romanChecked = document.getElementById("filter-roman").checked;
-                const problemChecked = document.getElementById("filter-problem").checked;
-                
-                if (!romanceChecked && play.romance === "TRUE") return false;
-                if (!romanChecked && play.roman === "TRUE") return false;
-                if (!problemChecked && play.problem_play === "TRUE") return false;
+                if (!document.getElementById("filter-romance").checked && play.romance === "TRUE") return false;
+                if (!document.getElementById("filter-roman").checked && play.roman === "TRUE") return false;
+                if (!document.getElementById("filter-problem").checked && play.problem_play === "TRUE") return false;
                 
                 return true;
             });
             
-            filteredPlays.sort((a, b) => (a.year || 0) - (b.year || 0));
-            
             document.getElementById("plays-count").textContent = `${filteredPlays.length} of ${allPlays.length} plays`;
-            
             renderPlaysList();
             renderMasterTable();
         }
         
-        // Render plays list in sidebar
         function renderPlaysList() {
             const container = document.getElementById("plays-list-items");
             container.innerHTML = "";
             
-            filteredPlays.forEach(play => {
+            const sortedPlays = [...filteredPlays].sort((a, b) => a.short_title.localeCompare(b.short_title));
+            
+            sortedPlays.forEach(play => {
                 const div = document.createElement("div");
                 div.className = "play-item";
                 if (currentPlay && currentPlay.gutenberg_id === play.gutenberg_id) {
                     div.classList.add("selected");
                 }
                 div.onclick = () => loadPlayDetail(play);
-                
-                div.innerHTML = `
-                    <div class="play-item-title">${play.short_title}</div>
-                `;
-                
+                div.innerHTML = `<div class="play-item-title">${play.short_title}</div>`;
                 container.appendChild(div);
             });
         }
         
-        // Render master table
         function renderMasterTable() {
             const tbody = document.getElementById("master-table-body");
             tbody.innerHTML = "";
             
-            filteredPlays.forEach(play => {
+            const sortedPlays = [...filteredPlays].sort((a, b) => {
+                let aVal = a[currentSortColumn] || "";
+                let bVal = b[currentSortColumn] || "";
+                
+                if (currentSortColumn === "year" || currentSortColumn === "gutenberg_id") {
+                    aVal = parseInt(aVal) || 0;
+                    bVal = parseInt(bVal) || 0;
+                }
+                
+                if (currentSortOrder === "asc") {
+                    return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+                } else {
+                    return aVal < bVal ? 1 : aVal > bVal ? -1 : 0;
+                }
+            });
+            
+            sortedPlays.forEach(play => {
                 const row = document.createElement("tr");
                 row.onclick = () => loadPlayDetail(play);
-                
                 row.innerHTML = `
-                    <td>${play.gutenberg_id}</td>
                     <td><strong>${play.short_title}</strong></td>
                     <td>${play.year || "—"}</td>
-                    <td>${play.genre}</td>
                     <td>${play.period || "—"}</td>
-                    <td>${(play.tokens || 0).toLocaleString()}</td>
+                    <td>${play.genre}</td>
+                    <td>${play.gutenberg_id}</td>
                 `;
-                
                 tbody.appendChild(row);
             });
         }
         
-        // Clear filters
         function clearFilters() {
-            document.getElementById("filter-elizabethan").checked = true;
-            document.getElementById("filter-jacobean").checked = true;
-            document.getElementById("filter-tragedy").checked = true;
-            document.getElementById("filter-comedy").checked = true;
-            document.getElementById("filter-history").checked = true;
-            document.getElementById("filter-romance").checked = true;
-            document.getElementById("filter-roman").checked = true;
-            document.getElementById("filter-problem").checked = true;
+            ["filter-elizabethan", "filter-jacobean", "filter-tragedy", "filter-comedy", 
+             "filter-history", "filter-romance", "filter-roman", "filter-problem"].forEach(id => {
+                document.getElementById(id).checked = true;
+            });
             filterAndRenderPlays();
         }
         
-        // Load play detail
         async function loadPlayDetail(play) {
             currentPlay = play;
             
-            // Update selected state in sidebar
             document.querySelectorAll(".play-item").forEach(item => item.classList.remove("selected"));
             event.target.closest(".play-item")?.classList.add("selected");
             
-            // Switch to play navigation
             document.getElementById("master-nav").classList.add("hidden");
             document.getElementById("play-nav").classList.add("active");
             
-            // Update play nav header
             document.getElementById("play-nav-title").textContent = play.short_title;
-            document.getElementById("play-nav-meta").textContent = 
-                `${play.year || "Year unknown"} · ${play.genre} · ${play.period || "Period unknown"}`;
+            document.getElementById("play-nav-meta").textContent = play.author || "William Shakespeare";
             
-            // Switch to play detail view
             document.getElementById("master-table-view").classList.add("hidden");
             document.getElementById("play-detail-view").classList.add("active");
             
-            // Scroll to top
             document.getElementById("main-content").scrollTop = 0;
             
-            // Load content
             await loadPlayContent(play);
         }
         
-        // Back to master view
         function backToMasterView() {
             currentPlay = null;
             
@@ -1014,20 +936,14 @@ generate_html <- function(plays_json, token_json) {
             document.getElementById("main-content").scrollTop = 0;
         }
         
-        // Scroll to section
         function scrollToSection(event, sectionId) {
             event.preventDefault();
             const section = document.getElementById(sectionId);
             const mainContent = document.getElementById("main-content");
-            
             const offsetTop = section.offsetTop - mainContent.offsetTop;
-            mainContent.scrollTo({
-                top: offsetTop,
-                behavior: "smooth"
-            });
+            mainContent.scrollTo({ top: offsetTop, behavior: "smooth" });
         }
         
-        // Update active nav link based on scroll position
         function updateActiveNavLink() {
             const mainContent = document.getElementById("main-content");
             const sections = document.querySelectorAll(".section");
@@ -1053,36 +969,18 @@ generate_html <- function(plays_json, token_json) {
             });
         }
         
-        // Load play content
         async function loadPlayContent(play) {
             const shortTitle = play.short_title.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
             
-            // Overview
             loadOverview(play);
-            
-            // Full Text
             await loadFullText(play, shortTitle);
-            
-            // Character Network
+            await loadSentiment(shortTitle);
+            await loadBigrams(shortTitle);
+            await loadWords(shortTitle);
             await loadCharacterNetwork(shortTitle);
-            
-            // Frequency Analysis
-            await loadFrequencyAnalysis(shortTitle);
-            
-            // Sentiment Analysis
-            await loadSentimentAnalysis(shortTitle);
-            
-            // Bigram Networks
-            await loadBigramNetworks(shortTitle);
-            
-            // Word Correlations
-            await loadWordCorrelations(shortTitle);
-            
-            // Downloads
             loadDownloads(play, shortTitle);
         }
         
-        // Load overview
         function loadOverview(play) {
             const tags = [];
             if (play.romance === "TRUE") tags.push("Romance");
@@ -1091,48 +989,40 @@ generate_html <- function(plays_json, token_json) {
             
             document.getElementById("overview-stats").innerHTML = `
                 <div class="info-card">
-                    <div class="info-card-label">Gutenberg ID</div>
-                    <div class="info-card-value">${play.gutenberg_id}</div>
-                </div>
-                <div class="info-card">
                     <div class="info-card-label">Year</div>
                     <div class="info-card-value">${play.year || "Unknown"}</div>
-                </div>
-                <div class="info-card">
-                    <div class="info-card-label">Genre</div>
-                    <div class="info-card-value" style="font-size: 1rem;">${play.genre}</div>
                 </div>
                 <div class="info-card">
                     <div class="info-card-label">Period</div>
                     <div class="info-card-value" style="font-size: 1rem;">${play.period || "Unknown"}</div>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-label">Total Tokens</div>
-                    <div class="info-card-value">${(play.tokens || 0).toLocaleString()}</div>
+                    <div class="info-card-label">Genre</div>
+                    <div class="info-card-value" style="font-size: 1rem;">${play.genre}</div>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-label">Tags</div>
-                    <div class="info-card-value" style="font-size: 0.85rem;">${tags.length > 0 ? tags.join(", ") : "None"}</div>
+                    <div class="info-card-label">Gutenberg ID</div>
+                    <div class="info-card-value">${play.gutenberg_id}</div>
                 </div>
             `;
         }
         
-        // Load full text
         async function loadFullText(play, shortTitle) {
             try {
                 const response = await fetch(`data/json/full_text/${shortTitle}.json`);
                 if (response.ok) {
                     const data = await response.json();
-                    currentFullTextData = data;
+                    const filteredData = data.filter(row => row.section === "contents");
+                    currentFullTextData = filteredData;
                     
-                    const dialogueCount = data.filter(row => row.class === "dialogue").length;
-                    const directionCount = data.filter(row => row.class === "directions").length;
-                    const characters = [...new Set(data.filter(row => row.character).map(row => row.character))];
+                    const dialogueCount = filteredData.filter(row => row.class === "dialogue").length;
+                    const directionCount = filteredData.filter(row => row.class === "directions").length;
+                    const characters = [...new Set(filteredData.filter(row => row.character).map(row => row.character))];
                     
                     document.getElementById("fulltext-stats").innerHTML = `
                         <div class="info-card">
                             <div class="info-card-label">Total Lines</div>
-                            <div class="info-card-value">${data.length.toLocaleString()}</div>
+                            <div class="info-card-value">${filteredData.length.toLocaleString()}</div>
                         </div>
                         <div class="info-card">
                             <div class="info-card-label">Dialogue Lines</div>
@@ -1148,17 +1038,9 @@ generate_html <- function(plays_json, token_json) {
                         </div>
                     `;
                     
-                    // Download buttons
-                    document.getElementById("download-fulltext").innerHTML = `
-                        <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Cleaned Text (CSV)</a>
-                        <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
-                    `;
-                    
-                    // Setup search and filter listeners
                     document.getElementById("fulltext-search").addEventListener("input", filterFullText);
                     document.getElementById("fulltext-class-filter").addEventListener("change", filterFullText);
                     
-                    // Initial render
                     filterFullText();
                 } else {
                     document.getElementById("fulltext-stats").innerHTML = \'<div class="no-data">Data not available</div>\';
@@ -1169,19 +1051,16 @@ generate_html <- function(plays_json, token_json) {
             }
         }
         
-        // Filter full text based on search and class
         function filterFullText() {
             const searchTerm = document.getElementById("fulltext-search").value.toLowerCase();
             const classFilter = document.getElementById("fulltext-class-filter").value;
             
             let filtered = currentFullTextData;
             
-            // Apply class filter
             if (classFilter !== "all") {
                 filtered = filtered.filter(row => row.class === classFilter);
             }
             
-            // Apply search filter
             if (searchTerm) {
                 filtered = filtered.filter(row => 
                     (row.text && row.text.toLowerCase().includes(searchTerm)) ||
@@ -1189,21 +1068,18 @@ generate_html <- function(plays_json, token_json) {
                 );
             }
             
-            // Limit to first 100 rows for performance
             renderFullTextTable(filtered.slice(0, 100));
         }
         
-        // Render full text table (without gutenberg_title column)
         function renderFullTextTable(data) {
             const table = document.getElementById("fulltext-table");
             
             if (!data || data.length === 0) {
-                table.innerHTML = \'<tr><td colspan="10" class="no-data">No matching rows</td></tr>\';
+                table.innerHTML = \'<tr><td colspan="5" class="no-data">No matching rows</td></tr>\';
                 return;
             }
             
-            // Define columns to display (exclude gutenberg_title)
-            const displayColumns = ["gutenberg_id", "short_title", "genre", "year", "author", "section", "class", "act", "scene", "character", "line_number", "text"];
+            const displayColumns = ["act", "scene", "line_number", "character", "text"];
             
             let html = "<thead><tr>";
             displayColumns.forEach(col => {
@@ -1214,8 +1090,7 @@ generate_html <- function(plays_json, token_json) {
             data.forEach(row => {
                 html += "<tr>";
                 displayColumns.forEach(col => {
-                    const value = row[col] || "";
-                    html += `<td>${value}</td>`;
+                    html += `<td>${row[col] || ""}</td>`;
                 });
                 html += "</tr>";
             });
@@ -1224,63 +1099,14 @@ generate_html <- function(plays_json, token_json) {
             table.innerHTML = html;
         }
         
-        // Load character network
-        async function loadCharacterNetwork(shortTitle) {
-            const content = document.getElementById("character-network-content");
-            let html = "";
-            let found = false;
-            
-            const staticPlot = `plots/character_networks/${shortTitle}_character_network.png`;
-            if (await fileExists(staticPlot)) {
-                html += `
-                    <div class="plot-item">
-                        <h4>Static Network</h4>
-                        <img src="${staticPlot}" alt="Character Network">
-                    </div>
-                `;
-                found = true;
-            }
-            
-            const interactivePlot = `interactive_networks/characters/${shortTitle}.html`;
-            if (await fileExists(interactivePlot)) {
-                html += `
-                    <div class="plot-item">
-                        <h4>Interactive Network</h4>
-                        <iframe src="${interactivePlot}"></iframe>
-                    </div>
-                `;
-                found = true;
-            }
-            
-            content.innerHTML = found ? html : \'<div class="no-data">No character network visualizations available</div>\';
-        }
-        
-        // Load frequency analysis
-        async function loadFrequencyAnalysis(shortTitle) {
-            const content = document.getElementById("frequency-content");
-            const freqPlot = `plots/frequency/individual_plays/${shortTitle}_top_words.png`;
-            
-            if (await fileExists(freqPlot)) {
-                content.innerHTML = `
-                    <div class="plot-item">
-                        <h4>Most Frequent Words</h4>
-                        <img src="${freqPlot}" alt="Word Frequency">
-                    </div>
-                `;
-            } else {
-                content.innerHTML = \'<div class="no-data">No frequency analysis available</div>\';
-            }
-        }
-        
-        // Load sentiment analysis
-        async function loadSentimentAnalysis(shortTitle) {
+        async function loadSentiment(shortTitle) {
             const content = document.getElementById("sentiment-content");
             const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_all_lexicons.png`;
             
             if (await fileExists(sentimentPlot)) {
                 content.innerHTML = `
                     <div class="plot-item">
-                        <h4>Sentiment by Act and Scene (All Lexicons)</h4>
+                        <h4>Sentiment by Act and Scene</h4>
                         <img src="${sentimentPlot}" alt="Sentiment Analysis">
                     </div>
                 `;
@@ -1289,30 +1115,63 @@ generate_html <- function(plays_json, token_json) {
             }
         }
         
-        // Load bigram networks
-        async function loadBigramNetworks(shortTitle) {
-            const content = document.getElementById("bigrams-content");
-            const bigramPlot = `plots/relationships/networks/bigram_network_${shortTitle}.png`;
-            
-            if (await fileExists(bigramPlot)) {
-                content.innerHTML = `
-                    <div class="plot-item">
-                        <h4>Bigram Network</h4>
-                        <img src="${bigramPlot}" alt="Bigram Network">
-                    </div>
-                `;
-            } else {
-                content.innerHTML = \'<div class="no-data">No bigram network available</div>\';
-            }
-        }
+    async function loadBigrams(shortTitle) {
+    const content = document.getElementById("bigrams-content");
+    let html = "";
+    let found = false;
+    
+    const bifreqPlot = `plots/frequency/individual_plays/${shortTitle}_bigram_tfidf.png`;
+    if (await fileExists(bifreqPlot)) {
+        html += `
+            <div class="plot-item">
+                <h4>Most Frequent Bigrams</h4>
+                <img src="${bifreqPlot}" alt="Bigram Frequency">
+            </div>
+        `;
+        found = true;
+    }
+    
+    const bigramPlot = `plots/relationships/networks/bigram_network_${shortTitle}.png`;
+    if (await fileExists(bigramPlot)) {
+        html += `
+            <div class="plot-item">
+                <h4>Bigram Network</h4>
+                <img src="${bigramPlot}" alt="Bigram Network">
+            </div>
+        `;
+        found = true;
+    }
+    
+            content.innerHTML = found ? html : \'<div class="no-data">No bigram analysis available</div>\';
+}
         
-        // Load word correlations (interactive first, then static)
-        async function loadWordCorrelations(shortTitle) {
-            const content = document.getElementById("correlations-content");
+        async function loadWords(shortTitle) {
+            const content = document.getElementById("words-content");
             let html = "";
             let found = false;
             
-            // Interactive first
+            const freqPlot = `plots/frequency/individual_plays/${shortTitle}_word_tfidf.png`;
+            if (await fileExists(freqPlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Most Frequent Words</h4>
+                        <img src="${freqPlot}" alt="Word Frequency">
+                    </div>
+                `;
+                found = true;
+            }
+            
+            const corrPlot = `plots/relationships/correlations/section_correlations_${shortTitle}.png`;
+            if (await fileExists(corrPlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Word Correlations</h4>
+                        <img src="${corrPlot}" alt="Word Correlations">
+                    </div>
+                `;
+                found = true;
+            }
+            
             const corrNetwork = `interactive_networks/correlations/${shortTitle}.html`;
             if (await fileExists(corrNetwork)) {
                 html += `
@@ -1324,32 +1183,50 @@ generate_html <- function(plays_json, token_json) {
                 found = true;
             }
             
-            // Static second
-            const corrPlot = `plots/relationships/correlations/section_correlations_${shortTitle}.png`;
-            if (await fileExists(corrPlot)) {
+            content.innerHTML = found ? html : \'<div class="no-data">No word analysis available</div>\';
+        }
+        
+        async function loadCharacterNetwork(shortTitle) {
+            const content = document.getElementById("character-network-content");
+            let html = "";
+            let found = false;
+            
+            const staticPlot = `plots/character_networks/${shortTitle}_network.png`;
+            if (await fileExists(staticPlot)) {
                 html += `
                     <div class="plot-item">
-                        <h4>Static Correlation Plot</h4>
-                        <img src="${corrPlot}" alt="Word Correlations">
+                        <h4>Character Network Static</h4>
+                        <img src="${staticPlot}" alt="Character Network Static">
                     </div>
                 `;
                 found = true;
             }
             
-            content.innerHTML = found ? html : \'<div class="no-data">No word correlation visualizations available</div>\';
+            const interactivePlot = `interactive_networks/characters/${shortTitle}.html`;
+            if (await fileExists(interactivePlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Character Network Interactive</h4>
+                        <iframe src="${interactivePlot}"></iframe>
+                    </div>
+                `;
+                found = true;
+            }
+            
+            content.innerHTML = found ? html : \'<div class="no-data">No character network visualizations available</div>\';
         }
         
-        // Load downloads
         function loadDownloads(play, shortTitle) {
             document.getElementById("downloads-content").innerHTML = `
-                <h3 class="section-subtitle">Play Data Files</h3>
+                <h3 class="section-subtitle">Data Files</h3>
                 <div class="download-buttons">
+                    <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Full Text (CSV)</a>
+                    <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
                     <a href="data/processed/tokens/${shortTitle}_tokens.csv" class="download-btn" download>Tokens (CSV)</a>
                 </div>
             `;
         }
         
-        // Helper: Check if file exists
         async function fileExists(path) {
             try {
                 const response = await fetch(path, { method: "HEAD" });
@@ -1365,110 +1242,44 @@ generate_html <- function(plays_json, token_json) {
   return(html)
 }
 
-# Main Execution Function -----------------------------------------------------
+# Main Execution ---------------------------------------------------------------
 
 main <- function() {
-  message("================================================================================")
-  message("Shakespeare Corpus Explorer - Static HTML Generator")
-  message("================================================================================\n")
-  
-  # Validate required directories exist
-  message("Validating project structure...")
-  
-  required_dirs <- c(
-    METADATA_DIR,
-    JSON_DIR,
-    CLEANED_DIR,
-    TOKENS_DIR,
-    PLOTS_DIR
-  )
-  
-  missing_dirs <- required_dirs[!dir.exists(required_dirs)]
-  
-  if (length(missing_dirs) > 0) {
-    warning("Missing directories:\n  ", paste(missing_dirs, collapse = "\n  "))
-    message("\nSome features may not work correctly without these directories.")
-  } else {
-    message("✓ All required directories found")
-  }
-  
-  # Check for required metadata files
-  message("\nChecking for required metadata files...")
+  message("\n", strrep("=", 80))
+  message("TIDY SHAKESPEARE - Static HTML Generator")
+  message(strrep("=", 80), "\n")
   
   meta_csv <- file.path(METADATA_DIR, "meta_shakespeare.csv")
   meta_json <- file.path(METADATA_DIR, "meta_shakespeare.json")
   
   if (!file.exists(meta_csv) && !file.exists(meta_json)) {
-    stop("ERROR: Neither meta_shakespeare.csv nor meta_shakespeare.json found in ", METADATA_DIR)
+    stop("ERROR: Neither meta_shakespeare.csv nor meta_shakespeare.json found")
   }
   
-  # Read metadata
-  message("  Reading metadata...")
   if (file.exists(meta_json)) {
     plays_data <- read_json(meta_json)
-    message("  ✓ Loaded meta_shakespeare.json")
+    message("✓ Loaded meta_shakespeare.json")
   } else {
     plays_data <- read_csv(meta_csv, show_col_types = FALSE)
-    message("  ✓ Loaded meta_shakespeare.csv")
-    # Also save as JSON for future use
     write_json(plays_data, meta_json, pretty = TRUE)
-    message("  ✓ Created meta_shakespeare.json")
+    message("✓ Loaded meta_shakespeare.csv and created JSON")
   }
   
-  message(sprintf("  Found %d plays", nrow(plays_data)))
+  message(sprintf("✓ Found %d plays\n", nrow(plays_data)))
   
-  # Check for tokenisation log
-  token_log_csv <- file.path(METADATA_DIR, "tokenisation_log.csv")
-  token_log_json <- file.path(METADATA_DIR, "tokenisation_log.json")
-  
-  token_data <- list()
-  
-  if (file.exists(token_log_json)) {
-    token_data <- read_json(token_log_json)
-    message("  ✓ Loaded tokenisation_log.json")
-  } else if (file.exists(token_log_csv)) {
-    token_df <- read_csv(token_log_csv, show_col_types = FALSE)
-    token_data <- token_df
-    write_json(token_df, token_log_json, pretty = TRUE)
-    message("  ✓ Loaded tokenisation_log.csv and created JSON")
-  } else {
-    message("  ℹ No tokenisation log found (optional)")
-  }
-  
-  # Convert data to JSON strings for embedding
-  message("\nPreparing embedded data...")
   plays_json <- toJSON(plays_data, auto_unbox = TRUE, pretty = FALSE)
-  token_json <- toJSON(token_data, auto_unbox = TRUE, pretty = FALSE)
   
-  # Generate HTML with embedded data
-  message("\nGenerating index.html with embedded data...")
-  html_content <- generate_html(plays_json, token_json)
-  
-  # Write to file
+  message("Generating index.html...")
+  html_content <- generate_html(plays_json)
   writeLines(html_content, OUTPUT_FILE)
   
-  message("\n================================================================================")
-  message("SUCCESS: Static HTML application generated")
-  message("================================================================================")
-  message("\nOutput file: ", OUTPUT_FILE)
-  message("\nFeatures:")
-  message("  • Two-level sidebar navigation (master → play detail)")
-  message("  • Plays list above filters in sidebar")
-  message("  • Filters for period, genre, and tags (no token slider)")
-  message("  • Master table view of all plays")
-  message("  • Individual play pages with scrollable sections")
-  message("  • Full text with search and class filters")
-  message("  • Word correlations displayed vertically (interactive first)")
-  message("  • Attribution footer with GitHub and portfolio links")
-  message("  • Minimal black/grey/white color scheme")
-  message("  • Embedded JSON data (works without web server)")
-  message("\nTo view the application:")
-  message("  1. Run a local server: servr::httd() or python -m http.server 8000")
-  message("  2. Open http://localhost:8000 in your browser")
-  message("\n================================================================================\n")
+  message("\n", strrep("=", 80))
+  message("SUCCESS: ", OUTPUT_FILE, " generated")
+  message(strrep("=", 80))
+  message("\nTo view: servr::httd() or python -m http.server 8000")
+  message(strrep("=", 80), "\n")
 }
 
-# Execute Main Function --------------------------------------------------------
 if (!interactive()) {
   main()
 } else {

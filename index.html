@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shakespeare Corpus Explorer</title>
+    <title>Tidy Shakespeare</title>
     <style>
         * {
             margin: 0;
@@ -61,12 +61,12 @@
         
         .container {
             display: flex;
-            height: calc(100vh - 140px);
+            height: calc(100vh - 120px);
             overflow: hidden;
         }
         
         .sidebar {
-            width: 320px;
+            width: 280px;
             background: #fafafa;
             border-right: 1px solid #e0e0e0;
             display: flex;
@@ -74,7 +74,6 @@
             overflow: hidden;
         }
         
-        /* Level 1: Master navigation */
         .master-nav {
             display: flex;
             flex-direction: column;
@@ -151,8 +150,8 @@
         
         .checkbox-group {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            flex-direction: column;
+            gap: 0.4rem;
         }
         
         .checkbox-item {
@@ -161,7 +160,7 @@
         }
         
         .checkbox-item input {
-            margin-right: 0.3rem;
+            margin-right: 0.5rem;
             cursor: pointer;
         }
         
@@ -189,7 +188,6 @@
             background: #1a1a1a;
         }
         
-        /* Level 2: Play navigation */
         .play-nav {
             display: none;
             flex-direction: column;
@@ -275,7 +273,6 @@
             background: #fff;
         }
         
-        /* Master table view */
         .master-table-view {
             padding: 2rem;
         }
@@ -316,6 +313,27 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: #666;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .data-table th:hover {
+            background: #eee;
+        }
+        
+        .data-table th.sortable::after {
+            content: " ↕";
+            opacity: 0.3;
+        }
+        
+        .data-table th.sort-asc::after {
+            content: " ↑";
+            opacity: 1;
+        }
+        
+        .data-table th.sort-desc::after {
+            content: " ↓";
+            opacity: 1;
         }
         
         .data-table td {
@@ -332,7 +350,6 @@
             background: #fafafa;
         }
         
-        /* Play detail view */
         .play-detail-view {
             display: none;
             padding: 2rem;
@@ -501,8 +518,8 @@
         .footer {
             background: #f5f5f5;
             border-top: 1px solid #e0e0e0;
-            padding: 1rem 2rem;
-            font-size: 0.85rem;
+            padding: 0.75rem 2rem;
+            font-size: 0.8rem;
             color: #666;
         }
         
@@ -518,15 +535,15 @@
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .footer-line {
-            margin-bottom: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            align-items: center;
         }
         
         @media (max-width: 1024px) {
             .sidebar {
-                width: 280px;
+                width: 260px;
             }
         }
         
@@ -549,8 +566,8 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <h1>Shakespeare Corpus Explorer</h1>
-            <div class="header-subtitle">37 plays from Project Gutenberg · Tidy text analysis pipeline</div>
+            <h1>Tidy Shakespeare</h1>
+            <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
         </div>
         <div class="header-right">
             <a href="https://hopemcmanus.github.io/portfolio/shakespeare/" class="header-link" target="_blank">About</a>
@@ -559,19 +576,14 @@
     </div>
     
     <div class="container">
-        <!-- SIDEBAR -->
         <div class="sidebar">
-            <!-- Level 1: Master Navigation -->
             <div class="master-nav" id="master-nav">
                 <div class="plays-list">
                     <div class="plays-count" id="plays-count">Loading...</div>
-                    <div id="plays-list-items">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <div id="plays-list-items"></div>
                 </div>
                 
                 <div class="filters">
-                    <!-- Period Filter -->
                     <div class="filter-section">
                         <span class="filter-label">Period</span>
                         <div class="checkbox-group">
@@ -586,7 +598,6 @@
                         </div>
                     </div>
                     
-                    <!-- Genre Filter -->
                     <div class="filter-section">
                         <span class="filter-label">Genre</span>
                         <div class="checkbox-group">
@@ -605,7 +616,6 @@
                         </div>
                     </div>
                     
-                    <!-- Tags Filter -->
                     <div class="filter-section">
                         <span class="filter-label">Tags</span>
                         <div class="checkbox-group">
@@ -628,135 +638,89 @@
                 </div>
             </div>
             
-            <!-- Level 2: Play Navigation -->
             <div class="play-nav" id="play-nav">
                 <div class="play-nav-header">
                     <button class="back-button" onclick="backToMasterView()">Back to All Plays</button>
                     <div class="play-nav-title" id="play-nav-title">Play Title</div>
-                    <div class="play-nav-meta" id="play-nav-meta">Year · Genre · Period</div>
+                    <div class="play-nav-meta" id="play-nav-meta">Author</div>
                 </div>
                 <div class="play-nav-links" id="play-nav-links">
-                    <a href="#overview" class="nav-link" onclick="scrollToSection(event, 'overview')">Overview</a>
-                    <a href="#full-text" class="nav-link" onclick="scrollToSection(event, 'full-text')">Full Text</a>
-                    <a href="#character-network" class="nav-link" onclick="scrollToSection(event, 'character-network')">Character Network</a>
-                    <a href="#frequency" class="nav-link" onclick="scrollToSection(event, 'frequency')">Frequency Analysis</a>
-                    <a href="#sentiment" class="nav-link" onclick="scrollToSection(event, 'sentiment')">Sentiment Analysis</a>
-                    <a href="#bigrams" class="nav-link" onclick="scrollToSection(event, 'bigrams')">Bigram Networks</a>
-                    <a href="#correlations" class="nav-link" onclick="scrollToSection(event, 'correlations')">Word Correlations</a>
+                    <a href="#overview" class="nav-link" onclick="scrollToSection(event, 'overview')">Information</a>
+                    <a href="#full-text" class="nav-link" onclick="scrollToSection(event, 'full-text')">Text</a>
+                    <a href="#sentiment" class="nav-link" onclick="scrollToSection(event, 'sentiment')">Sentiment</a>
+                    <a href="#bigrams" class="nav-link" onclick="scrollToSection(event, 'bigrams')">Bigrams</a>
+                    <a href="#words" class="nav-link" onclick="scrollToSection(event, 'words')">Words</a>
+                    <a href="#character-network" class="nav-link" onclick="scrollToSection(event, 'character-network')">Characters</a>
                     <a href="#downloads" class="nav-link" onclick="scrollToSection(event, 'downloads')">Downloads</a>
                 </div>
             </div>
         </div>
         
-        <!-- MAIN CONTENT -->
         <div class="main-content" id="main-content">
-            <!-- Master Table View -->
             <div class="master-table-view" id="master-table-view">
-                <h2>Shakespeare Plays</h2>
+                <h2>Corpus</h2>
                 <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Gutenberg ID</th>
-                                <th>Title</th>
-                                <th>Year</th>
-                                <th>Genre</th>
-                                <th>Period</th>
-                                <th>Tokens</th>
+                                <th class="sortable" data-column="short_title" onclick="sortTable('short_title')">Title</th>
+                                <th class="sortable" data-column="year" onclick="sortTable('year')">Year</th>
+                                <th class="sortable" data-column="period" onclick="sortTable('period')">Period</th>
+                                <th class="sortable" data-column="genre" onclick="sortTable('genre')">Genre</th>
+                                <th class="sortable" data-column="gutenberg_id" onclick="sortTable('gutenberg_id')">Gutenberg ID</th>
                             </tr>
                         </thead>
-                        <tbody id="master-table-body">
-                            <!-- Populated by JavaScript -->
-                        </tbody>
+                        <tbody id="master-table-body"></tbody>
                     </table>
                 </div>
             </div>
             
-            <!-- Play Detail View -->
             <div class="play-detail-view" id="play-detail-view">
-                <!-- Overview Section -->
                 <section class="section" id="overview">
-                    <h2 class="section-title">Overview</h2>
-                    <div class="info-grid" id="overview-stats">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <h2 class="section-title">Information</h2>
+                    <div class="info-grid" id="overview-stats"></div>
                 </section>
                 
-                <!-- Full Text Section -->
                 <section class="section" id="full-text">
-                    <h2 class="section-title">Full Text</h2>
-                    <div class="info-grid" id="fulltext-stats">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    
-                    <h3 class="section-subtitle">Download Options</h3>
-                    <div class="download-buttons" id="download-fulltext">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    
-                    <h3 class="section-subtitle">Preview with Search & Filters</h3>
+                    <h2 class="section-title">Text</h2>
+                    <div class="info-grid" id="fulltext-stats"></div>
+                    <h3 class="section-subtitle">Preview</h3>
                     <div class="fulltext-controls">
                         <input type="text" id="fulltext-search" class="search-box" placeholder="Search text...">
                         <select id="fulltext-class-filter" class="filter-select">
-                            <option value="all">All Classes</option>
-                            <option value="dialogue">Dialogue Only</option>
-                            <option value="directions">Stage Directions Only</option>
-                            <option value="references">References Only</option>
+                            <option value="all">All Contents</option>
+                            <option value="dialogue">Dialogue</option>
+                            <option value="directions">Stage Directions</option>
                         </select>
                     </div>
                     <div class="data-preview">
-                        <table class="data-table" id="fulltext-table">
-                            <!-- Populated by JavaScript -->
-                        </table>
+                        <table class="data-table" id="fulltext-table"></table>
                     </div>
                 </section>
                 
-                <!-- Character Network Section -->
-                <section class="section" id="character-network">
-                    <h2 class="section-title">Character Network</h2>
-                    <div id="character-network-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </section>
-                
-                <!-- Frequency Analysis Section -->
-                <section class="section" id="frequency">
-                    <h2 class="section-title">Frequency Analysis</h2>
-                    <div id="frequency-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </section>
-                
-                <!-- Sentiment Analysis Section -->
                 <section class="section" id="sentiment">
-                    <h2 class="section-title">Sentiment Analysis</h2>
-                    <div id="sentiment-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <h2 class="section-title">Sentiment</h2>
+                    <div id="sentiment-content"></div>
                 </section>
                 
-                <!-- Bigram Networks Section -->
                 <section class="section" id="bigrams">
-                    <h2 class="section-title">Bigram Networks</h2>
-                    <div id="bigrams-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <h2 class="section-title">Bigrams</h2>
+                    <div id="bigrams-content"></div>
                 </section>
                 
-                <!-- Word Correlations Section -->
-                <section class="section" id="correlations">
-                    <h2 class="section-title">Word Correlations</h2>
-                    <div id="correlations-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                <section class="section" id="words">
+                    <h2 class="section-title">Words</h2>
+                    <div id="words-content"></div>
                 </section>
                 
-                <!-- Downloads Section -->
+                <section class="section" id="character-network">
+                    <h2 class="section-title">Characters</h2>
+                    <div id="character-network-content"></div>
+                </section>
+                
                 <section class="section" id="downloads">
                     <h2 class="section-title">Downloads</h2>
-                    <div id="downloads-content">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                    <div id="downloads-content"></div>
                 </section>
             </div>
         </div>
@@ -764,86 +728,68 @@
     
     <div class="footer">
         <div class="footer-content">
-            <div class="footer-line">
-                Derived from the <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a>. 
-                Enhancements documented in our <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank">README at GitHub</a>.
-            </div>
-            <div class="footer-line">
-                Corpus licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a>
-            </div>
-            <div class="footer-line">
-                Download a comprehensive table with metadata on all plays in the corpus: 
-                <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | 
-                <a href="data/metadata/meta_shakespeare.csv" download>CSV</a>
-            </div>
+            <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
+            <span>·</span>
+            <span>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+            <span>·</span>
+            <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
         </div>
     </div>
     
     <script>
-        // Embedded data
         const EMBEDDED_PLAYS = [{"short_title":"A Midsummer Night's Dream","gutenberg_title":"A Midsummer Night's Dream","gutenberg_id":1514,"genre":"Comedy","year":1595,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"All's Well That Ends Well","gutenberg_title":"All's Well That Ends Well","gutenberg_id":1529,"genre":"Comedy","year":1603,"body_count":2,"boas_problem_plays":1,"death":1,"period":"Jacobean","romance":false,"problem_play":true,"roman":false},{"short_title":"As You Like It","gutenberg_title":"As You Like It","gutenberg_id":1523,"genre":"Comedy","year":1599,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Comedy of Errors","gutenberg_title":"The Comedy of Errors","gutenberg_id":1504,"genre":"Comedy","year":1594,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Love's Labour's Lost","gutenberg_title":"Love's Labour's Lost","gutenberg_id":1510,"genre":"Comedy","year":1595,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Measure for Measure","gutenberg_title":"Measure for Measure","gutenberg_id":1530,"genre":"Comedy","year":1604,"body_count":1,"boas_problem_plays":1,"death":1,"period":"Jacobean","romance":false,"problem_play":true,"roman":false},{"short_title":"Merchant of Venice","gutenberg_title":"The Merchant of Venice","gutenberg_id":1515,"genre":"Comedy","year":1597,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Merry Wives of Windsor","gutenberg_title":"The Merry Wives of Windsor","gutenberg_id":1517,"genre":"Comedy","year":1601,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Much Ado about Nothing","gutenberg_title":"Much Ado about Nothing","gutenberg_id":1519,"genre":"Comedy","year":1598,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Taming of the Shrew","gutenberg_title":"The Taming of the Shrew","gutenberg_id":1508,"genre":"Comedy","year":1592,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Tempest","gutenberg_title":"The Tempest","gutenberg_id":1540,"genre":"Comedy","year":1611,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Jacobean","romance":true,"problem_play":false,"roman":false},{"short_title":"Twelfth Night","gutenberg_title":"Twelfth Night; Or, What You Will","gutenberg_id":1526,"genre":"Comedy","year":1601,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Two Gentlemen of Verona","gutenberg_title":"The Two Gentlemen of Verona","gutenberg_id":1509,"genre":"Comedy","year":1598,"body_count":0,"boas_problem_plays":0,"death":0,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Winter's Tale","gutenberg_title":"The Winter's Tale","gutenberg_id":1539,"genre":"Comedy","year":1611,"body_count":1,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":true,"problem_play":false,"roman":false},{"short_title":"Henry IV, Part 1","gutenberg_title":"King Henry IV, the First Part","gutenberg_id":1516,"genre":"History","year":1597,"body_count":3,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Henry IV, Part 2","gutenberg_title":"King Henry IV, Second Part","gutenberg_id":1518,"genre":"History","year":1598,"body_count":4,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Henry V","gutenberg_title":"The Life of King Henry V","gutenberg_id":1521,"genre":"History","year":1599,"body_count":5,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Henry VI, Part 1","gutenberg_title":"King Henry VI, First Part","gutenberg_id":1500,"genre":"History","year":1592,"body_count":4,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Henry VI, Part 2","gutenberg_title":"History of King Henry the Sixth, Second Part","gutenberg_id":1501,"genre":"History","year":1591,"body_count":6,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Henry VI, Part 3","gutenberg_title":"The History of King Henry the Sixth, Third Part","gutenberg_id":1502,"genre":"History","year":1595,"body_count":2,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Henry VIII","gutenberg_title":"The Life of Henry the Eighth","gutenberg_id":1541,"genre":"History","year":1613,"body_count":2,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":false},{"short_title":"King John","gutenberg_title":"King John","gutenberg_id":1511,"genre":"History","year":1597,"body_count":3,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Pericles","gutenberg_title":"Pericles, Prince of Tyre","gutenberg_id":1537,"genre":"History","year":1608,"body_count":2,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":true,"problem_play":false,"roman":false},{"short_title":"Richard II","gutenberg_title":"The Tragedy of King Richard the Second","gutenberg_id":1512,"genre":"History","year":1595,"body_count":7,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Richard III","gutenberg_title":"The Tragedy of King Richard III","gutenberg_id":1503,"genre":"History","year":1592,"body_count":10,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Antony and Cleopatra","gutenberg_title":"Antony and Cleopatra","gutenberg_id":1534,"genre":"Tragedy","year":1607,"body_count":9,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":true},{"short_title":"Coriolanus","gutenberg_title":"The Tragedy of Coriolanus","gutenberg_id":1535,"genre":"Tragedy","year":1608,"body_count":2,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":true},{"short_title":"Cymbeline","gutenberg_title":"Cymbeline","gutenberg_id":1538,"genre":"Tragedy","year":1610,"body_count":2,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":true,"problem_play":false,"roman":false},{"short_title":"Hamlet","gutenberg_title":"Hamlet, Prince of Denmark","gutenberg_id":1524,"genre":"Tragedy","year":1600,"body_count":9,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Julius Caesar","gutenberg_title":"Julius Caesar","gutenberg_id":1522,"genre":"Tragedy","year":1599,"body_count":10,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":true},{"short_title":"King Lear","gutenberg_title":"The Tragedy of King Lear","gutenberg_id":1532,"genre":"Tragedy","year":1606,"body_count":10,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":false},{"short_title":"Macbeth","gutenberg_title":"Macbeth","gutenberg_id":1533,"genre":"Tragedy","year":1606,"body_count":8,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":false},{"short_title":"Othello","gutenberg_title":"Othello, the Moor of Venice","gutenberg_id":1531,"genre":"Tragedy","year":1604,"body_count":4,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":false},{"short_title":"Romeo and Juliet","gutenberg_title":"Romeo and Juliet","gutenberg_id":1513,"genre":"Tragedy","year":1595,"body_count":6,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":false},{"short_title":"Timon of Athens","gutenberg_title":"The Life of Timon of Athens","gutenberg_id":1536,"genre":"Tragedy","year":1604,"body_count":3,"boas_problem_plays":0,"death":1,"period":"Jacobean","romance":false,"problem_play":false,"roman":false},{"short_title":"Titus Andronicus","gutenberg_title":"The Tragedy of Titus Andronicus","gutenberg_id":1507,"genre":"Tragedy","year":1591,"body_count":14,"boas_problem_plays":0,"death":1,"period":"Elizabethan","romance":false,"problem_play":false,"roman":true},{"short_title":"Troilus and Cressida","gutenberg_title":"The History of Troilus and Cressida","gutenberg_id":1528,"genre":"Tragedy","year":1602,"body_count":6,"boas_problem_plays":1,"death":1,"period":"Elizabethan","romance":false,"problem_play":true,"roman":false}];
-        const EMBEDDED_TOKENS = [{"short_title":"Hamlet","genre":"Tragedy","year":1600,"total_tokens":30922,"dialogue_tokens":29812,"direction_tokens":706,"reference_tokens":150,"unique_words":4772,"unique_characters":40},{"short_title":"Richard III","genre":"History","year":1592,"total_tokens":30060,"dialogue_tokens":28486,"direction_tokens":988,"reference_tokens":174,"unique_words":4077,"unique_characters":66},{"short_title":"Coriolanus","genre":"Tragedy","year":1608,"total_tokens":28265,"dialogue_tokens":26677,"direction_tokens":1054,"reference_tokens":209,"unique_words":4071,"unique_characters":71},{"short_title":"Cymbeline","genre":"Tragedy","year":1610,"total_tokens":28184,"dialogue_tokens":27035,"direction_tokens":591,"reference_tokens":204,"unique_words":4296,"unique_characters":44},{"short_title":"Henry IV, Part 2","genre":"History","year":1598,"total_tokens":26848,"dialogue_tokens":25621,"direction_tokens":520,"reference_tokens":119,"unique_words":4143,"unique_characters":48},{"short_title":"Othello","genre":"Tragedy","year":1604,"total_tokens":26840,"dialogue_tokens":25964,"direction_tokens":556,"reference_tokens":108,"unique_words":3830,"unique_characters":26},{"short_title":"King Lear","genre":"Tragedy","year":1606,"total_tokens":26770,"dialogue_tokens":25477,"direction_tokens":770,"reference_tokens":211,"unique_words":4220,"unique_characters":27},{"short_title":"Henry V","genre":"History","year":1599,"total_tokens":26769,"dialogue_tokens":25494,"direction_tokens":499,"reference_tokens":150,"unique_words":4559,"unique_characters":48},{"short_title":"Troilus and Cressida","genre":"Tragedy","year":1602,"total_tokens":26680,"dialogue_tokens":25423,"direction_tokens":571,"reference_tokens":174,"unique_words":4267,"unique_characters":30},{"short_title":"Henry VI, Part 2","genre":"History","year":1591,"total_tokens":26393,"dialogue_tokens":18273,"direction_tokens":7657,"reference_tokens":137,"unique_words":4109,"unique_characters":44},{"short_title":"Antony and Cleopatra","genre":"Tragedy","year":1607,"total_tokens":25646,"dialogue_tokens":23921,"direction_tokens":941,"reference_tokens":311,"unique_words":3976,"unique_characters":59},{"short_title":"Winter's Tale","genre":"Comedy","year":1611,"total_tokens":25560,"dialogue_tokens":24787,"direction_tokens":375,"reference_tokens":136,"unique_words":3927,"unique_characters":34},{"short_title":"Henry VIII","genre":"History","year":1613,"total_tokens":25241,"dialogue_tokens":23684,"direction_tokens":858,"reference_tokens":116,"unique_words":3686,"unique_characters":48},{"short_title":"Henry IV, Part 1","genre":"History","year":1597,"total_tokens":25205,"dialogue_tokens":24141,"direction_tokens":631,"reference_tokens":156,"unique_words":3876,"unique_characters":34},{"short_title":"Romeo and Juliet","genre":"Tragedy","year":1595,"total_tokens":25147,"dialogue_tokens":23954,"direction_tokens":603,"reference_tokens":152,"unique_words":3741,"unique_characters":31},{"short_title":"Henry VI, Part 3","genre":"History","year":1595,"total_tokens":25136,"dialogue_tokens":23374,"direction_tokens":1209,"reference_tokens":180,"unique_words":3609,"unique_characters":38},{"short_title":"All's Well That Ends Well","genre":"Comedy","year":1603,"total_tokens":23599,"dialogue_tokens":22657,"direction_tokens":439,"reference_tokens":191,"unique_words":3554,"unique_characters":24},{"short_title":"Richard II","genre":"History","year":1595,"total_tokens":23003,"dialogue_tokens":21950,"direction_tokens":562,"reference_tokens":165,"unique_words":3701,"unique_characters":38},{"short_title":"Merry Wives of Windsor","genre":"Comedy","year":1601,"total_tokens":22631,"dialogue_tokens":21385,"direction_tokens":794,"reference_tokens":160,"unique_words":3258,"unique_characters":27},{"short_title":"As You Like It","genre":"Comedy","year":1599,"total_tokens":22367,"dialogue_tokens":21510,"direction_tokens":376,"reference_tokens":162,"unique_words":3263,"unique_characters":27},{"short_title":"Love's Labour's Lost","genre":"Comedy","year":1595,"total_tokens":22273,"dialogue_tokens":10028,"direction_tokens":11991,"reference_tokens":72,"unique_words":3721,"unique_characters":18},{"short_title":"Henry VI, Part 1","genre":"History","year":1592,"total_tokens":22259,"dialogue_tokens":20777,"direction_tokens":928,"reference_tokens":156,"unique_words":3889,"unique_characters":55},{"short_title":"Measure for Measure","genre":"Comedy","year":1604,"total_tokens":22128,"dialogue_tokens":21362,"direction_tokens":422,"reference_tokens":122,"unique_words":3344,"unique_characters":25},{"short_title":"Merchant of Venice","genre":"Comedy","year":1597,"total_tokens":21837,"dialogue_tokens":21006,"direction_tokens":405,"reference_tokens":142,"unique_words":3302,"unique_characters":25},{"short_title":"Much Ado about Nothing","genre":"Comedy","year":1598,"total_tokens":21580,"dialogue_tokens":20894,"direction_tokens":374,"reference_tokens":110,"unique_words":2995,"unique_characters":24},{"short_title":"Taming of the Shrew","genre":"Comedy","year":1592,"total_tokens":21570,"dialogue_tokens":18257,"direction_tokens":581,"reference_tokens":90,"unique_words":3294,"unique_characters":28},{"short_title":"King John","genre":"History","year":1597,"total_tokens":21378,"dialogue_tokens":20529,"direction_tokens":392,"reference_tokens":138,"unique_words":3599,"unique_characters":29},{"short_title":"Titus Andronicus","genre":"Tragedy","year":1591,"total_tokens":21242,"dialogue_tokens":20038,"direction_tokens":819,"reference_tokens":117,"unique_words":3410,"unique_characters":27},{"short_title":"Twelfth Night","genre":"Comedy","year":1601,"total_tokens":20281,"dialogue_tokens":19505,"direction_tokens":440,"reference_tokens":117,"unique_words":3134,"unique_characters":19},{"short_title":"Julius Caesar","genre":"Tragedy","year":1599,"total_tokens":20185,"dialogue_tokens":19204,"direction_tokens":585,"reference_tokens":141,"unique_words":2924,"unique_characters":48},{"short_title":"Pericles","genre":"History","year":1608,"total_tokens":19140,"dialogue_tokens":17780,"direction_tokens":856,"reference_tokens":191,"unique_words":3326,"unique_characters":47},{"short_title":"Timon of Athens","genre":"Tragedy","year":1604,"total_tokens":18965,"dialogue_tokens":17923,"direction_tokens":601,"reference_tokens":152,"unique_words":3319,"unique_characters":60},{"short_title":"Macbeth","genre":"Tragedy","year":1606,"total_tokens":17750,"dialogue_tokens":16539,"direction_tokens":618,"reference_tokens":224,"unique_words":3380,"unique_characters":40},{"short_title":"Two Gentlemen of Verona","genre":"Comedy","year":1598,"total_tokens":17730,"dialogue_tokens":16953,"direction_tokens":361,"reference_tokens":160,"unique_words":2734,"unique_characters":18},{"short_title":"Tempest","genre":"Comedy","year":1611,"total_tokens":17059,"dialogue_tokens":16440,"direction_tokens":354,"reference_tokens":79,"unique_words":3219,"unique_characters":20},{"short_title":"A Midsummer Night's Dream","genre":"Comedy","year":1595,"total_tokens":16896,"dialogue_tokens":16215,"direction_tokens":396,"reference_tokens":77,"unique_words":3012,"unique_characters":32},{"short_title":"Comedy of Errors","genre":"Comedy","year":1594,"total_tokens":14983,"dialogue_tokens":14414,"direction_tokens":350,"reference_tokens":60,"unique_words":2551,"unique_characters":18}];
         
-        // Global state
         let allPlays = [];
         let filteredPlays = [];
         let currentPlay = null;
         let currentFullTextData = [];
+        let currentSortColumn = "short_title";
+        let currentSortOrder = "asc";
         
-        // Initialize
         document.addEventListener("DOMContentLoaded", function() {
-            console.log("Initializing Shakespeare Corpus Explorer...");
             loadMetadata();
             setupEventListeners();
             filterAndRenderPlays();
         });
         
-        // Load metadata from embedded data
         function loadMetadata() {
             try {
-                console.log("Loading embedded metadata...");
-                
                 if (!EMBEDDED_PLAYS || EMBEDDED_PLAYS.length === 0) {
                     throw new Error("No plays data embedded");
                 }
-                
                 allPlays = EMBEDDED_PLAYS;
-                
-                // Merge token counts
-                if (EMBEDDED_TOKENS && EMBEDDED_TOKENS.length > 0) {
-                    allPlays = allPlays.map(play => {
-                        const tokenInfo = EMBEDDED_TOKENS.find(t => t.gutenberg_id === play.gutenberg_id);
-                        return {
-                            ...play,
-                            tokens: tokenInfo ? tokenInfo.tokens : 0
-                        };
-                    });
-                }
-                
-                console.log(`Loaded ${allPlays.length} plays`);
-                
             } catch (error) {
                 console.error("Error loading metadata:", error);
                 document.getElementById("plays-count").textContent = "Error: " + error.message;
             }
         }
         
-        // Setup event listeners
         function setupEventListeners() {
-            document.getElementById("filter-elizabethan").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-jacobean").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-tragedy").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-comedy").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-history").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-romance").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-roman").addEventListener("change", filterAndRenderPlays);
-            document.getElementById("filter-problem").addEventListener("change", filterAndRenderPlays);
-            
-            // Scroll spy for nav links
+            ["filter-elizabethan", "filter-jacobean", "filter-tragedy", "filter-comedy", 
+             "filter-history", "filter-romance", "filter-roman", "filter-problem"].forEach(id => {
+                document.getElementById(id).addEventListener("change", filterAndRenderPlays);
+            });
             document.getElementById("main-content").addEventListener("scroll", updateActiveNavLink);
         }
         
-        // Filter and render plays
+        function sortTable(column) {
+            if (currentSortColumn === column) {
+                currentSortOrder = currentSortOrder === "asc" ? "desc" : "asc";
+            } else {
+                currentSortColumn = column;
+                currentSortOrder = "asc";
+            }
+            
+            document.querySelectorAll(".data-table th").forEach(th => {
+                th.classList.remove("sort-asc", "sort-desc");
+            });
+            
+            const th = document.querySelector(`[data-column="${column}"]`);
+            th.classList.add(currentSortOrder === "asc" ? "sort-asc" : "sort-desc");
+            
+            renderMasterTable();
+        }
+        
         function filterAndRenderPlays() {
             const periods = [];
             if (document.getElementById("filter-elizabethan").checked) periods.push("Elizabethan");
@@ -858,110 +804,98 @@
                 if (periods.length > 0 && !periods.includes(play.period)) return false;
                 if (genres.length > 0 && !genres.includes(play.genre)) return false;
                 
-                const romanceChecked = document.getElementById("filter-romance").checked;
-                const romanChecked = document.getElementById("filter-roman").checked;
-                const problemChecked = document.getElementById("filter-problem").checked;
-                
-                if (!romanceChecked && play.romance === "TRUE") return false;
-                if (!romanChecked && play.roman === "TRUE") return false;
-                if (!problemChecked && play.problem_play === "TRUE") return false;
+                if (!document.getElementById("filter-romance").checked && play.romance === "TRUE") return false;
+                if (!document.getElementById("filter-roman").checked && play.roman === "TRUE") return false;
+                if (!document.getElementById("filter-problem").checked && play.problem_play === "TRUE") return false;
                 
                 return true;
             });
             
-            filteredPlays.sort((a, b) => (a.year || 0) - (b.year || 0));
-            
             document.getElementById("plays-count").textContent = `${filteredPlays.length} of ${allPlays.length} plays`;
-            
             renderPlaysList();
             renderMasterTable();
         }
         
-        // Render plays list in sidebar
         function renderPlaysList() {
             const container = document.getElementById("plays-list-items");
             container.innerHTML = "";
             
-            filteredPlays.forEach(play => {
+            const sortedPlays = [...filteredPlays].sort((a, b) => a.short_title.localeCompare(b.short_title));
+            
+            sortedPlays.forEach(play => {
                 const div = document.createElement("div");
                 div.className = "play-item";
                 if (currentPlay && currentPlay.gutenberg_id === play.gutenberg_id) {
                     div.classList.add("selected");
                 }
                 div.onclick = () => loadPlayDetail(play);
-                
-                div.innerHTML = `
-                    <div class="play-item-title">${play.short_title}</div>
-                `;
-                
+                div.innerHTML = `<div class="play-item-title">${play.short_title}</div>`;
                 container.appendChild(div);
             });
         }
         
-        // Render master table
         function renderMasterTable() {
             const tbody = document.getElementById("master-table-body");
             tbody.innerHTML = "";
             
-            filteredPlays.forEach(play => {
+            const sortedPlays = [...filteredPlays].sort((a, b) => {
+                let aVal = a[currentSortColumn] || "";
+                let bVal = b[currentSortColumn] || "";
+                
+                if (currentSortColumn === "year" || currentSortColumn === "gutenberg_id") {
+                    aVal = parseInt(aVal) || 0;
+                    bVal = parseInt(bVal) || 0;
+                }
+                
+                if (currentSortOrder === "asc") {
+                    return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+                } else {
+                    return aVal < bVal ? 1 : aVal > bVal ? -1 : 0;
+                }
+            });
+            
+            sortedPlays.forEach(play => {
                 const row = document.createElement("tr");
                 row.onclick = () => loadPlayDetail(play);
-                
                 row.innerHTML = `
-                    <td>${play.gutenberg_id}</td>
                     <td><strong>${play.short_title}</strong></td>
                     <td>${play.year || "—"}</td>
-                    <td>${play.genre}</td>
                     <td>${play.period || "—"}</td>
-                    <td>${(play.tokens || 0).toLocaleString()}</td>
+                    <td>${play.genre}</td>
+                    <td>${play.gutenberg_id}</td>
                 `;
-                
                 tbody.appendChild(row);
             });
         }
         
-        // Clear filters
         function clearFilters() {
-            document.getElementById("filter-elizabethan").checked = true;
-            document.getElementById("filter-jacobean").checked = true;
-            document.getElementById("filter-tragedy").checked = true;
-            document.getElementById("filter-comedy").checked = true;
-            document.getElementById("filter-history").checked = true;
-            document.getElementById("filter-romance").checked = true;
-            document.getElementById("filter-roman").checked = true;
-            document.getElementById("filter-problem").checked = true;
+            ["filter-elizabethan", "filter-jacobean", "filter-tragedy", "filter-comedy", 
+             "filter-history", "filter-romance", "filter-roman", "filter-problem"].forEach(id => {
+                document.getElementById(id).checked = true;
+            });
             filterAndRenderPlays();
         }
         
-        // Load play detail
         async function loadPlayDetail(play) {
             currentPlay = play;
             
-            // Update selected state in sidebar
             document.querySelectorAll(".play-item").forEach(item => item.classList.remove("selected"));
             event.target.closest(".play-item")?.classList.add("selected");
             
-            // Switch to play navigation
             document.getElementById("master-nav").classList.add("hidden");
             document.getElementById("play-nav").classList.add("active");
             
-            // Update play nav header
             document.getElementById("play-nav-title").textContent = play.short_title;
-            document.getElementById("play-nav-meta").textContent = 
-                `${play.year || "Year unknown"} · ${play.genre} · ${play.period || "Period unknown"}`;
+            document.getElementById("play-nav-meta").textContent = play.author || "William Shakespeare";
             
-            // Switch to play detail view
             document.getElementById("master-table-view").classList.add("hidden");
             document.getElementById("play-detail-view").classList.add("active");
             
-            // Scroll to top
             document.getElementById("main-content").scrollTop = 0;
             
-            // Load content
             await loadPlayContent(play);
         }
         
-        // Back to master view
         function backToMasterView() {
             currentPlay = null;
             
@@ -973,20 +907,14 @@
             document.getElementById("main-content").scrollTop = 0;
         }
         
-        // Scroll to section
         function scrollToSection(event, sectionId) {
             event.preventDefault();
             const section = document.getElementById(sectionId);
             const mainContent = document.getElementById("main-content");
-            
             const offsetTop = section.offsetTop - mainContent.offsetTop;
-            mainContent.scrollTo({
-                top: offsetTop,
-                behavior: "smooth"
-            });
+            mainContent.scrollTo({ top: offsetTop, behavior: "smooth" });
         }
         
-        // Update active nav link based on scroll position
         function updateActiveNavLink() {
             const mainContent = document.getElementById("main-content");
             const sections = document.querySelectorAll(".section");
@@ -1012,36 +940,18 @@
             });
         }
         
-        // Load play content
         async function loadPlayContent(play) {
             const shortTitle = play.short_title.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
             
-            // Overview
             loadOverview(play);
-            
-            // Full Text
             await loadFullText(play, shortTitle);
-            
-            // Character Network
+            await loadSentiment(shortTitle);
+            await loadBigrams(shortTitle);
+            await loadWords(shortTitle);
             await loadCharacterNetwork(shortTitle);
-            
-            // Frequency Analysis
-            await loadFrequencyAnalysis(shortTitle);
-            
-            // Sentiment Analysis
-            await loadSentimentAnalysis(shortTitle);
-            
-            // Bigram Networks
-            await loadBigramNetworks(shortTitle);
-            
-            // Word Correlations
-            await loadWordCorrelations(shortTitle);
-            
-            // Downloads
             loadDownloads(play, shortTitle);
         }
         
-        // Load overview
         function loadOverview(play) {
             const tags = [];
             if (play.romance === "TRUE") tags.push("Romance");
@@ -1050,48 +960,40 @@
             
             document.getElementById("overview-stats").innerHTML = `
                 <div class="info-card">
-                    <div class="info-card-label">Gutenberg ID</div>
-                    <div class="info-card-value">${play.gutenberg_id}</div>
-                </div>
-                <div class="info-card">
                     <div class="info-card-label">Year</div>
                     <div class="info-card-value">${play.year || "Unknown"}</div>
-                </div>
-                <div class="info-card">
-                    <div class="info-card-label">Genre</div>
-                    <div class="info-card-value" style="font-size: 1rem;">${play.genre}</div>
                 </div>
                 <div class="info-card">
                     <div class="info-card-label">Period</div>
                     <div class="info-card-value" style="font-size: 1rem;">${play.period || "Unknown"}</div>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-label">Total Tokens</div>
-                    <div class="info-card-value">${(play.tokens || 0).toLocaleString()}</div>
+                    <div class="info-card-label">Genre</div>
+                    <div class="info-card-value" style="font-size: 1rem;">${play.genre}</div>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-label">Tags</div>
-                    <div class="info-card-value" style="font-size: 0.85rem;">${tags.length > 0 ? tags.join(", ") : "None"}</div>
+                    <div class="info-card-label">Gutenberg ID</div>
+                    <div class="info-card-value">${play.gutenberg_id}</div>
                 </div>
             `;
         }
         
-        // Load full text
         async function loadFullText(play, shortTitle) {
             try {
                 const response = await fetch(`data/json/full_text/${shortTitle}.json`);
                 if (response.ok) {
                     const data = await response.json();
-                    currentFullTextData = data;
+                    const filteredData = data.filter(row => row.section === "contents");
+                    currentFullTextData = filteredData;
                     
-                    const dialogueCount = data.filter(row => row.class === "dialogue").length;
-                    const directionCount = data.filter(row => row.class === "directions").length;
-                    const characters = [...new Set(data.filter(row => row.character).map(row => row.character))];
+                    const dialogueCount = filteredData.filter(row => row.class === "dialogue").length;
+                    const directionCount = filteredData.filter(row => row.class === "directions").length;
+                    const characters = [...new Set(filteredData.filter(row => row.character).map(row => row.character))];
                     
                     document.getElementById("fulltext-stats").innerHTML = `
                         <div class="info-card">
                             <div class="info-card-label">Total Lines</div>
-                            <div class="info-card-value">${data.length.toLocaleString()}</div>
+                            <div class="info-card-value">${filteredData.length.toLocaleString()}</div>
                         </div>
                         <div class="info-card">
                             <div class="info-card-label">Dialogue Lines</div>
@@ -1107,17 +1009,9 @@
                         </div>
                     `;
                     
-                    // Download buttons
-                    document.getElementById("download-fulltext").innerHTML = `
-                        <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Cleaned Text (CSV)</a>
-                        <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
-                    `;
-                    
-                    // Setup search and filter listeners
                     document.getElementById("fulltext-search").addEventListener("input", filterFullText);
                     document.getElementById("fulltext-class-filter").addEventListener("change", filterFullText);
                     
-                    // Initial render
                     filterFullText();
                 } else {
                     document.getElementById("fulltext-stats").innerHTML = '<div class="no-data">Data not available</div>';
@@ -1128,19 +1022,16 @@
             }
         }
         
-        // Filter full text based on search and class
         function filterFullText() {
             const searchTerm = document.getElementById("fulltext-search").value.toLowerCase();
             const classFilter = document.getElementById("fulltext-class-filter").value;
             
             let filtered = currentFullTextData;
             
-            // Apply class filter
             if (classFilter !== "all") {
                 filtered = filtered.filter(row => row.class === classFilter);
             }
             
-            // Apply search filter
             if (searchTerm) {
                 filtered = filtered.filter(row => 
                     (row.text && row.text.toLowerCase().includes(searchTerm)) ||
@@ -1148,21 +1039,18 @@
                 );
             }
             
-            // Limit to first 100 rows for performance
             renderFullTextTable(filtered.slice(0, 100));
         }
         
-        // Render full text table (without gutenberg_title column)
         function renderFullTextTable(data) {
             const table = document.getElementById("fulltext-table");
             
             if (!data || data.length === 0) {
-                table.innerHTML = '<tr><td colspan="10" class="no-data">No matching rows</td></tr>';
+                table.innerHTML = '<tr><td colspan="5" class="no-data">No matching rows</td></tr>';
                 return;
             }
             
-            // Define columns to display (exclude gutenberg_title)
-            const displayColumns = ["gutenberg_id", "short_title", "genre", "year", "author", "section", "class", "act", "scene", "character", "line_number", "text"];
+            const displayColumns = ["act", "scene", "line_number", "character", "text"];
             
             let html = "<thead><tr>";
             displayColumns.forEach(col => {
@@ -1173,8 +1061,7 @@
             data.forEach(row => {
                 html += "<tr>";
                 displayColumns.forEach(col => {
-                    const value = row[col] || "";
-                    html += `<td>${value}</td>`;
+                    html += `<td>${row[col] || ""}</td>`;
                 });
                 html += "</tr>";
             });
@@ -1183,63 +1070,14 @@
             table.innerHTML = html;
         }
         
-        // Load character network
-        async function loadCharacterNetwork(shortTitle) {
-            const content = document.getElementById("character-network-content");
-            let html = "";
-            let found = false;
-            
-            const staticPlot = `plots/character_networks/${shortTitle}_character_network.png`;
-            if (await fileExists(staticPlot)) {
-                html += `
-                    <div class="plot-item">
-                        <h4>Static Network</h4>
-                        <img src="${staticPlot}" alt="Character Network">
-                    </div>
-                `;
-                found = true;
-            }
-            
-            const interactivePlot = `interactive_networks/characters/${shortTitle}.html`;
-            if (await fileExists(interactivePlot)) {
-                html += `
-                    <div class="plot-item">
-                        <h4>Interactive Network</h4>
-                        <iframe src="${interactivePlot}"></iframe>
-                    </div>
-                `;
-                found = true;
-            }
-            
-            content.innerHTML = found ? html : '<div class="no-data">No character network visualizations available</div>';
-        }
-        
-        // Load frequency analysis
-        async function loadFrequencyAnalysis(shortTitle) {
-            const content = document.getElementById("frequency-content");
-            const freqPlot = `plots/frequency/individual_plays/${shortTitle}_top_words.png`;
-            
-            if (await fileExists(freqPlot)) {
-                content.innerHTML = `
-                    <div class="plot-item">
-                        <h4>Most Frequent Words</h4>
-                        <img src="${freqPlot}" alt="Word Frequency">
-                    </div>
-                `;
-            } else {
-                content.innerHTML = '<div class="no-data">No frequency analysis available</div>';
-            }
-        }
-        
-        // Load sentiment analysis
-        async function loadSentimentAnalysis(shortTitle) {
+        async function loadSentiment(shortTitle) {
             const content = document.getElementById("sentiment-content");
             const sentimentPlot = `plots/sentiment/individual_plays/sentiment_${shortTitle}_all_lexicons.png`;
             
             if (await fileExists(sentimentPlot)) {
                 content.innerHTML = `
                     <div class="plot-item">
-                        <h4>Sentiment by Act and Scene (All Lexicons)</h4>
+                        <h4>Sentiment by Act and Scene</h4>
                         <img src="${sentimentPlot}" alt="Sentiment Analysis">
                     </div>
                 `;
@@ -1248,30 +1086,63 @@
             }
         }
         
-        // Load bigram networks
-        async function loadBigramNetworks(shortTitle) {
-            const content = document.getElementById("bigrams-content");
-            const bigramPlot = `plots/relationships/networks/bigram_network_${shortTitle}.png`;
-            
-            if (await fileExists(bigramPlot)) {
-                content.innerHTML = `
-                    <div class="plot-item">
-                        <h4>Bigram Network</h4>
-                        <img src="${bigramPlot}" alt="Bigram Network">
-                    </div>
-                `;
-            } else {
-                content.innerHTML = '<div class="no-data">No bigram network available</div>';
-            }
-        }
+    async function loadBigrams(shortTitle) {
+    const content = document.getElementById("bigrams-content");
+    let html = "";
+    let found = false;
+    
+    const bifreqPlot = `plots/frequency/individual_plays/${shortTitle}_bigram_tfidf.png`;
+    if (await fileExists(bifreqPlot)) {
+        html += `
+            <div class="plot-item">
+                <h4>Most Frequent Bigrams</h4>
+                <img src="${bifreqPlot}" alt="Bigram Frequency">
+            </div>
+        `;
+        found = true;
+    }
+    
+    const bigramPlot = `plots/relationships/networks/bigram_network_${shortTitle}.png`;
+    if (await fileExists(bigramPlot)) {
+        html += `
+            <div class="plot-item">
+                <h4>Bigram Network</h4>
+                <img src="${bigramPlot}" alt="Bigram Network">
+            </div>
+        `;
+        found = true;
+    }
+    
+            content.innerHTML = found ? html : '<div class="no-data">No bigram analysis available</div>';
+}
         
-        // Load word correlations (interactive first, then static)
-        async function loadWordCorrelations(shortTitle) {
-            const content = document.getElementById("correlations-content");
+        async function loadWords(shortTitle) {
+            const content = document.getElementById("words-content");
             let html = "";
             let found = false;
             
-            // Interactive first
+            const freqPlot = `plots/frequency/individual_plays/${shortTitle}_word_tfidf.png`;
+            if (await fileExists(freqPlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Most Frequent Words</h4>
+                        <img src="${freqPlot}" alt="Word Frequency">
+                    </div>
+                `;
+                found = true;
+            }
+            
+            const corrPlot = `plots/relationships/correlations/section_correlations_${shortTitle}.png`;
+            if (await fileExists(corrPlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Word Correlations</h4>
+                        <img src="${corrPlot}" alt="Word Correlations">
+                    </div>
+                `;
+                found = true;
+            }
+            
             const corrNetwork = `interactive_networks/correlations/${shortTitle}.html`;
             if (await fileExists(corrNetwork)) {
                 html += `
@@ -1283,32 +1154,50 @@
                 found = true;
             }
             
-            // Static second
-            const corrPlot = `plots/relationships/correlations/section_correlations_${shortTitle}.png`;
-            if (await fileExists(corrPlot)) {
+            content.innerHTML = found ? html : '<div class="no-data">No word analysis available</div>';
+        }
+        
+        async function loadCharacterNetwork(shortTitle) {
+            const content = document.getElementById("character-network-content");
+            let html = "";
+            let found = false;
+            
+            const staticPlot = `plots/character_networks/${shortTitle}_network.png`;
+            if (await fileExists(staticPlot)) {
                 html += `
                     <div class="plot-item">
-                        <h4>Static Correlation Plot</h4>
-                        <img src="${corrPlot}" alt="Word Correlations">
+                        <h4>Character Network Static</h4>
+                        <img src="${staticPlot}" alt="Character Network Static">
                     </div>
                 `;
                 found = true;
             }
             
-            content.innerHTML = found ? html : '<div class="no-data">No word correlation visualizations available</div>';
+            const interactivePlot = `interactive_networks/characters/${shortTitle}.html`;
+            if (await fileExists(interactivePlot)) {
+                html += `
+                    <div class="plot-item">
+                        <h4>Character Network Interactive</h4>
+                        <iframe src="${interactivePlot}"></iframe>
+                    </div>
+                `;
+                found = true;
+            }
+            
+            content.innerHTML = found ? html : '<div class="no-data">No character network visualizations available</div>';
         }
         
-        // Load downloads
         function loadDownloads(play, shortTitle) {
             document.getElementById("downloads-content").innerHTML = `
-                <h3 class="section-subtitle">Play Data Files</h3>
+                <h3 class="section-subtitle">Data Files</h3>
                 <div class="download-buttons">
+                    <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Full Text (CSV)</a>
+                    <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
                     <a href="data/processed/tokens/${shortTitle}_tokens.csv" class="download-btn" download>Tokens (CSV)</a>
                 </div>
             `;
         }
         
-        // Helper: Check if file exists
         async function fileExists(path) {
             try {
                 const response = await fetch(path, { method: "HEAD" });

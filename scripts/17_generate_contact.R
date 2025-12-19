@@ -279,13 +279,17 @@ html_content <- paste0('<!DOCTYPE html>
         </div>
     </div>
     
+    <div id="readme-content" class="readme-wrapper">
+    <p>Loading README...</p>
+</div>
+    
     <div class="footer">
         <div class="footer-content">
               <div class="footer-content">
          <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
           <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
           <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
-          <span><a href="contact/index.html"">Contact</a></span>
+          <span><a href="../contact/index.html"">Contact</a></span>
         </div>
     </div>
     

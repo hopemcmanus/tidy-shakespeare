@@ -259,7 +259,7 @@ html_content <- paste0('<!DOCTYPE html>
     <div class="container">
         <div class="intro">
             <h2>About Tidy Shakespeare</h2>
-            <p>This project has tidy data and analysis for 37 Shakespeare plays from Project Gutenberg.</p>
+            <p>This project applies tidy data principles to structure and analyse a corpus of Shakespeare plays</p>
         </div>
         <div id="readme-content" class="readme-wrapper">
     <p>Loading README...</p>
@@ -277,27 +277,72 @@ html_content <- paste0('<!DOCTYPE html>
         </div>
     
    <script>
-        async function loadReadme() {
-            try {
-                const response = await fetch("https://raw.githubusercontent.com/hopemcmanus/tidy-shakespeare/main/README.md");
-                const markdown = await response.text();
+    async function loadReadme() {
+        try {
+            const response = await fetch("https://raw.githubusercontent.com/hopemcmanus/tidy-shakespeare/main/README.md");
+            const markdown = await response.text();
+            
+            // Extract only specific sections
+            const sections = extractSections(markdown, [
+                "Description",
+                "Data",
+                "Key Features"
+            ]);
+            
+            const html = sections
+                .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+                .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+                .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+                .replace(/\\*\\*(.*?)\\*\\*/gim, "<strong>$1</strong>")
+                .replace(/\\*(.*?)\\*/gim, "<em>$1</em>")
+                .replace(/\\n/gim, "<br>");
+            
+            document.getElementById("readme-content").innerHTML = html;
+        } catch (error) {
+            document.getElementById("readme-content").innerHTML = "<p>Error loading README</p>";
+        }
+    }
+    
+    function extractSections(markdown, sectionTitles) {
+        let result = "";
+        const lines = markdown.split("\\n");
+        let capturing = false;
+        let currentLevel = 0;
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            
+            // Check if this is a header line
+            const headerMatch = line.match(/^(#{1,6})\\s+(.+)$/);
+            
+            if (headerMatch) {
+                const level = headerMatch[1].length;
+                const title = headerMatch[2];
                 
-                const html = markdown
-                    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-                    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-                    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-                    .replace(/\\*\\*(.*?)\\*\\*/gim, "<strong>$1</strong>")
-                    .replace(/\\*(.*?)\\*/gim, "<em>$1</em>")
-                    .replace(/\\n/gim, "<br>");
-                
-                document.getElementById("readme-content").innerHTML = html;
-            } catch (error) {
-                document.getElementById("readme-content").innerHTML = "<p>Error loading README</p>";
+                // Check if this is one of our desired sections
+if (sectionTitles.includes(title)) {
+        capturing = true;
+                    currentLevel = level;
+                    result += line + "\\n";
+                }
+                // Stop capturing if we hit a same-level or higher-level header
+                else if (capturing && level <= currentLevel) {
+                    capturing = false;
+                }
+                else if (capturing) {
+                    result += line + "\\n";
+                }
+            }
+            else if (capturing) {
+                result += line + "\\n";
             }
         }
         
-        loadReadme();
-    </script>
+        return result;
+    }
+    
+    loadReadme();
+</script>
 </body>
 </html>')
     

@@ -28,9 +28,9 @@ glossary <- tribble(
   
   "Tidy Principles", "Stop Words", "Common words (e.g., 'the', 'a', 'and') that are often removed from analysis. This project uses extended stop words including Shakespearean terms like 'thou', 'thee', 'thy'.", "https://www.tidytextmining.com/tidytext.html#word-frequencies", "Word Frequencies",
   
-  "Tidy Principles", "Tidy Text Format", "A table with one-token-per-row, where each row represents a single word along with its metadata (play, act, scene, character). Follows tidy data principles.", "https://www.tidytextmining.com/tidytext.html", "Tidy Text Format",
+  "Tidy Principles", "Tidy Text", "A table with one-token-per-row, where each row represents a single word along with its metadata (play, act, scene, character). Follows tidy data principles.", "https://www.tidytextmining.com/tidytext.html", "Tidy Text Format",
   
-  "Tidy Principles", "Tidy Data Principles", "Each variable forms a column, each observation forms a row, each type of observational unit forms a table. Applied to text: one-token-per-row format.", "https://www.tidytextmining.com/tidytext.html#contrasting-tidy-text-with-other-data-structures", "Tidy vs Non-Tidy Text",
+  "Tidy Principles", "Tidy Data", "Each variable forms a column, each observation forms a row, each type of observational unit forms a table. Applied to text: one-token-per-row format.", "https://www.tidytextmining.com/tidytext.html#contrasting-tidy-text-with-other-data-structures", "Tidy vs Non-Tidy Text",
   
   # Frequency Analysis
   "Frequency Analysis", "Term Frequency (TF)", "How frequently a word appears in a document. Calculated as the number of times a term appears divided by total terms in the document.", "https://www.tidytextmining.com/tfidf.html#term-frequency-in-jane-austens-novels", "Term Frequency",
@@ -311,9 +311,9 @@ html_content <- sprintf('<!DOCTYPE html>
         </div>
         <div class="header-right">
             <a href="../index.html" class="header-link">← Back to Main Page</a>
-             <a href="about/index.html" class="header-link">About</a>
-             <a href="glossary/index.html" class="header-link current">Glossary</a>
-            <a href="https://github.com/hopemcmanus/tidy-shakespeare" class="header-link">GitHub</a>
+             <a href="../about/index.html" class="header-link">About</a>
+             <a href="../glossary/index.html" class="header-link current">Glossary</a>
+            <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>
 
         </div>
     </div>
@@ -321,14 +321,14 @@ html_content <- sprintf('<!DOCTYPE html>
     <div class="container">
         <div class="intro">
             <h2>About This Glossary</h2>
-            <p>This glossary has a list of terms used in the Tidy Shakespeare project. Each term has a definition, a category and a reference, primarily <em>Text Mining with R: A Tidy Approach</em> by Julia Silge and David Robinson.</p>
+            <p>This glossary has a list of terms used in the Tidy Shakespeare project. Each term has a definition, a category and a reference, primarily <em>Text Mining with R</em> by Julia Silge and David Robinson.</p>
         </div>
         
         <div class="table-wrapper">
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th style="width: 20%%">Term</th>
+                        <th class style="width: 20%%">Term</th>
                         <th style="width: 50%%">Definition</th>
                         <th style="width: 15%%">Category</th>
                         <th style="width: 15%%">Reference</th>
@@ -346,7 +346,7 @@ html_content <- sprintf('<!DOCTYPE html>
           <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
           <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
           <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
-          <span><a href="contact/index.html"">Contact</a></span>
+          <span><a href="../contact/index.html"">Contact</a></span>
         </div>
     </div>
 </body>

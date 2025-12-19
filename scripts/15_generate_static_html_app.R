@@ -597,7 +597,7 @@ generate_html <- function(plays_json) {
        <div class="header-right">
    <a href="about/index.html" class="header-link">About</a>
    <a href="glossary/index.html" class="header-link">Glossary</a>
-   <a href="https://github.com/hopemcmanus/tidy-shakespeare" class="header-link">GitHub</a>
+   <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>
 
 </div>
     </div>
@@ -1221,6 +1221,8 @@ generate_html <- function(plays_json) {
                     <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Full Text (CSV)</a>
                     <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
                     <a href="data/processed/tokens/${shortTitle}_tokens.csv" class="download-btn" download>Tokens (CSV)</a>
+                    <a href="../contact/index.html"">Contact</a>
+
                 </div>
             `;
         }

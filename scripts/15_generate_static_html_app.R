@@ -36,6 +36,20 @@ generate_html <- function(plays_json) {
             box-sizing: border-box;
         }
         
+        .download-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.download-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
@@ -566,40 +580,107 @@ generate_html <- function(plays_json) {
             align-items: center;
         }
         
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 260px;
-            }
-        }
+        .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
         
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: 40vh;
-            }
-            
-            .main-content {
-                height: 60vh;
-            }
-        }
+      @media (max-width: 768px) {
+    .header {
+        position: relative;
+    }
+    
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .header-right {
+        position: fixed;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        background: #2c2c2c;
+        flex-direction: column;
+        padding: 1rem;
+        border-left: 1px solid #555;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        transform: translateX(100%);
+        transition: transform 0.3s;
+        z-index: 1000;
+    }
+    
+    .header-right.active {
+        transform: translateX(0);
+    }
+    
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 40vh;
+        display: none;
+    }
+    
+    .main-content {
+        height: 60vh;
+}
+
+
+      }
+
+  .corpus-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+        
+    .stat-card {
+    background: #fafafa;
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}  
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="header-left">
-            <h1>Tidy Shakespeare</h1>
-            <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
-        </div>
-       <div class="header-right">
-   <a href="about/index.html" class="header-link">About</a>
-   <a href="glossary/index.html" class="header-link">Glossary</a>
-   <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>
-
-</div>
+    <div class="header-left">
+        <h1>Tidy Shakespeare</h1>
+        <div class="header-subtitle">Tidy Data and Text Analysis of Shakespeare Plays</div>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <div class="header-right" id="header-menu">
+        <a href="about/index.html" class="header-link">About</a>
+        <a href="glossary/index.html" class="header-link">Glossary</a>
+        <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>
+    </div>
     </div>
     
     <div class="container">
@@ -643,23 +724,7 @@ generate_html <- function(plays_json) {
                         </div>
                     </div>
                     
-                    <div class="filter-section">
-                        <span class="filter-label">Tags</span>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="filter-romance" value="romance" checked>
-                                <label for="filter-romance">Romance</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="filter-roman" value="roman" checked>
-                                <label for="filter-roman">Roman</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="filter-problem" value="problem_play" checked>
-                                <label for="filter-problem">Problem</label>
-                            </div>
-                        </div>
-                    </div>
+
                     
                     <button class="clear-filters" onclick="clearFilters()">Clear Filters</button>
                 </div>
@@ -672,7 +737,7 @@ generate_html <- function(plays_json) {
                     <div class="play-nav-meta" id="play-nav-meta">Author</div>
                 </div>
                 <div class="play-nav-links" id="play-nav-links">
-                    <a href="#overview" class="nav-link" onclick="scrollToSection(event, \'overview\')">Information</a>
+                    <a href="#overview" class="nav-link" onclick="scrollToSection(event, \'overview\')">Bibliographic Information</a>
                     <a href="#full-text" class="nav-link" onclick="scrollToSection(event, \'full-text\')">Text</a>
                     <a href="#sentiment" class="nav-link" onclick="scrollToSection(event, \'sentiment\')">Sentiment</a>
                     <a href="#bigrams" class="nav-link" onclick="scrollToSection(event, \'bigrams\')">Bigrams</a>
@@ -683,10 +748,33 @@ generate_html <- function(plays_json) {
             </div>
         </div>
         
-        <div class="main-content" id="main-content">
-            <div class="master-table-view" id="master-table-view">
-                <h2>Corpus</h2>
-                <div class="table-wrapper">
+<div class="main-content" id="main-content">
+    <div class="master-table-view" id="master-table-view">
+        <section id="corpus-overview" class="section">
+        <h2 class="section-title">Corpus Information</h2>
+        <div class="corpus-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="total-plays">37</div>
+                <div class="stat-label">Plays</div>
+            </div>
+        
+            <div class="stat-card">
+                <div class="stat-value" id="date-range">1589-1613</div>
+                <div class="stat-label">Years</div>
+            </div>
+            
+              <div class="stat-card">
+                <div class="stat-value" id="total-genres">3</div>
+                <div class="stat-label">Genres</div>
+            </div>
+                </div> 
+                               </section>
+
+    <section id="corpus" class="section">
+
+    <h2 class="section-title">Corpus</h2>
+
+        <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -701,10 +789,20 @@ generate_html <- function(plays_json) {
                     </table>
                 </div>
             </div>
-            
+               </section>
+               
+               <div class="download-section">
+    <h3>Downloads</h3>
+    <div class="download-buttons">
+        <a href="data/metadata/meta_shakespeare.csv" class="download-btn" download>Metadata (CSV)</a>
+        <a href="data/metadata/meta_shakespeare.json" class="download-btn" download>Metadata (JSON)</a>
+        <a href="data/metadata/stop_words_custom.csv" class="download-btn" download>Custom Stop Words</a>
+    </div>
+</div>
+
             <div class="play-detail-view" id="play-detail-view">
                 <section class="section" id="overview">
-                    <h2 class="section-title">Information</h2>
+                    <h2 class="section-title">Bibliographic Information</h2>
                     <div class="info-grid" id="overview-stats"></div>
                 </section>
                 
@@ -713,7 +811,7 @@ generate_html <- function(plays_json) {
                     <div class="info-grid" id="fulltext-stats"></div>
                     <h3 class="section-subtitle">Preview</h3>
                     <div class="fulltext-controls">
-                        <input type="text" id="fulltext-search" class="search-box" placeholder="Search text...">
+                        <input type="text" id="fulltext-search" class="search-box" placeholder="Search Text...">
                         <select id="fulltext-class-filter" class="filter-select">
                             <option value="all">All Contents</option>
                             <option value="dialogue">Dialogue</option>
@@ -756,7 +854,7 @@ generate_html <- function(plays_json) {
     <div class="footer">
         <div class="footer-content">
           <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
-          <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+          <span><a href="https://github.com/hopemcmanus/tidy-shakespeare?tab=readme-ov-file#attribution-and-license" target="_blank">Code</a> licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
           <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
           <span><a href="contact/index.html"">Contact</a></span>
 
@@ -777,7 +875,19 @@ generate_html <- function(plays_json) {
             loadMetadata();
             setupEventListeners();
             filterAndRenderPlays();
+            updateCorpusStats();
         });
+        
+        
+        
+       function toggleMenu() {
+    var menu = document.querySelector(".header-right");
+    if (menu.classList.contains("active")) {
+        menu.classList.remove("active");
+    } else {
+        menu.classList.add("active");
+    }
+}
         
         function loadMetadata() {
             try {
@@ -793,11 +903,24 @@ generate_html <- function(plays_json) {
         
         function setupEventListeners() {
             ["filter-elizabethan", "filter-jacobean", "filter-tragedy", "filter-comedy", 
-             "filter-history", "filter-romance", "filter-roman", "filter-problem"].forEach(id => {
+             "filter-history"].forEach(id => {
                 document.getElementById(id).addEventListener("change", filterAndRenderPlays);
             });
             document.getElementById("main-content").addEventListener("scroll", updateActiveNavLink);
         }
+        
+        function updateCorpusStats() {
+    const plays = allPlays.length;
+    const genres = new Set(allPlays.map(p => p.genre)).size;
+    const years = allPlays.map(p => parseInt(p.year)).filter(y => !isNaN(y));
+    const minYear = Math.min(...years);
+    const maxYear = Math.max(...years);
+    
+    document.getElementById("total-plays").textContent = plays;
+    document.getElementById("total-genres").textContent = genres;
+    document.getElementById("date-range").textContent = `${minYear}-${maxYear}`;
+}
+
         
         function sortTable(column) {
             if (currentSortColumn === column) {
@@ -827,13 +950,10 @@ generate_html <- function(plays_json) {
             if (document.getElementById("filter-comedy").checked) genres.push("Comedy");
             if (document.getElementById("filter-history").checked) genres.push("History");
             
+               
             filteredPlays = allPlays.filter(play => {
                 if (periods.length > 0 && !periods.includes(play.period)) return false;
                 if (genres.length > 0 && !genres.includes(play.genre)) return false;
-                
-                if (!document.getElementById("filter-romance").checked && play.romance === "TRUE") return false;
-                if (!document.getElementById("filter-roman").checked && play.roman === "TRUE") return false;
-                if (!document.getElementById("filter-problem").checked && play.problem_play === "TRUE") return false;
                 
                 return true;
             });
@@ -897,7 +1017,7 @@ generate_html <- function(plays_json) {
         
         function clearFilters() {
             ["filter-elizabethan", "filter-jacobean", "filter-tragedy", "filter-comedy", 
-             "filter-history", "filter-romance", "filter-roman", "filter-problem"].forEach(id => {
+             "filter-history"].forEach(id => {
                 document.getElementById(id).checked = true;
             });
             filterAndRenderPlays();
@@ -980,11 +1100,7 @@ generate_html <- function(plays_json) {
         }
         
         function loadOverview(play) {
-            const tags = [];
-            if (play.romance === "TRUE") tags.push("Romance");
-            if (play.roman === "TRUE") tags.push("Roman");
-            if (play.problem_play === "TRUE") tags.push("Problem Play");
-            
+           
             document.getElementById("overview-stats").innerHTML = `
                 <div class="info-card">
                     <div class="info-card-label">Year</div>
@@ -1077,7 +1193,7 @@ generate_html <- function(plays_json) {
                 return;
             }
             
-            const displayColumns = ["act", "scene", "line_number", "character", "text"];
+            const displayColumns = ["character", "text", "line_number", "scene", "act"];
             
             let html = "<thead><tr>";
             displayColumns.forEach(col => {
@@ -1104,7 +1220,7 @@ generate_html <- function(plays_json) {
             if (await fileExists(sentimentPlot)) {
                 content.innerHTML = `
                     <div class="plot-item">
-                        <h4>Sentiment by Act and Scene</h4>
+                        <h4>Sentiment by Scene-Act</h4>
                         <img src="${sentimentPlot}" alt="Sentiment Analysis">
                     </div>
                 `;
@@ -1122,7 +1238,7 @@ generate_html <- function(plays_json) {
     if (await fileExists(bifreqPlot)) {
         html += `
             <div class="plot-item">
-                <h4>Most Frequent Bigrams</h4>
+                <h4>Distinctive Bigrams</h4>
                 <img src="${bifreqPlot}" alt="Bigram Frequency">
             </div>
         `;
@@ -1152,7 +1268,7 @@ generate_html <- function(plays_json) {
             if (await fileExists(freqPlot)) {
                 html += `
                     <div class="plot-item">
-                        <h4>Most Frequent Words</h4>
+                        <h4>Distinctive Words</h4>
                         <img src="${freqPlot}" alt="Word Frequency">
                     </div>
                 `;
@@ -1193,7 +1309,7 @@ generate_html <- function(plays_json) {
             if (await fileExists(staticPlot)) {
                 html += `
                     <div class="plot-item">
-                        <h4>Character Network Static</h4>
+                        <h4>Static Character Network</h4>
                         <img src="${staticPlot}" alt="Character Network Static">
                     </div>
                 `;
@@ -1204,7 +1320,7 @@ generate_html <- function(plays_json) {
             if (await fileExists(interactivePlot)) {
                 html += `
                     <div class="plot-item">
-                        <h4>Character Network Interactive</h4>
+                        <h4>Interactive Character Network</h4>
                         <iframe src="${interactivePlot}"></iframe>
                     </div>
                 `;
@@ -1221,7 +1337,6 @@ generate_html <- function(plays_json) {
                     <a href="data/cleaned/${shortTitle}.csv" class="download-btn" download>Full Text (CSV)</a>
                     <a href="data/json/full_text/${shortTitle}.json" class="download-btn" download>Full Text (JSON)</a>
                     <a href="data/processed/tokens/${shortTitle}_tokens.csv" class="download-btn" download>Tokens (CSV)</a>
-                    <a href="../contact/index.html"">Contact</a>
 
                 </div>
             `;
@@ -1235,6 +1350,7 @@ generate_html <- function(plays_json) {
                 return false;
             }
         }
+        
     </script>
 </body>
 </html>');

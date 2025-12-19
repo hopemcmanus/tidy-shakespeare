@@ -89,8 +89,26 @@ glossary <- tribble(
 glossary <- glossary %>%
   arrange(category, term)
 
+# Generate table rows
+table_rows <- paste(
+  apply(glossary, 1, function(row) {
+    sprintf('                    <tr>
+                        <td class="term">%s</td>
+                        <td class="definition">%s</td>
+                        <td class="category">%s</td>
+                        <td class="reference"><a href="%s" target="_blank">%s</a></td>
+                    </tr>',
+            row["term"],
+            row["definition"],
+            row["category"],
+            row["reference"],
+            row["reference_text"])
+  }),
+  collapse = "\n"
+)
+
 # Generate HTML ----------------------------------------------------------------
-html_content <- sprintf('<!DOCTYPE html>
+html_content <- paste0('<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -102,7 +120,8 @@ html_content <- sprintf('<!DOCTYPE html>
             padding: 0;
             box-sizing: border-box;
         }
-        
+      
+      
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
@@ -152,10 +171,11 @@ html_content <- sprintf('<!DOCTYPE html>
         }
         
         .header-link.current {
-    background: #444;
-    border-color: #666;
-    cursor: default;
-}
+            background: #444;
+            border-color: #666;
+            cursor: default;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -181,15 +201,9 @@ html_content <- sprintf('<!DOCTYPE html>
             line-height: 1.8;
         }
         
-        .table-wrapper {
-            overflow-x: auto;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-        }
         
         .data-table {
-            width: 100%%;
+            width: 100%;
             border-collapse: collapse;
             font-size: 0.9rem;
         }
@@ -219,31 +233,14 @@ html_content <- sprintf('<!DOCTYPE html>
             background: #fafafa;
         }
         
-          .data-table th.sortable::after {
-            content: " ↕";
-            opacity: 0.3;
-        }
-        
-        .data-table th.sort-asc::after {
-            content: " ↑";
-            opacity: 1;
-        }
-        
-        .data-table th.sort-desc::after {
-            content: " ↓";
-            opacity: 1;
-        }
-        
         .category {
             color: #666;
             font-size: 0.85rem;
         }
         
         .term {
-            font-weight: 600;
-            color: #1a1a1a;
             font-weight: 500;
-
+            color: #1a1a1a;
         }
         
         .definition {
@@ -254,8 +251,6 @@ html_content <- sprintf('<!DOCTYPE html>
         .reference {
             text-align: center;
         }
-        
-    
         
         .footer {
             background: #f5f5f5;
@@ -283,7 +278,49 @@ html_content <- sprintf('<!DOCTYPE html>
             align-items: center;
         }
         
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
         @media (max-width: 768px) {
+            .header {
+                position: relative;
+            }
+            
+            .hamburger {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+             
+            .header-right {
+                position: fixed;
+                top: 70px;
+                right: 0;
+                width: 200px;
+                background: #2c2c2c;
+                flex-direction: column;
+                padding: 1rem;
+                border-left: 1px solid #555;
+                box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+                transform: translateX(100%);
+                transition: transform 0.3s;
+                z-index: 1000;
+            }
+            
+            .header-right.active {
+                transform: translateX(0);
+            }
+            
             .container {
                 padding: 1rem;
             }
@@ -294,11 +331,14 @@ html_content <- sprintf('<!DOCTYPE html>
             
             .data-table {
                 font-size: 0.85rem;
+                margin: 0;
             }
             
             .data-table th,
             .data-table td {
                 padding: 0.5rem;
+            
+     
             }
         }
     </style>
@@ -307,69 +347,61 @@ html_content <- sprintf('<!DOCTYPE html>
     <div class="header">
         <div class="header-left">
             <h1>Tidy Shakespeare</h1>
-            <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
+            <div class="header-subtitle">Tidy Data and Text Analysis of Shakespeare Plays</div>
         </div>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
         <div class="header-right">
             <a href="../index.html" class="header-link">← Back to Main Page</a>
-             <a href="../about/index.html" class="header-link">About</a>
-             <a href="../glossary/index.html" class="header-link current">Glossary</a>
+            <a href="../about/index.html" class="header-link">About</a>
+            <a href="../glossary/index.html" class="header-link current">Glossary</a>
             <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>
-
         </div>
     </div>
     
     <div class="container">
         <div class="intro">
             <h2>About This Glossary</h2>
-            <p>This glossary has a list of terms used in the Tidy Shakespeare project. Each term has a definition, a category and a reference, primarily <em>Text Mining with R</em> by Julia Silge and David Robinson.</p>
+            <p>This glossary has a list of terms used in the Tidy Shakespeare project. Each term has a definition, a category and a reference, primarily <a href="https://github.com/juliasilge/tidy-text-mining" target="_blank"><em>Text Mining with R</em></a> by Julia Silge and David Robinson.</p>
         </div>
         
         <div class="table-wrapper">
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th class style="width: 20%%">Term</th>
-                        <th style="width: 50%%">Definition</th>
-                        <th style="width: 15%%">Category</th>
-                        <th style="width: 15%%">Reference</th>
+                        <th style="width: 20%">Term</th>
+                        <th style="width: 50%">Definition</th>
+                        <th style="width: 15%">Category</th>
+                        <th style="width: 15%">Reference</th>
                     </tr>
                 </thead>
                 <tbody>
-%s
+', table_rows, '
                 </tbody>
             </table>
         </div>
     </div>
-    
+    </div>
     <div class="footer">
         <div class="footer-content">
-          <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
-          <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
-          <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
-          <span><a href="../contact/index.html"">Contact</a></span>
+            <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
+            <span><a href="https://github.com/hopemcmanus/tidy-shakespeare?tab=readme-ov-file#attribution-and-license" target="_blank">Code</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+            <span>Download Metadata: <a href="../data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="../data/metadata/meta_shakespeare.csv" download>CSV</a></span>
+            <span><a href="../contact/index.html">Contact</a></span>
         </div>
     </div>
+    
+    <script>
+        function toggleMenu() {
+            var menu = document.querySelector(".header-right");
+            if (menu.classList.contains("active")) {
+                menu.classList.remove("active");
+            } else {
+                menu.classList.add("active");
+            }
+        }
+    </script>
 </body>
-</html>',
-                      
-                        # Generate table rows
-                        paste(
-                          apply(glossary, 1, function(row) {
-                            sprintf('                    <tr>
-                        <td class="term">%s</td>
-                        <td class="definition">%s</td>
-                        <td class="category">%s</td>
-
-                        <td class="reference"><a href="%s" target="_blank">%s</a></td>
-                    </tr>',
-                                    row["term"],
-                                    row["definition"],
-                                    row["category"],
-                                    row["reference"],
-                                    row["reference_text"])
-                          }),
-                          collapse = "\n"
-                        ))
+</html>')
 
 # Write files ------------------------------------------------------------------
 writeLines(html_content, OUTPUT_HTML)

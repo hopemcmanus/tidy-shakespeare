@@ -214,27 +214,74 @@ html_content <- paste0('<!DOCTYPE html>
             align-items: center;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
             
-            .header h1 {
-                font-size: 1.25rem;
-            }
-            
-            .form-wrapper {
-                padding: 1.5rem;
-            }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
         }
+        
+
+        
+         @media (max-width: 768px) {
+    .header {
+        position: relative;
+    }
+    
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .header-right {
+        position: fixed;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        background: #2c2c2c;
+        flex-direction: column;
+        padding: 1rem;
+        border-left: 1px solid #555;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        transform: translateX(100%);
+        transition: transform 0.3s;
+        z-index: 1000;
+    }
+    
+    .header-right.active {
+        transform: translateX(0);
+    }
+    
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 40vh;
+    }
+    
+    .main-content {
+        height: 60vh;
+    }
+}
+        
     </style>
 </head>
 <body>
     <div class="header">
         <div class="header-left">
             <h1>Tidy Shakespeare</h1>
-            <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
+            <div class="header-subtitle">Tidy Data and Text Analysis of Shakespeare Plays</div>
         </div>
+         <button class="hamburger" onclick="toggleMenu()">☰</button>
         <div class="header-right">
              <a href="../index.html" class="header-link">← Back to Main Page</a>
              <a href="../about/index.html" class="header-link">About</a>
@@ -279,21 +326,27 @@ html_content <- paste0('<!DOCTYPE html>
         </div>
     </div>
     
-    <div id="readme-content" class="readme-wrapper">
-    <p>Loading README...</p>
-</div>
     
     <div class="footer">
         <div class="footer-content">
               <div class="footer-content">
          <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
-          <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+          <span><a href="https://github.com/hopemcmanus/tidy-shakespeare?tab=readme-ov-file#attribution-and-license" target="_blank">Code</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
           <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
           <span><a href="../contact/index.html"">Contact</a></span>
         </div>
     </div>
     
     <script>
+    function toggleMenu() {
+            var menu = document.querySelector(".header-right");
+            if (menu.classList.contains("active")) {
+                menu.classList.remove("active");
+            } else {
+                menu.classList.add("active");
+            }
+        }
+    
         const form = document.getElementById("contact-form");
         const statusDiv = document.getElementById("form-status");
         
@@ -332,6 +385,8 @@ html_content <- paste0('<!DOCTYPE html>
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Send Message";
             }
+            
+            
         });
     </script>
 </body>

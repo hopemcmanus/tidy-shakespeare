@@ -1,0 +1,198 @@
+[
+  {
+    "category": "Data Structures",
+    "term": "Document-Term Matrix",
+    "definition": "A matrix where rows represent documents (plays), columns represent terms (words), and values represent frequency or TF-IDF scores.",
+    "reference": "https://www.tidytextmining.com/dtm.html",
+    "reference_text": "Document-Term Matrices"
+  },
+  {
+    "category": "Frequency Analysis",
+    "term": "Inverse Document Frequency (IDF)",
+    "definition": "Decreases the weight for commonly used words and increases the weight for words that are not used very much. Calculated as log(total documents / documents containing term).",
+    "reference": "https://www.tidytextmining.com/tfidf.html#zipfs-law",
+    "reference_text": "Zipf's Law"
+  },
+  {
+    "category": "Frequency Analysis",
+    "term": "TF-IDF",
+    "definition": "Term Frequency-Inverse Document Frequency. A numerical statistic that reflects how important a word is to a document in a collection. High TF-IDF means the word is frequent in this document but rare in others, making it distinctive.",
+    "reference": "https://www.tidytextmining.com/tfidf.html",
+    "reference_text": "TF-IDF"
+  },
+  {
+    "category": "Frequency Analysis",
+    "term": "Term Frequency (TF)",
+    "definition": "How frequently a word appears in a document. Calculated as the number of times a term appears divided by total terms in the document.",
+    "reference": "https://www.tidytextmining.com/tfidf.html#term-frequency-in-jane-austens-novels",
+    "reference_text": "Term Frequency"
+  },
+  {
+    "category": "Frequency Analysis",
+    "term": "Zipf's Law",
+    "definition": "The observation that word frequency is inversely proportional to its rank. The most frequent word appears approximately twice as often as the second most frequent word, three times as often as the third, etc.",
+    "reference": "https://www.tidytextmining.com/tfidf.html#zipfs-law",
+    "reference_text": "Zipf's Law Explained"
+  },
+  {
+    "category": "N-grams and Relationships",
+    "term": "Bigram",
+    "definition": "A sequence of two adjacent words. Used to examine word pairs and common phrases (e.g., 'good night', 'fair lady').",
+    "reference": "https://www.tidytextmining.com/ngrams.html#tokenizing-by-n-gram",
+    "reference_text": "N-gram Tokenisation"
+  },
+  {
+    "category": "N-grams and Relationships",
+    "term": "Correlation",
+    "definition": "A measure of how often words appear together relative to how often they appear separately. Used to find word pairs that commonly co-occur.",
+    "reference": "https://www.tidytextmining.com/ngrams.html#counting-and-correlating-pairs-of-words-with-the-widyr-package",
+    "reference_text": "Pairwise Correlation"
+  },
+  {
+    "category": "N-grams and Relationships",
+    "term": "N-gram",
+    "definition": "A contiguous sequence of n items (words) from text. Bigrams are 2-grams, trigrams are 3-grams, etc.",
+    "reference": "https://www.tidytextmining.com/ngrams.html",
+    "reference_text": "N-grams & Word Combinations"
+  },
+  {
+    "category": "N-grams and Relationships",
+    "term": "Pairwise Correlation",
+    "definition": "Examining relationships between pairs of words to find which words tend to appear together in the same section or scene.",
+    "reference": "https://www.tidytextmining.com/ngrams.html#pairwise-correlation",
+    "reference_text": "Correlation Analysis"
+  },
+  {
+    "category": "Network Analysis",
+    "term": "Betweenness Centrality",
+    "definition": "Measures how often a node lies on the shortest path between other nodes. High betweenness indicates importance in connecting different parts of the network.",
+    "reference": "https://www.tidytextmining.com/ngrams.html",
+    "reference_text": "Network Centrality"
+  },
+  {
+    "category": "Network Analysis",
+    "term": "Degree Centrality",
+    "definition": "The number of direct connections a node has. High degree indicates a character/word that connects to many others.",
+    "reference": "https://www.tidytextmining.com/ngrams.html",
+    "reference_text": "Centrality Measures"
+  },
+  {
+    "category": "Network Analysis",
+    "term": "Edge",
+    "definition": "A connection between two nodes in a network graph, representing a relationship (e.g., characters appearing together or word co-occurrence).",
+    "reference": "https://www.tidytextmining.com/ngrams.html#visualizing-a-network-of-bigrams-with-ggraph",
+    "reference_text": "Network Edges"
+  },
+  {
+    "category": "Network Analysis",
+    "term": "Network Graph",
+    "definition": "A visualisation showing relationships between entities (characters or words) as nodes connected by edges.",
+    "reference": "https://www.tidytextmining.com/ngrams.html#visualizing-a-network-of-bigrams-with-ggraph",
+    "reference_text": "Network Visualisation"
+  },
+  {
+    "category": "Network Analysis",
+    "term": "Node",
+    "definition": "A point in a network graph representing an entity (e.g., a character or word).",
+    "reference": "https://www.tidytextmining.com/ngrams.html#visualizing-a-network-of-bigrams-with-ggraph",
+    "reference_text": "Bigram Networks"
+  },
+  {
+    "category": "Project-Specific",
+    "term": "Act-Scene Structure",
+    "definition": "Shakespeare's organisational system dividing plays into major sections (Acts) and smaller segments (Scenes). Used as document boundaries for some analyses.",
+    "reference": "https://www.tidytextmining.com/",
+    "reference_text": "Text Mining with R"
+  },
+  {
+    "category": "Project-Specific",
+    "term": "Character Network",
+    "definition": "A network where nodes represent characters and edges represent co-occurrence (appearing in the same scene). Edge weight indicates how many scenes they share.",
+    "reference": "https://www.tidytextmining.com/ngrams.html#visualizing-a-network-of-bigrams-with-ggraph",
+    "reference_text": "Character Networks"
+  },
+  {
+    "category": "Project-Specific",
+    "term": "Dialogue vs Directions",
+    "definition": "Two main text classes in plays: dialogue (spoken by characters) and stage directions (describing action). Analysed separately or together depending on research question.",
+    "reference": "https://www.tidytextmining.com/",
+    "reference_text": "Tidy Text Mining"
+  },
+  {
+    "category": "Project-Specific",
+    "term": "Word Correlation Network",
+    "definition": "A network showing which words tend to appear together in sections of text, with correlation strength determining edge weight.",
+    "reference": "https://www.tidytextmining.com/ngrams.html#pairwise-correlation",
+    "reference_text": "Word Correlations"
+  },
+  {
+    "category": "Sentiment Analysis",
+    "term": "AFINN Lexicon",
+    "definition": "A sentiment lexicon that assigns words a score from -5 (most negative) to +5 (most positive). Created by Finn Årup Nielsen.",
+    "reference": "https://www.tidytextmining.com/sentiment.html#the-sentiments-datasets",
+    "reference_text": "AFINN Sentiment Lexicon"
+  },
+  {
+    "category": "Sentiment Analysis",
+    "term": "Bing Lexicon",
+    "definition": "A sentiment lexicon that categorises words into binary positive/negative sentiment. Created by Bing Liu and collaborators.",
+    "reference": "https://www.tidytextmining.com/sentiment.html#the-sentiments-datasets",
+    "reference_text": "Bing Sentiment Lexicon"
+  },
+  {
+    "category": "Sentiment Analysis",
+    "term": "NRC Lexicon",
+    "definition": "National Research Council Canada lexicon that categorises words into emotions (joy, fear, anger, etc.) and positive/negative sentiment.",
+    "reference": "https://www.tidytextmining.com/sentiment.html#the-sentiments-datasets",
+    "reference_text": "NRC Emotion Lexicon"
+  },
+  {
+    "category": "Sentiment Analysis",
+    "term": "Sentiment Analysis",
+    "definition": "Computational identification and categorisation of opinions in text to determine emotional tone (positive, negative, neutral).",
+    "reference": "https://www.tidytextmining.com/sentiment.html",
+    "reference_text": "Sentiment Analysis"
+  },
+  {
+    "category": "Sentiment Analysis",
+    "term": "Sentiment Lexicon",
+    "definition": "A dictionary of words labelled with sentiment scores or categories. This project uses three: Bing (positive/negative), AFINN (numeric scores), and NRC (emotions).",
+    "reference": "https://www.tidytextmining.com/sentiment.html#the-sentiments-datasets",
+    "reference_text": "Sentiment Lexicons"
+  },
+  {
+    "category": "Tidy Principles",
+    "term": "Stop Words",
+    "definition": "Common words (e.g., 'the', 'a', 'and') that are often removed from analysis. This project uses extended stop words including Shakespearean terms like 'thou', 'thee', 'thy'.",
+    "reference": "https://www.tidytextmining.com/tidytext.html#word-frequencies",
+    "reference_text": "Word Frequencies"
+  },
+  {
+    "category": "Tidy Principles",
+    "term": "Tidy Data",
+    "definition": "Each variable forms a column, each observation forms a row, each type of observational unit forms a table. Applied to text: one-token-per-row format.",
+    "reference": "https://www.tidytextmining.com/tidytext.html#contrasting-tidy-text-with-other-data-structures",
+    "reference_text": "Tidy vs Non-Tidy Text"
+  },
+  {
+    "category": "Tidy Principles",
+    "term": "Tidy Text",
+    "definition": "A table with one-token-per-row, where each row represents a single word along with its metadata (play, act, scene, character). Follows tidy data principles.",
+    "reference": "https://www.tidytextmining.com/tidytext.html",
+    "reference_text": "Tidy Text Format"
+  },
+  {
+    "category": "Tidy Principles",
+    "term": "Token",
+    "definition": "A meaningful unit of text (typically a word) extracted during tokenisation. In this project, tokens include individual words from Shakespeare's dialogue, stage directions, and references.",
+    "reference": "https://www.tidytextmining.com/tidytext.html#the-unnest_tokens-function",
+    "reference_text": "Tokenisation"
+  },
+  {
+    "category": "Tidy Principles",
+    "term": "Tokenisation",
+    "definition": "The process of breaking text into individual words or meaningful units. Uses unnest_tokens() to convert text data into one-token-per-row format.",
+    "reference": "https://www.tidytextmining.com/tidytext.html#the-unnest_tokens-function",
+    "reference_text": "Unnest Tokens Function"
+  }
+]

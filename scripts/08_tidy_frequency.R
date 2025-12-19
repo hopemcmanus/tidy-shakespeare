@@ -6,8 +6,9 @@ library(here)
 
 # Configuration
 INPUT_DIR_FILTERED <- here("data", "processed", "filtered")
+INPUT_DIR_CLEANED <- here("data", "cleaned")
 OUTPUT_DIR_PLOTS <- here("plots", "frequency")
-CHAR_NAMES_FILE <- here("all_chars_df.csv")  # Your character names file
+CHAR_NAMES_FILE <- here("data", "metadata", "all_characters.csv")  # Your character names file
 
 # Create output directories
 dir.create(OUTPUT_DIR_PLOTS, recursive = TRUE, showWarnings = FALSE)
@@ -58,115 +59,330 @@ apply_character_filter <- function(data, exclude_chars = NULL) {
   return(data)
 }
 
-# Step 1: Individual play analysis (All plays)
-message("STEP 1: Individual Play Analysis (All Plays)")
+# Step 1: Individual play TF-IDF analysis (Words and Bigrams)
+message("STEP 1: Individual Play TF-IDF Analysis (All Plays)")
 message(strrep("-", 70))
 
-# Load list of all plays from cleaned data
-all_play_titles <- all_plays %>%
-  distinct(short_title) %>%
-  pull(short_title) %>%
-  sort()
+# Load all filtered play tokens for word TF-IDF
+message("Loading all filtered play tokens...")
 
-message("Found ", length(all_play_titles), " plays to analyze\n")
+all_filtered_tokens <- tibble()
+play_files <- list.files(file.path(INPUT_DIR_FILTERED, "by_play"), 
+                         pattern = "_filtered\\.csv$", full.names = TRUE)
 
-play_analysis_count <- 0
+for (play_file in play_files) {
+  play_data <- read_csv(play_file, show_col_types = FALSE)
+  all_filtered_tokens <- bind_rows(all_filtered_tokens, play_data)
+}
 
-for (play_title in all_play_titles) {
+message("✓ Loaded ", format(nrow(all_filtered_tokens), big.mark = ","), " tokens from ", 
+        n_distinct(all_filtered_tokens$short_title), " plays\n")
+
+# Calculate word TF-IDF
+message("Calculating word TF-IDF scores...")
+
+word_counts <- all_filtered_tokens %>%
+  count(short_title, word, sort = TRUE)
+
+word_tf_idf <- word_counts %>%
+  bind_tf_idf(word, short_title, n) %>%
+  arrange(short_title, desc(tf_idf))
+
+message("✓ Calculated word TF-IDF\n")
+
+# Load cleaned data for bigram TF-IDF
+message("Loading cleaned data for bigram analysis...")
+
+all_plays_cleaned <- read_csv(
+  file.path(INPUT_DIR_CLEANED, "all_shakespeare.csv"),
+  show_col_types = FALSE
+) %>%
+  filter(class == "dialogue")
+
+message("✓ Loaded ", format(nrow(all_plays_cleaned), big.mark = ","), " dialogue lines")
+
+# Create bigrams
+message("Creating and filtering bigrams...")
+
+shakespeare_bigrams <- all_plays_cleaned %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram))
+
+# Filter stop words from bigrams
+bigrams_separated <- shakespeare_bigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ")
+
+bigrams_filtered <- bigrams_separated %>%
+  filter(!word1 %in% stop_words_custom$word,
+         !word2 %in% stop_words_custom$word)
+
+bigrams_united <- bigrams_filtered %>%
+  unite(bigram, word1, word2, sep = " ")
+
+# Calculate bigram TF-IDF
+bigram_counts <- bigrams_united %>%
+  count(short_title, bigram, sort = TRUE)
+
+bigram_tf_idf <- bigram_counts %>%
+  bind_tf_idf(bigram, short_title, n) %>%
+  arrange(short_title, desc(tf_idf))
+
+message("✓ Calculated bigram TF-IDF\n")
+
+# Create plots for each play
+message("Creating TF-IDF plots for each play...")
+
+play_titles <- sort(unique(word_tf_idf$short_title))
+plot_count <- 0
+
+for (play_title in play_titles) {
+  
   # Generate filename
   filename <- play_title %>%
     str_to_lower() %>%
     str_replace_all("[^a-z0-9]+", "_") %>%
     str_remove("^_|_$")
   
-  play_file <- file.path(INPUT_DIR_FILTERED, "by_play", paste0(filename, "_filtered.csv"))
+  # Word TF-IDF plot
+  top_words <- word_tf_idf %>%
+    filter(short_title == play_title) %>%
+    slice_max(tf_idf, n = 20) %>%
+    mutate(
+      # Capitalize if character name
+      word_display = if_else(word %in% char_names, str_to_title(word), word)
+    )
   
-  if (!file.exists(play_file)) {
-    message("  Skipping ", play_title, " (file not found)")
-    next
+  p_words <- top_words %>%
+    mutate(word_display = reorder(word_display, tf_idf)) %>%
+    ggplot(aes(tf_idf, word_display)) +
+    geom_col(fill = "steelblue", alpha = 0.8) +
+    labs(
+      x = "TF-IDF",
+      y = NULL,
+      title = paste("Most Distinctive Words:", play_title),
+      subtitle = "Top 20 words by TF-IDF (frequent here, rare elsewhere)"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      plot.subtitle = element_text(size = 10, color = "gray30")
+    )
+  
+  ggsave(
+    filename = paste0(filename, "_word_tfidf.png"),
+    plot = p_words,
+    path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
+    width = 8,
+    height = 6,
+    dpi = 600
+  )
+  
+  # Bigram TF-IDF plot
+  top_bigrams <- bigram_tf_idf %>%
+    filter(short_title == play_title) %>%
+    slice_max(tf_idf, n = 20)
+  
+  p_bigrams <- top_bigrams %>%
+    mutate(bigram = reorder(bigram, tf_idf)) %>%
+    ggplot(aes(tf_idf, bigram)) +
+    geom_col(fill = "darkorange", alpha = 0.8) +
+    labs(
+      x = "TF-IDF",
+      y = NULL,
+      title = paste("Most Distinctive Bigrams:", play_title),
+      subtitle = "Top 20 bigrams by TF-IDF (frequent here, rare elsewhere)"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      plot.subtitle = element_text(size = 10, color = "gray30")
+    )
+  
+  ggsave(
+    filename = paste0(filename, "_bigram_tfidf.png"),
+    plot = p_bigrams,
+    path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
+    width = 8,
+    height = 6,
+    dpi = 600
+  )
+  
+  plot_count <- plot_count + 1
+  
+  if (plot_count %% 10 == 0) {
+    message("  Created ", plot_count, "/", length(play_titles), " play analyses...")
   }
+}
+
+message("✓ Created ", plot_count, " play analyses (words + bigrams)\n")
+
+# Save TF-IDF data
+write_csv(word_tf_idf, file.path(OUTPUT_DIR_PLOTS, "all_plays_word_tfidf.csv"))
+write_csv(bigram_tf_idf, file.path(OUTPUT_DIR_PLOTS, "all_plays_bigram_tfidf.csv"))
+
+message("✓ Saved TF-IDF data files\n")
+
+
+# Step 1b: Individual play TF-IDF analysis (Words and Bigrams)
+message("STEP 1b: Individual Play TF-IDF Analysis (All Plays)")
+message(strrep("-", 70))
+
+# Load all filtered play tokens for word TF-IDF
+message("Loading all filtered play tokens for TF-IDF...")
+
+all_filtered_tokens <- tibble()
+play_files <- list.files(file.path(INPUT_DIR_FILTERED, "by_play"), 
+                         pattern = "_filtered\\.csv$", full.names = TRUE)
+
+for (play_file in play_files) {
+  play_data <- read_csv(play_file, show_col_types = FALSE)
+  all_filtered_tokens <- bind_rows(all_filtered_tokens, play_data)
+}
+
+message("✓ Loaded ", format(nrow(all_filtered_tokens), big.mark = ","), " tokens from ", 
+        n_distinct(all_filtered_tokens$short_title), " plays\n")
+
+# Calculate word TF-IDF
+message("Calculating word TF-IDF scores...")
+
+word_counts <- all_filtered_tokens %>%
+  count(short_title, word, sort = TRUE)
+
+word_tf_idf <- word_counts %>%
+  bind_tf_idf(word, short_title, n) %>%
+  arrange(short_title, desc(tf_idf))
+
+message("✓ Calculated word TF-IDF\n")
+
+# Load cleaned data for bigram TF-IDF
+message("Loading cleaned data for bigram analysis...")
+
+all_plays_cleaned <- read_csv(
+  file.path(INPUT_DIR_CLEANED, "all_shakespeare.csv"),
+  show_col_types = FALSE
+) %>%
+  filter(class == "dialogue")
+
+message("✓ Loaded ", format(nrow(all_plays_cleaned), big.mark = ","), " dialogue lines")
+
+# Create bigrams
+message("Creating and filtering bigrams...")
+
+shakespeare_bigrams <- all_plays_cleaned %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram))
+
+# Filter stop words from bigrams
+bigrams_separated <- shakespeare_bigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ")
+
+bigrams_filtered <- bigrams_separated %>%
+  filter(!word1 %in% stop_words_custom$word,
+         !word2 %in% stop_words_custom$word)
+
+bigrams_united <- bigrams_filtered %>%
+  unite(bigram, word1, word2, sep = " ")
+
+# Calculate bigram TF-IDF
+bigram_counts <- bigrams_united %>%
+  count(short_title, bigram, sort = TRUE)
+
+bigram_tf_idf <- bigram_counts %>%
+  bind_tf_idf(bigram, short_title, n) %>%
+  arrange(short_title, desc(tf_idf))
+
+message("✓ Calculated bigram TF-IDF\n")
+
+# Create TF-IDF plots for each play
+message("Creating TF-IDF plots for each play...")
+
+play_titles_tfidf <- sort(unique(word_tf_idf$short_title))
+tfidf_plot_count <- 0
+
+for (play_title in play_titles_tfidf) {
   
-  # Load play data
-  play_filtered <- read_csv(play_file, show_col_types = FALSE)
+  # Generate filename
+  filename <- play_title %>%
+    str_to_lower() %>%
+    str_replace_all("[^a-z0-9]+", "_") %>%
+    str_remove("^_|_$")
   
-  # Count words
-  play_counts <- play_filtered %>%
-    count(word, sort = TRUE)
+  # Word TF-IDF plot
+  top_words <- word_tf_idf %>%
+    filter(short_title == play_title) %>%
+    slice_max(tf_idf, n = 20)
   
-  # Determine threshold (adaptive based on play length)
-  max_count <- max(play_counts$n)
-  threshold <- max(20, max_count * 0.05)  # At least 50, or 2% of max
+  p_words <- top_words %>%
+    mutate(word = reorder(word, tf_idf)) %>%
+    ggplot(aes(tf_idf, word)) +
+    geom_col(fill = "steelblue", alpha = 0.8) +
+    labs(
+      x = "TF-IDF",
+      y = NULL,
+      title = paste("Most Distinctive Words:", play_title),
+      subtitle = "Top 20 words by TF-IDF (frequent here, rare elsewhere)"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      plot.subtitle = element_text(size = 10, color = "gray30")
+    )
   
-  # Plot top words
-  if (max_count >= threshold) {
-    p_play <- play_counts %>%
-      filter(n > threshold) %>%
-      head(20) %>%  # Top 20 words max
-      mutate(word = reorder(word, n)) %>%
-      ggplot(aes(n, word)) +
-      geom_col(fill = "steelblue") +
+  ggsave(
+    filename = paste0(filename, "_word_tfidf.png"),
+    plot = p_words,
+    path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
+    width = 8,
+    height = 6,
+    dpi = 600
+  )
+  
+  # Bigram TF-IDF plot
+  top_bigrams <- bigram_tf_idf %>%
+    filter(short_title == play_title) %>%
+    slice_max(tf_idf, n = 20)
+  
+  if (nrow(top_bigrams) > 0) {
+    p_bigrams <- top_bigrams %>%
+      mutate(bigram = reorder(bigram, tf_idf)) %>%
+      ggplot(aes(tf_idf, bigram)) +
+      geom_col(fill = "darkorange", alpha = 0.8) +
       labs(
-        x = "Frequency",
+        x = "TF-IDF",
         y = NULL,
-        title = paste("Most Frequent Words in", play_title),
-        subtitle = paste("Top words (threshold >", round(threshold), "occurrences)")
+        title = paste("Most Distinctive Bigrams:", play_title),
+        subtitle = "Top 20 bigrams by TF-IDF (frequent here, rare elsewhere)"
       ) +
-      theme_minimal()
+      theme_minimal() +
+      theme(
+        plot.title = element_text(size = 14, face = "bold"),
+        plot.subtitle = element_text(size = 10, color = "gray30")
+      )
     
     ggsave(
-      filename = paste0(filename, "_top_words.png"),
-      plot = p_play,
+      filename = paste0(filename, "_bigram_tfidf.png"),
+      plot = p_bigrams,
       path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
       width = 8,
       height = 6,
       dpi = 600
     )
-    
-    # Optionally create version excluding character names
-    if (exclude_chars) {
-      play_counts_no_chars <- play_filtered %>%
-        filter(!word %in% char_names) %>%
-        count(word, sort = TRUE)
-      
-      threshold_no_chars <- max(30, max(play_counts_no_chars$n) * 0.02)
-      
-      p_play_no_chars <- play_counts_no_chars %>%
-        filter(n > threshold_no_chars) %>%
-        head(20) %>%
-        mutate(word = reorder(word, n)) %>%
-        ggplot(aes(n, word)) +
-        geom_col(fill = "darkorange") +
-        labs(
-          x = "Frequency",
-          y = NULL,
-          title = paste("Most Frequent Words in", play_title, "(Excluding Character Names)"),
-          subtitle = paste("Top words (threshold >", round(threshold_no_chars), "occurrences)")
-        ) +
-        theme_minimal()
-      
-      ggsave(
-        filename = paste0(filename, "_top_words_no_chars.png"),
-        plot = p_play_no_chars,
-        path = file.path(OUTPUT_DIR_PLOTS, "individual_plays"),
-        width = 8,
-        height = 6,
-        dpi = 600
-      )
-    }
-    
-    play_analysis_count <- play_analysis_count + 1
-    
-    if (play_analysis_count %% 10 == 0) {
-      message("  Created ", play_analysis_count, "/", length(all_play_titles), " play analyses...")
-    }
+  }
+  
+  tfidf_plot_count <- tfidf_plot_count + 1
+  
+  if (tfidf_plot_count %% 10 == 0) {
+    message("  Created ", tfidf_plot_count, "/", length(play_titles_tfidf), " TF-IDF analyses...")
   }
 }
 
-message("✓ Created ", play_analysis_count, " individual play bar charts")
-if (exclude_chars) {
-  message("  (with and without character names)")
-}
-message("")
+message("✓ Created ", tfidf_plot_count, " TF-IDF analyses (words + bigrams)\n")
+
+# Save TF-IDF data
+write_csv(word_tf_idf, file.path(OUTPUT_DIR_PLOTS, "individual_plays", "all_plays_word_tfidf.csv"))
+write_csv(bigram_tf_idf, file.path(OUTPUT_DIR_PLOTS, "individual_plays", "all_plays_bigram_tfidf.csv"))
+
+message("✓ Saved TF-IDF data files\n")
 
 # Step 2: Word clouds
 message("STEP 2: Word Cloud Analysis")

@@ -18,10 +18,6 @@ TOKENS_DIR <- "data/processed/tokens"
 PLOTS_DIR <- "plots"
 OUTPUT_FILE <- "index.html"
 
-# GitHub info for attribution
-GITHUB_REPO <- "https://github.com/hopemcmanus/tidy-shakespeare"
-PORTFOLIO_URL <- "https://hopemcmanus.github.io/portfolio/shakespeare/"
-
 # Helper Functions -------------------------------------------------------------
 
 #' Generate HTML string with embedded JSON data
@@ -598,10 +594,12 @@ generate_html <- function(plays_json) {
             <h1>Tidy Shakespeare</h1>
             <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
         </div>
-        <div class="header-right">
-            <a href="', PORTFOLIO_URL, '" class="header-link" target="_blank">About</a>
-            <a href="', GITHUB_REPO, '" class="header-link" target="_blank">GitHub</a>
-        </div>
+       <div class="header-right">
+   <a href="about/index.html" class="header-link">About</a>
+   <a href="glossary/index.html" class="header-link">Glossary</a>
+   <a href="https://github.com/hopemcmanus/tidy-shakespeare" class="header-link">GitHub</a>
+
+</div>
     </div>
     
     <div class="container">
@@ -757,11 +755,11 @@ generate_html <- function(plays_json) {
     
     <div class="footer">
         <div class="footer-content">
-            <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
-            <span>·</span>
-            <span>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
-            <span>·</span>
-            <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
+          <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
+          <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+          <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
+          <span><a href="contact/index.html"">Contact</a></span>
+
         </div>
     </div>
     

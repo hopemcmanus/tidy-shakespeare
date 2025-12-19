@@ -1,0 +1,353 @@
+################################################################################
+# 17_generate_contact.R
+# 
+# Description: Generates contact page with Formspree form matching main index.html style
+#
+################################################################################
+
+library(tidyverse)
+
+# Configuration ----------------------------------------------------------------
+OUTPUT_DIR <- "contact"
+OUTPUT_HTML <- file.path(OUTPUT_DIR, "index.html")
+
+# Formspree endpoint
+FORMSPREE_ENDPOINT <- "https://formspree.io/f/xvgenqjq"
+
+# Create output directory
+dir.create(OUTPUT_DIR, recursive = TRUE, showWarnings = FALSE)
+
+# Generate HTML ----------------------------------------------------------------
+html_content <- paste0('<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact: Tidy Shakespeare</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        
+        .header {
+            background: #2c2c2c;
+            color: #ffffff;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .header-subtitle {
+            font-size: 0.85rem;
+            color: #d0d0d0;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .header-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #555;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        
+        .header-link:hover {
+            background: #444;
+            border-color: #666;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .intro {
+            background: #fafafa;
+            padding: 1.5rem;
+            border-left: 4px solid #333;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .intro h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+        
+        .intro p {
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .form-wrapper {
+            background: #fafafa;
+            padding: 2rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #333;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a1a1a;
+        }
+        
+        .submit-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+        
+        .form-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 3px;
+            display: none;
+        }
+        
+        .form-status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+        
+        .form-status.error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        
+        .footer {
+            background: #f5f5f5;
+            border-top: 1px solid #e0e0e0;
+            padding: 0.75rem 2rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .footer a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.25rem;
+            }
+            
+            .form-wrapper {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>Tidy Shakespeare</h1>
+            <div class="header-subtitle">Tidy Data and Text Analysis for 37 Shakespeare Plays</div>
+        </div>
+        <div class="header-right">
+             <a href="../index.html" class="header-link">← Back to Main Page</a>
+             <a href="../about/index.html" class="header-link">About</a>
+             <a href="../glossary/index.html" class="header-link">Glossary</a>
+            <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>
+
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <h2>Contact</h2>
+            <p>If you have a question about this project, have found an issue, or would like to suggest an improvement, please submit the form below.</p>
+        </div>
+        
+        <div class="form-wrapper">
+            <form id="contact-form" action="', FORMSPREE_ENDPOINT, '" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit</button>
+                
+                <div id="form-status" class="form-status"></div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-content">
+              <div class="footer-content">
+         <span>Texts from <a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></span>
+          <span><a href="https://github.com/juliasilge/tidy-text-mining" target="_blank">Tidy Text Mining with R</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">CC BY-NC-SA 3.0</a></span>
+          <span>Download Metadata: <a href="data/metadata/meta_shakespeare.json" download>JSON</a> | <a href="data/metadata/meta_shakespeare.csv" download>CSV</a></span>
+          <span><a href="contact/index.html"">Contact</a></span>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById("contact-form");
+        const statusDiv = document.getElementById("form-status");
+        
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector(".submit-btn");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+            
+            statusDiv.style.display = "none";
+            statusDiv.className = "form-status";
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+                
+                if (response.ok) {
+                    statusDiv.className = "form-status success";
+                    statusDiv.textContent = "Thank you! Your message has been sent successfully.";
+                    statusDiv.style.display = "block";
+                    form.reset();
+                } else {
+                    throw new Error("Form submission failed");
+                }
+            } catch (error) {
+                statusDiv.className = "form-status error";
+                statusDiv.textContent = "Sorry, there was an error sending your message. Please try again.";
+                statusDiv.style.display = "block";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send Message";
+            }
+        });
+    </script>
+</body>
+</html>')
+
+# Write file -------------------------------------------------------------------
+writeLines(html_content, OUTPUT_HTML)
+
+# Summary ----------------------------------------------------------------------
+message("\n", strrep("=", 80))
+message("CONTACT PAGE GENERATED")
+message(strrep("=", 80))
+message("\nOutput file: ", OUTPUT_HTML)
+message("\nIMPORTANT: Update the Formspree endpoint in the script:")
+message("  Line 18: FORMSPREE_ENDPOINT <- \"https://formspree.io/f/YOUR_FORM_ID\"")
+message("\nTo get a Formspree form ID:")
+message("  1. Go to https://formspree.io/")
+message("  2. Sign up for a free account")
+message("  3. Create a new form")
+message("  4. Copy your form endpoint (e.g., https://formspree.io/f/xyzabc123)")
+message("  5. Update the script and regenerate")
+message("\nTo view: Open contact/index.html in your web browser")
+message(strrep("=", 80), "\n")

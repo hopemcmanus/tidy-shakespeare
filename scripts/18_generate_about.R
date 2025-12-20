@@ -282,6 +282,7 @@ html_content <- paste0('<!DOCTYPE html>
     </div>
     <button class="hamburger" onclick="toggleMenu()">☰</button>
     <div class="header-right" id="header-menu">
+        <a href="../index.html" class="header-link">← Back to Main Page</a>
         <a href="../about/index.html" class="header-link">About</a>
         <a href="../glossary/index.html" class="header-link">Glossary</a>
         <a href="https://github.com/hopemcmanus/tidy-shakespeare" target="_blank" class="header-link">GitHub</a>

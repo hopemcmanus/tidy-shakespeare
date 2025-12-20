@@ -301,6 +301,12 @@ html_content <- paste0('<!DOCTYPE html>
                 transform: translateY(-50%);
             }
             
+             .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            margin: 0;
+        }
              
             .header-right {
                 position: fixed;
@@ -331,7 +337,6 @@ html_content <- paste0('<!DOCTYPE html>
             
             .data-table {
                 font-size: 0.85rem;
-                margin: 0;
             }
             
             .data-table th,
